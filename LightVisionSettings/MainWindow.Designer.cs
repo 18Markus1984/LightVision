@@ -104,6 +104,7 @@
             this.bt_Einstellungen.TabIndex = 3;
             this.bt_Einstellungen.Text = "Einstellungen";
             this.bt_Einstellungen.UseVisualStyleBackColor = false;
+            this.bt_Einstellungen.Click += new System.EventHandler(this.bt_Einstellungen_Click);
             // 
             // bt_Kacheln
             // 
@@ -119,6 +120,7 @@
             this.bt_Kacheln.TabIndex = 2;
             this.bt_Kacheln.Text = "Kacheln";
             this.bt_Kacheln.UseVisualStyleBackColor = false;
+            this.bt_Kacheln.Click += new System.EventHandler(this.bt_Kacheln_Click);
             // 
             // bt_Wecker
             // 
@@ -148,7 +150,7 @@
             // p_Slider
             // 
             this.p_Slider.BackColor = System.Drawing.Color.Black;
-            this.p_Slider.Location = new System.Drawing.Point(0, 126);
+            this.p_Slider.Location = new System.Drawing.Point(0, 166);
             this.p_Slider.Name = "p_Slider";
             this.p_Slider.Size = new System.Drawing.Size(5, 40);
             this.p_Slider.TabIndex = 0;

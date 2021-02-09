@@ -24,7 +24,17 @@ namespace LightVisionSettings
 
         private void bt_Wecker_Click(object sender, EventArgs e)
         {
-            //p_Slider.Location.(0, 126);
+            p_Slider.Location = new Point(0, 126);
+        }
+
+        private void bt_Kacheln_Click(object sender, EventArgs e)
+        {
+            p_Slider.Location = new Point(0, 166);
+        }
+
+        private void bt_Einstellungen_Click(object sender, EventArgs e)
+        {
+            p_Slider.Location = new Point(0, 206);
         }
     }
 }
