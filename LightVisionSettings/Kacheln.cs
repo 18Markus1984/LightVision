@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,12 @@ namespace LightVisionSettings
 
         private void bt_Speichern_Click(object sender, EventArgs e)
         {
+            string connectionString;
+            SqlConnection cnn;
+            //connectionString = @"Data Source=localhost;Initial Catalog=lightvision;User ID=root;Password=";
+            connectionString = @"Data Source=localhost;Initial Catalog=lightvision;User ID=root";
+            cnn = new SqlConnection(connectionString);
+
             List<string> listOfColors = new List<string>();
             foreach(Control c in Controls)
             {
@@ -55,6 +62,19 @@ namespace LightVisionSettings
                     listOfColors.Add($"{c.BackColor.A}, {c.BackColor.R}, {c.BackColor.G}, {c.BackColor.B}");
                 }
             }
+
+            SqlCommand command;
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            string sql = "";
+            cnn.Open();
+            foreach (string s in listOfColors)
+            {
+                sql = "INSERT INTO kacheln VALUES (s)";
+                command = new SqlCommand(sql, cnn);
+                adapter.InsertCommand = command;
+                adapter.InsertCommand.ExecuteNonQuery();
+            }
+            cnn.Close();
         }
 
         private void bt_Color_Click(object sender, EventArgs e)
