@@ -18,6 +18,8 @@ namespace LightVisionSettings
             AddButtons();
         }
 
+        Color backColorButtons = Color.Transparent;
+
         private void AddButtons()
         {
             for (int k = 0; k < 10; k++)
@@ -40,10 +42,7 @@ namespace LightVisionSettings
         private void buttonLED_Click(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                clickedButton.BackColor = colorDialog1.Color;
-            }
+            clickedButton.BackColor = backColorButtons;
         }
 
         private void bt_Speichern_Click(object sender, EventArgs e)
@@ -55,6 +54,15 @@ namespace LightVisionSettings
                 {
                     listOfColors.Add($"{c.BackColor.A}, {c.BackColor.R}, {c.BackColor.G}, {c.BackColor.B}");
                 }
+            }
+        }
+
+        private void bt_Color_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                bt_Color.BackColor = colorDialog1.Color;
+                backColorButtons = colorDialog1.Color;
             }
         }
     }
