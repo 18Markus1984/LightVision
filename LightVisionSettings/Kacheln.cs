@@ -22,7 +22,7 @@ namespace LightVisionSettings
         {
             for (int k = 0; k < 10; k++)
             {
-                for (int i = 0; i <= 28; i++)
+                for (int i = 0; i < 28; i++)
                 {
                     Button button = new Button();
                     button.Name = $"led{i}_{k}";
@@ -48,7 +48,14 @@ namespace LightVisionSettings
 
         private void bt_Speichern_Click(object sender, EventArgs e)
         {
-
+            List<string> listOfColors = new List<string>();
+            foreach(Control c in Controls)
+            {
+                if(c is Button && c.Name.Substring(0,3) is "led")
+                {
+                    listOfColors.Add($"{c.BackColor.A}, {c.BackColor.R}, {c.BackColor.G}, {c.BackColor.B}");
+                }
+            }
         }
     }
 }
