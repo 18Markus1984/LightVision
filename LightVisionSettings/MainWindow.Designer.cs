@@ -37,6 +37,7 @@
             this.bt_Wecker = new System.Windows.Forms.Button();
             this.p_Content = new System.Windows.Forms.Panel();
             this.p_Slider = new System.Windows.Forms.Panel();
+            this.kacheln1 = new LightVisionSettings.Kacheln();
             this.p_Nav.SuspendLayout();
             this.panel1.SuspendLayout();
             this.p_Content.SuspendLayout();
@@ -140,6 +141,7 @@
             // 
             // p_Content
             // 
+            this.p_Content.Controls.Add(this.kacheln1);
             this.p_Content.Controls.Add(this.p_Slider);
             this.p_Content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Content.Location = new System.Drawing.Point(172, 0);
@@ -154,6 +156,13 @@
             this.p_Slider.Name = "p_Slider";
             this.p_Slider.Size = new System.Drawing.Size(5, 40);
             this.p_Slider.TabIndex = 0;
+            // 
+            // kacheln1
+            // 
+            this.kacheln1.Location = new System.Drawing.Point(0, 0);
+            this.kacheln1.Name = "kacheln1";
+            this.kacheln1.Size = new System.Drawing.Size(786, 538);
+            this.kacheln1.TabIndex = 1;
             // 
             // LightVision_Base
             // 
@@ -185,6 +194,7 @@
         private System.Windows.Forms.Button bt_Einstellungen;
         private System.Windows.Forms.Button bt_Kacheln;
         private System.Windows.Forms.Panel p_Slider;
+        private Kacheln kacheln1;
     }
 }
 

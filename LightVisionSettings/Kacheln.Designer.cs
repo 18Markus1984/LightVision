@@ -20,6 +20,8 @@
             base.Dispose(disposing);
         }
 
+
+
         #region Vom Komponenten-Designer generierter Code
 
         /// <summary> 
@@ -28,12 +30,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.bt_Speichern = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // bt_Speichern
+            // 
+            this.bt_Speichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_Speichern.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_Speichern.Location = new System.Drawing.Point(18, 271);
+            this.bt_Speichern.Name = "bt_Speichern";
+            this.bt_Speichern.Size = new System.Drawing.Size(91, 28);
+            this.bt_Speichern.TabIndex = 0;
+            this.bt_Speichern.Text = "Speichern";
+            this.bt_Speichern.UseVisualStyleBackColor = true;
+            this.bt_Speichern.Click += new System.EventHandler(this.bt_Speichern_Click);
             // 
             // Kacheln
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.bt_Speichern);
             this.Name = "Kacheln";
             this.Size = new System.Drawing.Size(786, 538);
             this.ResumeLayout(false);
@@ -41,5 +58,7 @@
         }
 
         #endregion
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button bt_Speichern;
     }
 }
