@@ -36,8 +36,8 @@
             this.bt_Kacheln = new System.Windows.Forms.Button();
             this.bt_Wecker = new System.Windows.Forms.Button();
             this.p_Content = new System.Windows.Forms.Panel();
-            this.p_Slider = new System.Windows.Forms.Panel();
             this.kacheln1 = new LightVisionSettings.Kacheln();
+            this.p_Slider = new System.Windows.Forms.Panel();
             this.p_Nav.SuspendLayout();
             this.panel1.SuspendLayout();
             this.p_Content.SuspendLayout();
@@ -149,6 +149,13 @@
             this.p_Content.Size = new System.Drawing.Size(786, 538);
             this.p_Content.TabIndex = 1;
             // 
+            // kacheln1
+            // 
+            this.kacheln1.Location = new System.Drawing.Point(0, 0);
+            this.kacheln1.Name = "kacheln1";
+            this.kacheln1.Size = new System.Drawing.Size(786, 538);
+            this.kacheln1.TabIndex = 1;
+            // 
             // p_Slider
             // 
             this.p_Slider.BackColor = System.Drawing.Color.Black;
@@ -156,13 +163,6 @@
             this.p_Slider.Name = "p_Slider";
             this.p_Slider.Size = new System.Drawing.Size(5, 40);
             this.p_Slider.TabIndex = 0;
-            // 
-            // kacheln1
-            // 
-            this.kacheln1.Location = new System.Drawing.Point(0, 0);
-            this.kacheln1.Name = "kacheln1";
-            this.kacheln1.Size = new System.Drawing.Size(786, 538);
-            this.kacheln1.TabIndex = 1;
             // 
             // LightVision_Base
             // 
