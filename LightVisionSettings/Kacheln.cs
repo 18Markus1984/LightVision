@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +20,7 @@ namespace LightVisionSettings
         }
 
         Color backColorButtons = Color.Transparent;
+
 
         private void AddButtons()
         {
@@ -47,34 +48,32 @@ namespace LightVisionSettings
         }
 
         private void bt_Speichern_Click(object sender, EventArgs e)
-        {
-            string connectionString;
-            SqlConnection cnn;
-            //connectionString = @"Data Source=localhost;Initial Catalog=lightvision;User ID=root;Password=";
-            connectionString = @"Data Source=localhost;Initial Catalog=lightvision;User ID=root";
-            cnn = new SqlConnection(connectionString);
-
+        {               
             List<string> listOfColors = new List<string>();
             foreach(Control c in Controls)
             {
-                if(c is Button && c.Name.Substring(0,3) is "led")
+                if(c is Button && c.Name.Contains("led") == true)
                 {
                     listOfColors.Add($"{c.BackColor.A}, {c.BackColor.R}, {c.BackColor.G}, {c.BackColor.B}");
                 }
             }
-
-            SqlCommand command;
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            string sql = "";
-            cnn.Open();
+            string myConnectionString = "SERVER=localhost;" +
+                                        "DATABASE=lightvision;" +
+                                        "UID=root;" +
+                                        "PASSWORD=;";
+            MySqlConnection connection = new MySqlConnection(myConnectionString);
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE kacheln SET uhrzeit = NULL";
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
             foreach (string s in listOfColors)
             {
-                sql = "INSERT INTO kacheln VALUES (s)";
-                command = new SqlCommand(sql, cnn);
-                adapter.InsertCommand = command;
-                adapter.InsertCommand.ExecuteNonQuery();
+                command.CommandText = $"INSERT INTO kacheln VALUES ('{s}')";
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
             }
-            cnn.Close();
         }
 
         private void bt_Color_Click(object sender, EventArgs e)
