@@ -19,24 +19,26 @@ namespace LightVisionSettings
             AddButtons();
         }
 
-        private List<Pixel> pixel;
+        private Pixel[,] pixel;
         private bool onClick;
         private Color backColorButtons;
+        private bool fill;
 
 
         private void AddButtons()
         {
-            pixel = new List<Pixel>();
+            pixel = new Pixel[28, 10];
             onClick = false;
             for (int i = 0; i < 28; i++)
             {
                 for (int k = 0; k < 10; k++)
                 {
-                    pixel.Add(new Pixel(i * 25, k * 25, 25));
+                    pixel[i, k] = new Pixel(i * 25, k * 25, 25);
                 }
             }
             this.DoubleBuffered = true;
             this.MouseMove += kachel_MouseMove;
+            this.fill = false;
         }
 
         private void buttonLED_Click(object sender, EventArgs e)
@@ -70,6 +72,12 @@ namespace LightVisionSettings
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
+            if (fill)
+            {
+                fillButtons(e.X, e.Y);
+                return;
+            }
+
             onClick = true;
             foreach (Pixel p in this.pixel)
             {
@@ -96,13 +104,33 @@ namespace LightVisionSettings
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Clear_Click(object sender, EventArgs e)
         {
             foreach (var item in pixel)
             {
                 item.Color = Color.White;
-            }
+            }    
             this.Refresh();
+        }
+
+        private void bt_Speichern_Click(object sender, EventArgs e)
+        {
+            List<int> colors = new List<int>();
+            foreach (var item in pixel)
+            {
+                colors.Add(item.Color.ToArgb());
+            }
+        }
+
+        private void Fill_Click(object sender, EventArgs e)
+        {
+            fill = !fill;
+        }
+
+        public void fillButtons(int x, int y)
+        {
+            Console.WriteLine(x / 28);
+            Console.WriteLine(y / 10);
         }
     }
 }
