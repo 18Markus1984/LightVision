@@ -19,70 +19,90 @@ namespace LightVisionSettings
             AddButtons();
         }
 
-        Color backColorButtons = Color.Transparent;
+        private List<Pixel> pixel;
+        private bool onClick;
+        private Color backColorButtons;
 
 
         private void AddButtons()
         {
-            for (int k = 0; k < 10; k++)
+            pixel = new List<Pixel>();
+            onClick = false;
+            for (int i = 0; i < 28; i++)
             {
-                for (int i = 0; i < 28; i++)
+                for (int k = 0; k < 10; k++)
                 {
-                    Button button = new Button();
-                    button.Name = $"led{i}_{k}";
-                    button.Location = new Point(10 + 25 * i, 10 + 25 * k);
-                    button.Size = new Size(25, 25);
-                    button.BackColor = Color.White;
-                    button.Click += new EventHandler(buttonLED_Click);
-
-                    // Adding this button to form 
-                    this.Controls.Add(button);
+                    pixel.Add(new Pixel(i * 25, k * 25, 25));
                 }
-            } 
+            }
+            this.DoubleBuffered = true;
+            this.MouseMove += kachel_MouseMove;
         }
 
         private void buttonLED_Click(object sender, EventArgs e)
         {
-            Button clickedButton = (Button)sender;
+            Control clickedButton = (Control)sender;
             clickedButton.BackColor = backColorButtons;
         }
 
-        private void bt_Speichern_Click(object sender, EventArgs e)
-        {               
-            List<string> listOfColors = new List<string>();
-            foreach(Control c in Controls)
+        private void kachel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (onClick)
             {
-                if(c is Button && c.Name.Contains("led") == true)
+                foreach (Pixel p in this.pixel)
                 {
-                    listOfColors.Add($"{c.BackColor.A}, {c.BackColor.R}, {c.BackColor.G}, {c.BackColor.B}");
+                    if (e.X > p.X && e.X < p.X + p.Size && e.Y > p.Y && e.Y < p.Y + p.Size)
+                    {
+                        p.Color = colorDialog1.Color;
+                        this.Refresh();
+                    }
                 }
-            }
-            string myConnectionString = "SERVER=localhost;" +
-                                        "DATABASE=lightvision;" +
-                                        "UID=root;" +
-                                        "PASSWORD=;";
-            MySqlConnection connection = new MySqlConnection(myConnectionString);
-            MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE kacheln SET uhrzeit = NULL";
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
-            foreach (string s in listOfColors)
-            {
-                command.CommandText = $"INSERT INTO kacheln VALUES ('{s}')";
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
             }
         }
 
-        private void bt_Color_Click(object sender, EventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            foreach (Pixel p in this.pixel)
+                p.Render(e.Graphics);
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            onClick = true;
+            foreach (Pixel p in this.pixel)
+            {
+                if (e.X > p.X && e.X < p.X + p.Size && e.Y > p.Y && e.Y < p.Y + p.Size)
+                {
+                    p.Color = colorDialog1.Color;
+                    this.Refresh();
+                }
+            }
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            onClick = false;
+        }
+
+        private void bt_Color_Click_1(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
                 bt_Color.BackColor = colorDialog1.Color;
                 backColorButtons = colorDialog1.Color;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (var item in pixel)
+            {
+                item.Color = Color.White;
+            }
+            this.Refresh();
         }
     }
 }

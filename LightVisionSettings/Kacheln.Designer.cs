@@ -33,6 +33,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.bt_Speichern = new System.Windows.Forms.Button();
             this.bt_Color = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_Speichern
@@ -45,7 +46,6 @@
             this.bt_Speichern.TabIndex = 0;
             this.bt_Speichern.Text = "Speichern";
             this.bt_Speichern.UseVisualStyleBackColor = true;
-            this.bt_Speichern.Click += new System.EventHandler(this.bt_Speichern_Click);
             // 
             // bt_Color
             // 
@@ -57,12 +57,25 @@
             this.bt_Color.TabIndex = 1;
             this.bt_Color.Text = "Farbe";
             this.bt_Color.UseVisualStyleBackColor = true;
-            this.bt_Color.Click += new System.EventHandler(this.bt_Color_Click);
+            this.bt_Color.Click += new System.EventHandler(this.bt_Color_Click_1);
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(183, 271);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(62, 28);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Kacheln
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_Color);
             this.Controls.Add(this.bt_Speichern);
             this.Name = "Kacheln";
@@ -75,5 +88,6 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button bt_Speichern;
         private System.Windows.Forms.Button bt_Color;
+        private System.Windows.Forms.Button button1;
     }
 }
