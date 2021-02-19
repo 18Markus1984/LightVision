@@ -33,8 +33,8 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.bt_Speichern = new System.Windows.Forms.Button();
             this.bt_Color = new System.Windows.Forms.Button();
-            this.bt_clear = new System.Windows.Forms.Button();
             this.bt_fill = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_Speichern
@@ -61,19 +61,6 @@
             this.bt_Color.UseVisualStyleBackColor = true;
             this.bt_Color.Click += new System.EventHandler(this.bt_Color_Click_1);
             // 
-            // bt_clear
-            // 
-            this.bt_clear.BackgroundImage = global::LightVisionSettings.Properties.Resources.erase_24px;
-            this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_clear.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_clear.Location = new System.Drawing.Point(183, 271);
-            this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(41, 41);
-            this.bt_clear.TabIndex = 2;
-            this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
-            // 
             // bt_fill
             // 
             this.bt_fill.BackgroundImage = global::LightVisionSettings.Properties.Resources.fill_color_24px;
@@ -86,6 +73,19 @@
             this.bt_fill.TabIndex = 3;
             this.bt_fill.UseVisualStyleBackColor = true;
             this.bt_fill.Click += new System.EventHandler(this.Fill_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.BackgroundImage = global::LightVisionSettings.Properties.Resources.erase_24px;
+            this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_clear.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_clear.Location = new System.Drawing.Point(183, 271);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(41, 41);
+            this.bt_clear.TabIndex = 2;
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // Kacheln
             // 

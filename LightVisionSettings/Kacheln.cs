@@ -16,20 +16,22 @@ namespace LightVisionSettings
         {
             InitializeComponent();
             AddButtons();
-            Random r = new Random();
-            colorDialog1.Color = Color.FromArgb(r.Next(0, 256),r.Next(0, 256), r.Next(0, 256));
+            Random r = new Random();        
+            colorDialog1.Color = Color.FromArgb(r.Next(0, 256),r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             bt_Color.BackColor = colorDialog1.Color;
+            backColorButtons = colorDialog1.Color;
         }
 
-        private Pixel[,] pixel;
-        private bool onClick;
-        private Color backColorButtons;
-        private bool fill;
+        private Pixel[,] pixel;             //Zweidimensionales Array für die Speicherung der Pixel Position und der Farbe 
+        private bool onClick;               //speichert, ob die Linke-Maus gedrückt ist oder nicht
+        private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
+        private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
+        private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
 
 
-        private void AddButtons()
+        private void AddButtons()       //Fügt 280 Pixel hinzu
         {
-            pixel = new Pixel[28, 10];
+            pixel = new Pixel[28, 10]; 
             onClick = false;
             for (int i = 0; i < 28; i++)
             {
@@ -38,66 +40,65 @@ namespace LightVisionSettings
                     pixel[i, k] = new Pixel(i * 25, k * 25, 25);
                 }
             }
-            this.DoubleBuffered = true;
-            this.MouseMove += kachel_MouseMove;
-            this.fill = false;
+            this.DoubleBuffered = true;             //damit die refresh rate höher ist
+            this.MouseMove += kachel_MouseMove;     //da man nicht hover und mousedown gleichzeitig als event verwenden kann mussten wir überprüfen, ob sich die Maus bewegt und über einem der Rechtecken befindet
+            this.fill = false;                      //fill-Modus deaktiviert
         }
 
-        private void buttonLED_Click(object sender, EventArgs e)
+        private void kachel_MouseMove(object sender, MouseEventArgs e)                          //Event wenn sich die Maus bewegt
         {
-            Control clickedButton = (Control)sender;
-            clickedButton.BackColor = backColorButtons;
-        }
-
-        private void kachel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (onClick)
+            if (onClick)                                                                        //die Licke-Maus-Taste muss gedrückt sein
             {
-                foreach (Pixel p in this.pixel)
+                foreach (Pixel p in this.pixel)     
                 {
-                    if (e.X > p.X  && e.X < p.X + p.Size && e.Y > p.Y && e.Y < p.Y + p.Size)
+                    if (e.X - 10 > p.X && e.X - 10 < p.X + p.Size && e.Y - 10 > p.Y && e.Y - 10 < p.Y + p.Size)    //Es wird überprüft über welchem Pixel sich die Maus bewegt
                     {
-                        p.Color = colorDialog1.Color;
-                        this.Refresh();
+                        p.Color = colorDialog1.Color;                                           //Die Hintergrundfarbe des entsprechenden Pixel wird auf die Ausgewählte geändert
+                        this.Refresh();                                                         //Die Pixel Rechtecke werden neu gezeichnet
                     }
                 }
             }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)       //überschreibt die OnPaint Funktion, damit wir die Refresh funktion benutzen können
         {
             base.OnPaint(e);
-            foreach (Pixel p in this.pixel)
+            foreach (Pixel p in this.pixel)                     //Es werden alle Pixel durchgegangen und diese malen sich dann selber
                 p.Render(e.Graphics);
         }
 
-        protected override void OnMouseDown(MouseEventArgs e)
+        protected override void OnMouseDown(MouseEventArgs e)      //wird für das malen bzw. hinterherziehen und fill tool verwendet
         {
             base.OnMouseDown(e);
-            if (fill)
+            int x = e.X / 25;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
+            int y = e.Y / 25;
+
+            if (fill && x < 28 && x >= 0 && y < 10 && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
             {
-                fillButtons(e.X, e.Y);
-                return;
+                clickedButton = pixel[x, y].Color;                  //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
+                fillButtons(x, y);                                  //Die Rekursive Funktion wird aufgerufen
+                this.Refresh();                                     //Die gemalten Rechtecke werden geudatet
+                return;                                             //Methode wird verlassen
             }
 
-            onClick = true;
-            foreach (Pixel p in this.pixel)
+            onClick = true;                                         //Der Button wird gedrückt
+            foreach (Pixel p in this.pixel)                         //Falls nur ein Knopf gedrückt wird werden alle Rechteckpositionen durchgegangen, um zu überprüfen ob auf jenes gedrückt wurde
             {
                 if (e.X - 10> p.X && e.X - 10 < p.X + p.Size && e.Y -10 > p.Y && e.Y -10 < p.Y + p.Size)
                 {
-                    p.Color = colorDialog1.Color;
-                    this.Refresh();
+                    p.Color = colorDialog1.Color;                   //Farbe wird für den Pixel gesetzt
+                    this.Refresh();                                 //alle Rechtecke werden neu gezeichnet
                 }
             }
         }
 
-        protected override void OnMouseUp(MouseEventArgs e)
+        protected override void OnMouseUp(MouseEventArgs e)         //Wird aktiviert, wenn die Linke Maus Taste aufgehört wird zu drücken
         {
             base.OnMouseUp(e);
-            onClick = false;
+            onClick = false;                                        //der druckstatus der Maus wird geändert
         }
 
-        private void bt_Color_Click_1(object sender, EventArgs e)
+        private void bt_Color_Click_1(object sender, EventArgs e)       //Hier wird die Farbe zum Malen ausgewählt
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -106,7 +107,7 @@ namespace LightVisionSettings
             }
         }
 
-        private void Clear_Click(object sender, EventArgs e)
+        private void Clear_Click(object sender, EventArgs e)    //Die Leinwand wird weiß gemacht/ resetet
         {
             foreach (var item in pixel)
             {
@@ -115,7 +116,7 @@ namespace LightVisionSettings
             this.Refresh();
         }
 
-        private void bt_Speichern_Click(object sender, EventArgs e)
+        private void bt_Speichern_Click(object sender, EventArgs e)     //Die Leinwand wird gespeichert
         {
             List<int> colors = new List<int>();
             foreach (var item in pixel)
@@ -124,10 +125,9 @@ namespace LightVisionSettings
             }
         }
 
-        private void Fill_Click(object sender, EventArgs e)
+        private void Fill_Click(object sender, EventArgs e)     //Methode für den Fill-Modus
         {
-            
-            if (fill)
+            if (fill)               //ändert die Farbe das der Benutzer sieht, dass er den Fill-Modus aktiviert hat
             {
                 bt_fill.BackColor = SystemColors.Control;
             }
@@ -135,15 +135,26 @@ namespace LightVisionSettings
             {
                 bt_fill.BackColor = Color.LightGray;
             }
-            fill = !fill;
+            fill = !fill;           //beim drücken auf den Knopf wird die aktivität des Modus geändert
         }
 
-        public void fillButtons(int x, int y)
+        public void fillButtons(int x, int y)       //Die rekursive Funktion für die Ausfüllung der Fläche verwendet
         {
-            int xPosition = (x / 25);
-            int yPosition = (y / 25);
+            if (x < 28 && x >= 0 && y < 10 && y >= 0)
+            {
+                if (pixel[x, y].Color != clickedButton)     //Rekusionsanker ist das die Farbe des Felds nicht mehr die ursprüngliche Feldfarbe der Fläche ist auf die der Benutzer anfangs gedrückt hat
+                {
 
-            Pixel p = pixel[xPosition, yPosition];
+                }
+                else
+                {
+                    pixel[x, y].Color = backColorButtons;   //Die Farbe des aktuelle betrachteten Pixels wird geändert
+                    fillButtons(x, y + 1);                  //nach oben
+                    fillButtons(x + 1, y);                  //nach rechts
+                    fillButtons(x, y - 1);                  //nach unten
+                    fillButtons(x - 1, y);                  //nach links    
+                }
+            }
         }
     }
 }
