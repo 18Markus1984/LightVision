@@ -33,10 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=8.0.21.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 8.0.21\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -96,6 +92,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UC_Login.resx">
       <DependentUpon>UC_Login.cs</DependentUpon>
@@ -112,6 +109,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\broom_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\erase_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\natural_user_interface_2_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left_click_26px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil_drawing_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fill_color_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fill_color_24px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

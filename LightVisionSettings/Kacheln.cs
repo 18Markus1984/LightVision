@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
-using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +16,9 @@ namespace LightVisionSettings
         {
             InitializeComponent();
             AddButtons();
+            Random r = new Random();
+            colorDialog1.Color = Color.FromArgb(r.Next(0, 256),r.Next(0, 256), r.Next(0, 256));
+            bt_Color.BackColor = colorDialog1.Color;
         }
 
         private Pixel[,] pixel;
@@ -53,7 +55,7 @@ namespace LightVisionSettings
             {
                 foreach (Pixel p in this.pixel)
                 {
-                    if (e.X > p.X && e.X < p.X + p.Size && e.Y > p.Y && e.Y < p.Y + p.Size)
+                    if (e.X > p.X  && e.X < p.X + p.Size && e.Y > p.Y && e.Y < p.Y + p.Size)
                     {
                         p.Color = colorDialog1.Color;
                         this.Refresh();
@@ -81,7 +83,7 @@ namespace LightVisionSettings
             onClick = true;
             foreach (Pixel p in this.pixel)
             {
-                if (e.X > p.X && e.X < p.X + p.Size && e.Y > p.Y && e.Y < p.Y + p.Size)
+                if (e.X - 10> p.X && e.X - 10 < p.X + p.Size && e.Y -10 > p.Y && e.Y -10 < p.Y + p.Size)
                 {
                     p.Color = colorDialog1.Color;
                     this.Refresh();
@@ -124,13 +126,24 @@ namespace LightVisionSettings
 
         private void Fill_Click(object sender, EventArgs e)
         {
+            
+            if (fill)
+            {
+                bt_fill.BackColor = SystemColors.Control;
+            }
+            else
+            {
+                bt_fill.BackColor = Color.LightGray;
+            }
             fill = !fill;
         }
 
         public void fillButtons(int x, int y)
         {
-            Console.WriteLine(x / 28);
-            Console.WriteLine(y / 10);
+            int xPosition = (x / 25);
+            int yPosition = (y / 25);
+
+            Pixel p = pixel[xPosition, yPosition];
         }
     }
 }
