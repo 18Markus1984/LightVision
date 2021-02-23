@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace LightVisionSettings
 {
@@ -13,23 +14,25 @@ namespace LightVisionSettings
     {
         private Socket socket;
         private NetworkStream ns;
-        private StreamWriter sw;
         private StreamReader sr;
+        private Stream s;
 
         public Client(string ip, int port)
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Connect(ip, port);
             ns = new NetworkStream(socket);
-            sw = new StreamWriter(ns);
             sr = new StreamReader(ns);
         }
 
-        public string Write(string msg)
+        public string Write(List<int> msg)
         {
-            sw.WriteLine(msg);
-            sw.Flush();
-
+            var json = JsonConvert.SerializeObject(msg);
+            using (StreamWriter sw = new StreamWriter(ns))
+            {
+                sw.Write(json);
+                sw.Flush();
+            }
             return sr.ReadLine();
         }
 

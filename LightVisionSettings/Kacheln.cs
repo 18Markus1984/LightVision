@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace LightVisionSettings
 {
     public partial class Kacheln : UserControl
@@ -45,7 +46,12 @@ namespace LightVisionSettings
             this.fill = false;                      //fill-Modus deaktiviert
         }
 
-        private void kachel_MouseMove(object sender, MouseEventArgs e)                          //Event wenn sich die Maus bewegt
+        /// <summary>
+        /// Event wenn sich die Maus bewegt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void kachel_MouseMove(object sender, MouseEventArgs e)                          
         {
             if (onClick)                                                                        //die Licke-Maus-Taste muss gedrückt sein
             {
@@ -67,7 +73,11 @@ namespace LightVisionSettings
                 p.Render(e.Graphics);
         }
 
-        protected override void OnMouseDown(MouseEventArgs e)      //wird für das malen bzw. hinterherziehen und fill tool verwendet
+        /// <summary>
+        /// wird für das malen bzw. hinterherziehen und fill tool verwendet
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnMouseDown(MouseEventArgs e)     
         {
             base.OnMouseDown(e);
             int x = e.X / 25;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
@@ -76,7 +86,7 @@ namespace LightVisionSettings
             if (fill && x < 28 && x >= 0 && y < 10 && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
             {
                 clickedButton = pixel[x, y].Color;                  //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
-                fillButtons(x, y);                                  //Die Rekursive Funktion wird aufgerufen
+                fillButtons(clickedButton, x, y);                                  //Die Rekursive Funktion wird aufgerufen
                 this.Refresh();                                     //Die gemalten Rechtecke werden geudatet
                 return;                                             //Methode wird verlassen
             }
@@ -107,7 +117,12 @@ namespace LightVisionSettings
             }
         }
 
-        private void Clear_Click(object sender, EventArgs e)    //Die Leinwand wird weiß gemacht/ resetet
+        /// <summary>
+        /// Die Leinwand wird weiß gemacht/ resetet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Clear_Click(object sender, EventArgs e)    
         {
             foreach (var item in pixel)
             {
@@ -138,22 +153,17 @@ namespace LightVisionSettings
             fill = !fill;           //beim drücken auf den Knopf wird die aktivität des Modus geändert
         }
 
-        public void fillButtons(int x, int y)       //Die rekursive Funktion für die Ausfüllung der Fläche verwendet
+        public void fillButtons(Color original, int x, int y)       //Die rekursive Funktion für die Ausfüllung der Fläche verwendet
         {
-            if (x < 28 && x >= 0 && y < 10 && y >= 0)
+            if (x < 28 && x >= 0 && y < 10 && y >= 0 && pixel[x, y].Color == original)
             {
-                if (pixel[x, y].Color != clickedButton)     //Rekusionsanker ist das die Farbe des Felds nicht mehr die ursprüngliche Feldfarbe der Fläche ist auf die der Benutzer anfangs gedrückt hat
-                {
-
-                }
-                else
-                {
-                    pixel[x, y].Color = backColorButtons;   //Die Farbe des aktuelle betrachteten Pixels wird geändert
-                    fillButtons(x, y + 1);                  //nach oben
-                    fillButtons(x + 1, y);                  //nach rechts
-                    fillButtons(x, y - 1);                  //nach unten
-                    fillButtons(x - 1, y);                  //nach links    
-                }
+                if (pixel[x, y].Color == backColorButtons)
+                    return;
+                pixel[x, y].Color = backColorButtons;   //Die Farbe des aktuelle betrachteten Pixels wird geändert
+                fillButtons(original, x, y + 1);                  //nach oben
+                fillButtons(original, x + 1, y);                  //nach rechts
+                fillButtons(original, x, y - 1);                  //nach unten
+                fillButtons(original, x - 1, y);                  //nach links    
             }
         }
     }

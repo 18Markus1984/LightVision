@@ -17,6 +17,8 @@ namespace LightVisionSettings
             InitializeComponent();
         }
 
+        //public Client c = new Client("127.0.0.1", 1337);
+
         private void bt_Close_Click(object sender, EventArgs e)
         {
             this.Close();
