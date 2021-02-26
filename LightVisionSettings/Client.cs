@@ -36,6 +36,16 @@ namespace LightVisionSettings
             return sr.ReadLine();
         }
 
+        public string GetPanel()
+        {
+            using (StreamWriter sw = new StreamWriter(ns))
+            {
+                sw.Write(Encoding.ASCII.GetBytes("getPanel"));
+                sw.Flush();
+            }
+            return sr.ReadToEnd();
+        }
+        
         public string Read()
         {
             return sr.ReadLine();

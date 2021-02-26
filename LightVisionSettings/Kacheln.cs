@@ -138,6 +138,7 @@ namespace LightVisionSettings
             {
                 colors.Add(item.Color.ToArgb());
             }
+            Client client = new Client("135.181.35.212", 65432);
         }
 
         private void Fill_Click(object sender, EventArgs e)     //Methode für den Fill-Modus
