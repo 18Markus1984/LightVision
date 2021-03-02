@@ -36,14 +36,19 @@ namespace LightVisionSettings
             return sr.ReadLine();
         }
 
-        public string GetPanel()
+        public List<Panel> GetPanel()
         {
+            using (sr = new StreamReader(ns))
             using (StreamWriter sw = new StreamWriter(ns))
             {
                 sw.Write("getPanel");
                 sw.Flush();
+                //var data = sr.ReadToEndAsync();
+                byte[] data = new byte[2048];
+                int bytesRead = ns.Read(data, 0, data.Length);
             }
-            return sr.ReadToEnd();
+            //JsonConvert.DeserializeObject(sr.ReadLine());
+            return null;
         }
 
         public void SendPanel(List<Panel> listOfPanel)

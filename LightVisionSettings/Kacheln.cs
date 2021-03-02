@@ -21,6 +21,7 @@ namespace LightVisionSettings
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256),r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             bt_Color.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
+            downloadPanels();
             foreach (Panel p in savedPanels)
             {
                 comboBox1.Items.Add(p);
@@ -165,6 +166,12 @@ namespace LightVisionSettings
         {
             Client client = new Client("135.181.35.212", 65432);
             client.SendPanel(savedPanels);
+        }
+
+        private List<Panel> downloadPanels()
+        {
+            Client client = new Client("135.181.35.212", 65432);
+            return client.GetPanel();
         }
 
         private void Fill_Click(object sender, EventArgs e)     //Methode für den Fill-Modus
