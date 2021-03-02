@@ -34,15 +34,17 @@ namespace LightVisionSettings
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
         private List<Panel> savedPanels = new List<Panel>(); //Speichert alle erstellten Panels
+        protected int length = 24;
+        protected int height = 8;
 
 
         private void AddButtons()       //Fügt 280 Pixel hinzu
         {
-            pixel = new Pixel[28, 10]; 
+            pixel = new Pixel[length, height]; 
             onClick = false;
-            for (int i = 0; i < 28; i++)
+            for (int i = 0; i < length; i++)
             {
-                for (int k = 0; k < 10; k++)
+                for (int k = 0; k < height; k++)
                 {
                     pixel[i, k] = new Pixel(i * 25, k * 25, 25);
                 }
@@ -55,9 +57,9 @@ namespace LightVisionSettings
         private void loadPanel(Panel selectedPanel)
         {
             int k = 0;
-            for (int i = 0; i < 24; i++)
+            for (int i = 0; i < length; i++)
             {
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < height; j++)
                 {
                     pixel[i, j].Color = Color.FromArgb(selectedPanel.colors[k]);
                     k += 1;
@@ -103,7 +105,7 @@ namespace LightVisionSettings
             int x = e.X / 25;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
             int y = e.Y / 25;
 
-            if (fill && x < 28 && x >= 0 && y < 10 && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
+            if (fill && x < length && x >= 0 && y < height && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
             {
                 clickedButton = pixel[x, y].Color;                  //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
                 fillButtons(clickedButton, x, y);                                  //Die Rekursive Funktion wird aufgerufen
@@ -189,7 +191,7 @@ namespace LightVisionSettings
 
         public void fillButtons(Color original, int x, int y)       //Die rekursive Funktion für die Ausfüllung der Fläche verwendet
         {
-            if (x < 28 && x >= 0 && y < 10 && y >= 0 && pixel[x, y].Color == original)
+            if (x < length && x >= 0 && y < height && y >= 0 && pixel[x, y].Color == original)
             {
                 if (pixel[x, y].Color == backColorButtons)
                     return;
