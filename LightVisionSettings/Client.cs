@@ -15,7 +15,7 @@ namespace LightVisionSettings
         private Socket socket;
         private NetworkStream ns;
         private StreamReader sr;
-        private Stream s;
+        //private Stream s;
 
         public Client(string ip, int port)
         {
@@ -40,16 +40,20 @@ namespace LightVisionSettings
         {
             using (StreamWriter sw = new StreamWriter(ns))
             {
-                sw.Write(Encoding.ASCII.GetBytes("getPanel"));
+                sw.Write("getPanel");
                 sw.Flush();
             }
             return sr.ReadToEnd();
         }
-        
-        public string Read()
-        {
-            return sr.ReadLine();
-        }
 
+        public void SendPanel(List<Panel> listOfPanel)
+        {
+            using (StreamWriter sw = new StreamWriter(ns))
+            {
+                var json = JsonConvert.SerializeObject(listOfPanel);
+                sw.Write(json);
+                sw.Flush();
+            }
+        }
     }
 }

@@ -9,21 +9,33 @@ namespace LightVisionSettings
 {
     public class Panel
     {
-        Color[,] panel;
+        public string name;
+        public List<int> colors;
 
-        public Panel()
+        public Panel(string name)
         {
-            panel = new Color[10, 28];
+            this.name = name;
+            List<int> defaultColors = new List<int>();
+            for (int i = 0; i < 192; i++)
+            {
+                defaultColors.Add(Color.Green.ToArgb());
+            }
+            colors = defaultColors;
+        }
+        
+        public Panel(string name, List<int> colors)
+        {
+            this.colors = colors;
         }
 
-        public void fill(Color color, int row, int colume)
-        {
-            panel[row, colume] = color;
-        }
+        //public void fill(Color color, int row, int colume)
+        //{
+        //    panel[row, colume] = color;
+        //}
 
-        public void fill(int alpha,int red,int green,int blue, int row, int colume)
-        {
-            panel[row, colume] = Color.FromArgb(alpha,red, green, blue);
-        }
+        //public void fill(int alpha,int red,int green,int blue, int row, int colume)
+        //{
+        //    panel[row, colume] = Color.FromArgb(alpha,red, green, blue);
+        //}
     }
 }

@@ -35,6 +35,9 @@
             this.bt_Color = new System.Windows.Forms.Button();
             this.bt_fill = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.bt_NewPanel = new System.Windows.Forms.Button();
+            this.tb_NamePanel = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // bt_Speichern
@@ -87,10 +90,41 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(344, 297);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(155, 21);
+            this.comboBox1.TabIndex = 4;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // bt_NewPanel
+            // 
+            this.bt_NewPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_NewPanel.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_NewPanel.Location = new System.Drawing.Point(277, 271);
+            this.bt_NewPanel.Name = "bt_NewPanel";
+            this.bt_NewPanel.Size = new System.Drawing.Size(61, 41);
+            this.bt_NewPanel.TabIndex = 5;
+            this.bt_NewPanel.Text = "Neu";
+            this.bt_NewPanel.UseVisualStyleBackColor = true;
+            this.bt_NewPanel.Click += new System.EventHandler(this.bt_NewPanel_Click);
+            // 
+            // tb_NamePanel
+            // 
+            this.tb_NamePanel.Location = new System.Drawing.Point(344, 271);
+            this.tb_NamePanel.Name = "tb_NamePanel";
+            this.tb_NamePanel.Size = new System.Drawing.Size(155, 20);
+            this.tb_NamePanel.TabIndex = 6;
+            // 
             // Kacheln
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tb_NamePanel);
+            this.Controls.Add(this.bt_NewPanel);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.bt_fill);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_Color);
@@ -98,6 +132,7 @@
             this.Name = "Kacheln";
             this.Size = new System.Drawing.Size(786, 538);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -107,5 +142,8 @@
         private System.Windows.Forms.Button bt_Color;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_fill;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button bt_NewPanel;
+        private System.Windows.Forms.TextBox tb_NamePanel;
     }
 }
