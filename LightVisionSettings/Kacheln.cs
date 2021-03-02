@@ -32,7 +32,7 @@ namespace LightVisionSettings
         private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
-        private List<Panel> savedPanels = new List<Panel>();
+        private List<Panel> savedPanels = new List<Panel>(); //Speichert alle erstellten Panels
 
 
         private void AddButtons()       //Fügt 280 Pixel hinzu
@@ -62,6 +62,7 @@ namespace LightVisionSettings
                     k += 1;
                 }
             }
+            this.Refresh();
         }
 
         /// <summary>
