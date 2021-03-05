@@ -21,7 +21,7 @@ namespace LightVisionSettings
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256),r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             bt_Color.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
-            downloadPanels();
+            //savedPanels = downloadPanels();
             foreach (Panel p in savedPanels)
             {
                 comboBox1.Items.Add(p);
