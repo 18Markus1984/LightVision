@@ -38,15 +38,24 @@ namespace LightVisionSettings
 
         public List<Panel> GetPanel()
         {
+            string data = "";
             using (sr = new StreamReader(ns))
             using (StreamWriter sw = new StreamWriter(ns))
             {
                 sw.Write("getPanel\n");
                 sw.Flush();
-                string data;
                 data = sr.ReadLine();
             }
-            //JsonConvert.DeserializeObject(sr.ReadLine());
+            List<string> seperatePanels = new List<string>();
+            while(data.Contains('{') || data.Contains('}'))
+            {
+                string buffer = "";
+                int start = data.IndexOf('{'); ;
+                int end = data.IndexOf('}');
+                buffer = data.Substring(start, end-start);
+                seperatePanels.Add(buffer);
+                data = data.Remove(start, end - start + 1);
+            }
             return null;
         }
 
