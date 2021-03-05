@@ -25,17 +25,6 @@ namespace LightVisionSettings
             sr = new StreamReader(ns);
         }
 
-        public string Write(List<int> msg)
-        {
-            var json = JsonConvert.SerializeObject(msg);
-            using (StreamWriter sw = new StreamWriter(ns))
-            {
-                sw.Write(json);
-                sw.Flush();
-            }
-            return sr.ReadLine();
-        }
-
         public List<Panel> GetPanel()
         {
             string data = "";
