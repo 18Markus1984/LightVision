@@ -41,9 +41,10 @@ namespace LightVisionSettings
             using (sr = new StreamReader(ns))
             using (StreamWriter sw = new StreamWriter(ns))
             {
-                sw.Write("getPanel");
+                sw.Write("getPanel\n");
                 sw.Flush();
-                string data = sr.ReadLine();
+                string data;
+                data = sr.ReadLine();
             }
             //JsonConvert.DeserializeObject(sr.ReadLine());
             return null;
@@ -54,7 +55,7 @@ namespace LightVisionSettings
             using (StreamWriter sw = new StreamWriter(ns))
             {
                 var json = JsonConvert.SerializeObject(listOfPanel);
-                sw.Write(json + "\n");
+                sw.WriteLine(json);
                 sw.Flush();
             }
         }

@@ -22,6 +22,7 @@ namespace LightVisionSettings
             bt_Color.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
             //savedPanels = downloadPanels();
+            downloadPanels();
             foreach (Panel p in savedPanels)
             {
                 comboBox1.Items.Add(p);
