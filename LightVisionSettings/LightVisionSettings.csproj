@@ -73,6 +73,7 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Kacheln.cs">
       <SubType>UserControl</SubType>
     </Compile>

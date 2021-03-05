@@ -26,6 +26,7 @@ namespace LightVisionSettings
         public Panel(string name, List<int> colors)
         {
             this.colors = colors;
+            this.name = name;
         }
 
         //public void fill(Color color, int row, int colume)

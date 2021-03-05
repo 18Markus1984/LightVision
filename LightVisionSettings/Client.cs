@@ -46,17 +46,13 @@ namespace LightVisionSettings
                 sw.Flush();
                 data = sr.ReadLine();
             }
-            List<string> seperatePanels = new List<string>();
-            while(data.Contains('{') || data.Contains('}'))
+            List<string> seperateStrings = ExtensionMethods.getStringInBetween(data, '{', '}');
+            List<Panel> panels = new List<Panel>();
+            foreach (string s in seperateStrings)
             {
-                string buffer = "";
-                int start = data.IndexOf('{'); ;
-                int end = data.IndexOf('}');
-                buffer = data.Substring(start, end-start);
-                seperatePanels.Add(buffer);
-                data = data.Remove(start, end - start + 1);
+                panels.Add(ExtensionMethods.getPanelFromString(s));
             }
-            return null;
+            return panels;
         }
 
         public void SendPanel(List<Panel> listOfPanel)
