@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
+
+
 namespace LightVisionSettings
 {
     public partial class LightVision_Base : Form
@@ -43,6 +45,7 @@ namespace LightVisionSettings
         public LightVision_Base()
         {
             InitializeComponent();
+            timer1.Start();
 
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
@@ -92,6 +95,7 @@ namespace LightVisionSettings
         {
             bt_Settings.BackColor = menuColor;
             p_Slider.Location = new Point(0, 246);
+            settings1.BringToFront();
             p_Slider.BringToFront();
         }
 
@@ -110,6 +114,21 @@ namespace LightVisionSettings
             b.BackColor = contentColor;
         }
 
-       
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (settings1.rgb)
+            {
+                Random rnd = new Random();
+                int A = rnd.Next(0, 255);
+                int R = rnd.Next(0, 255);
+                int G = rnd.Next(0, 255);
+                int B = rnd.Next(0, 255);
+                label1.ForeColor = Color.FromArgb(A, R, G, B);
+            }
+            else
+            {
+                label1.ForeColor = Color.White;
+            }
+        }
     }
 }

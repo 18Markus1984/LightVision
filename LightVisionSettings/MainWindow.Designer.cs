@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.p_Nav = new System.Windows.Forms.Panel();
             this.bt_Close = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -36,11 +37,13 @@
             this.bt_Kacheln = new System.Windows.Forms.Button();
             this.bt_Editor = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.p_Slider = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.p_Content = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.kacheln1 = new LightVisionSettings.Kacheln();
             this.dashboard1 = new LightVisionSettings.Dashboard();
+            this.settings1 = new LightVisionSettings.Settings();
             this.p_Nav.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -175,6 +178,14 @@
             this.panel2.TabIndex = 2;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
+            // p_Slider
+            // 
+            this.p_Slider.BackColor = System.Drawing.Color.White;
+            this.p_Slider.Location = new System.Drawing.Point(77, 77);
+            this.p_Slider.Name = "p_Slider";
+            this.p_Slider.Size = new System.Drawing.Size(5, 40);
+            this.p_Slider.TabIndex = 0;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -187,23 +198,20 @@
             this.label1.Text = "LightVision";
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
-            // p_Slider
-            // 
-            this.p_Slider.BackColor = System.Drawing.Color.White;
-            this.p_Slider.Location = new System.Drawing.Point(77, 77);
-            this.p_Slider.Name = "p_Slider";
-            this.p_Slider.Size = new System.Drawing.Size(5, 40);
-            this.p_Slider.TabIndex = 0;
-            // 
             // p_Content
             // 
             this.p_Content.Controls.Add(this.kacheln1);
             this.p_Content.Controls.Add(this.dashboard1);
+            this.p_Content.Controls.Add(this.settings1);
             this.p_Content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Content.Location = new System.Drawing.Point(172, 0);
             this.p_Content.Name = "p_Content";
-            this.p_Content.Size = new System.Drawing.Size(658, 538);
+            this.p_Content.Size = new System.Drawing.Size(621, 538);
             this.p_Content.TabIndex = 1;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // kacheln1
             // 
@@ -216,16 +224,24 @@
             // dashboard1
             // 
             this.dashboard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
-            this.dashboard1.Location = new System.Drawing.Point(3, 0);
+            this.dashboard1.Location = new System.Drawing.Point(0, 0);
             this.dashboard1.Name = "dashboard1";
             this.dashboard1.Size = new System.Drawing.Size(786, 538);
             this.dashboard1.TabIndex = 2;
+            // 
+            // settings1
+            // 
+            this.settings1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
+            this.settings1.Location = new System.Drawing.Point(0, 0);
+            this.settings1.Name = "settings1";
+            this.settings1.Size = new System.Drawing.Size(618, 538);
+            this.settings1.TabIndex = 3;
             // 
             // LightVision_Base
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(830, 538);
+            this.ClientSize = new System.Drawing.Size(793, 538);
             this.ControlBox = false;
             this.Controls.Add(this.p_Content);
             this.Controls.Add(this.p_Nav);
@@ -256,6 +272,8 @@
         private Dashboard dashboard1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button bt_Settings;
+        private System.Windows.Forms.Timer timer1;
+        private Settings settings1;
     }
 }
 
