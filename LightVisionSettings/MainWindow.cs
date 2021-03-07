@@ -45,6 +45,8 @@ namespace LightVisionSettings
         public LightVision_Base()
         {
             InitializeComponent();
+            settings1.contentColor = contentColor;
+            settings1.menuColor = menuColor;
             timer1.Start();
 
             this.FormBorderStyle = FormBorderStyle.None;
@@ -111,7 +113,7 @@ namespace LightVisionSettings
         private void bt_Leave(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            b.BackColor = contentColor;
+            b.BackColor = Color.Transparent;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -129,6 +131,22 @@ namespace LightVisionSettings
             {
                 label1.ForeColor = Color.White;
             }
+
+            ChangeColor();
+        }
+
+        private void ChangeColor()
+        {
+            menuColor = settings1.menuColor;
+            contentColor = settings1.contentColor;
+
+            settings1.BackColor = menuColor;
+            dashboard1.BackColor = menuColor;
+            kacheln1.BackColor = menuColor;
+            p_Content.BackColor = menuColor;
+
+            panel2.BackColor = contentColor;
+            p_Nav.BackColor = contentColor;
         }
     }
 }
