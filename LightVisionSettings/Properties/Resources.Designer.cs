@@ -153,6 +153,16 @@ namespace LightVisionSettings.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap gears_50px {
+            get {
+                object obj = ResourceManager.GetObject("gears_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap home_24px {
             get {
                 object obj = ResourceManager.GetObject("home_24px", resourceCulture);
@@ -213,6 +223,26 @@ namespace LightVisionSettings.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pen_32px {
+            get {
+                object obj = ResourceManager.GetObject("pen_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pencil_24px {
+            get {
+                object obj = ResourceManager.GetObject("pencil_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pencil_drawing_32px {
             get {
                 object obj = ResourceManager.GetObject("pencil_drawing_32px", resourceCulture);
@@ -226,6 +256,16 @@ namespace LightVisionSettings.Properties {
         internal static System.Drawing.Bitmap plugin_26px {
             get {
                 object obj = ResourceManager.GetObject("plugin_26px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap services_26px {
+            get {
+                object obj = ResourceManager.GetObject("services_26px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

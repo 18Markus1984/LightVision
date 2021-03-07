@@ -13,6 +13,13 @@ namespace LightVisionSettings
 {
     public partial class LightVision_Base : Form
     {
+        //Werte für die Veränderung des Aussehens
+        Color menuColor = Color.FromArgb(43, 147, 72);
+        Color contentColor = Color.FromArgb(0, 127, 95);
+
+        int buttonRadius = 35;
+        int buttonOffsetLeft = 5;
+
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -40,9 +47,14 @@ namespace LightVisionSettings
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
+            bt_Editor.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width+20,bt_Editor.Height, buttonRadius, buttonRadius));
+            bt_Dashboard.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
+            bt_Kacheln.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
+            bt_Settings.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
 
             p_Slider.Location = new Point(0, 126);
-
+            p_Slider.Enabled = true;
+            bt_Editor.BackColor = menuColor;
 
         }
 
@@ -55,7 +67,7 @@ namespace LightVisionSettings
 
         private void bt_Wecker_Click(object sender, EventArgs e)
         {
-            bt_Editor.BackColor = Color.FromArgb(30, 30, 30);
+            bt_Editor.BackColor = menuColor;
             p_Slider.Location = new Point(0, 126);
             kacheln1.BringToFront();
             p_Slider.BringToFront();
@@ -63,16 +75,23 @@ namespace LightVisionSettings
 
         private void bt_Kacheln_Click(object sender, EventArgs e)
         {
-            bt_Kacheln.BackColor = Color.FromArgb(30, 30, 30);
+            bt_Kacheln.BackColor = menuColor;
             p_Slider.Location = new Point(0, 166);
             
         }
 
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
-            bt_Dashboard.BackColor = Color.FromArgb(30, 30, 30);
+            bt_Dashboard.BackColor = menuColor;
             p_Slider.Location = new Point(0, 206);
             dashboard1.BringToFront();
+            p_Slider.BringToFront();
+        }
+
+        private void bt_Settings_Click(object sender, EventArgs e)
+        {
+            bt_Settings.BackColor = menuColor;
+            p_Slider.Location = new Point(0, 246);
             p_Slider.BringToFront();
         }
 
@@ -85,10 +104,12 @@ namespace LightVisionSettings
             }
         }
 
-        private void bt_Enter(object sender, EventArgs e)
+        private void bt_Leave(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            b.BackColor = Color.FromArgb(64, 64, 64);
+            b.BackColor = contentColor;
         }
+
+       
     }
 }

@@ -175,9 +175,6 @@
     <None Include="Resources\automation_32px.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gears_30px.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\home_26px.png" />
   </ItemGroup>
   <ItemGroup>
@@ -190,13 +187,28 @@
     <None Include="Resources\Dashboard Layout2_24px.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Dashboard Layout_24px.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\home_24px.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\home2_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dashboard Layout_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gears_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gears_50px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\services_26px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
