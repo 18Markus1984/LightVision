@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.p_Nav = new System.Windows.Forms.Panel();
-            this.bt_Close = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.bt_Close = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.bt_Einstellungen = new System.Windows.Forms.Button();
+            this.bt_Dashboard = new System.Windows.Forms.Button();
             this.bt_Kacheln = new System.Windows.Forms.Button();
-            this.bt_Wecker = new System.Windows.Forms.Button();
             this.p_Content = new System.Windows.Forms.Panel();
-            this.kacheln1 = new LightVisionSettings.Kacheln();
             this.p_Slider = new System.Windows.Forms.Panel();
+            this.kacheln1 = new LightVisionSettings.Kacheln();
             this.dashboard1 = new LightVisionSettings.Dashboard();
+            this.bt_Editor = new System.Windows.Forms.Button();
             this.p_Nav.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.p_Content.SuspendLayout();
             this.SuspendLayout();
@@ -47,14 +49,36 @@
             // p_Nav
             // 
             this.p_Nav.BackColor = System.Drawing.Color.Black;
+            this.p_Nav.Controls.Add(this.panel2);
             this.p_Nav.Controls.Add(this.bt_Close);
-            this.p_Nav.Controls.Add(this.label1);
             this.p_Nav.Controls.Add(this.panel1);
             this.p_Nav.Dock = System.Windows.Forms.DockStyle.Left;
             this.p_Nav.Location = new System.Drawing.Point(0, 0);
             this.p_Nav.Name = "p_Nav";
             this.p_Nav.Size = new System.Drawing.Size(172, 538);
             this.p_Nav.TabIndex = 0;
+            this.p_Nav.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(172, 117);
+            this.panel2.TabIndex = 2;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Forte", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(13, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(138, 30);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "LightVision";
             // 
             // bt_Close
             // 
@@ -70,43 +94,34 @@
             this.bt_Close.Text = "Beenden";
             this.bt_Close.UseVisualStyleBackColor = false;
             this.bt_Close.Click += new System.EventHandler(this.bt_Close_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Forte", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(16, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 30);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "LightVision";
+            this.bt_Close.Enter += new System.EventHandler(this.bt_Enter);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.bt_Einstellungen);
+            this.panel1.Controls.Add(this.bt_Dashboard);
             this.panel1.Controls.Add(this.bt_Kacheln);
-            this.panel1.Controls.Add(this.bt_Wecker);
+            this.panel1.Controls.Add(this.bt_Editor);
             this.panel1.Location = new System.Drawing.Point(0, 126);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(172, 254);
+            this.panel1.Size = new System.Drawing.Size(172, 124);
             this.panel1.TabIndex = 0;
             // 
-            // bt_Einstellungen
+            // bt_Dashboard
             // 
-            this.bt_Einstellungen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.bt_Einstellungen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bt_Einstellungen.FlatAppearance.BorderSize = 0;
-            this.bt_Einstellungen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_Einstellungen.Font = new System.Drawing.Font("Forte", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Einstellungen.ForeColor = System.Drawing.Color.White;
-            this.bt_Einstellungen.Location = new System.Drawing.Point(0, 80);
-            this.bt_Einstellungen.Name = "bt_Einstellungen";
-            this.bt_Einstellungen.Size = new System.Drawing.Size(172, 40);
-            this.bt_Einstellungen.TabIndex = 3;
-            this.bt_Einstellungen.Text = "Einstellungen";
-            this.bt_Einstellungen.UseVisualStyleBackColor = false;
-            this.bt_Einstellungen.Click += new System.EventHandler(this.bt_Einstellungen_Click);
+            this.bt_Dashboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.bt_Dashboard.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bt_Dashboard.FlatAppearance.BorderSize = 0;
+            this.bt_Dashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_Dashboard.Font = new System.Drawing.Font("Forte", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_Dashboard.ForeColor = System.Drawing.Color.White;
+            this.bt_Dashboard.Location = new System.Drawing.Point(0, 80);
+            this.bt_Dashboard.Name = "bt_Dashboard";
+            this.bt_Dashboard.Size = new System.Drawing.Size(172, 40);
+            this.bt_Dashboard.TabIndex = 3;
+            this.bt_Dashboard.Text = "Dashboard";
+            this.bt_Dashboard.UseVisualStyleBackColor = false;
+            this.bt_Dashboard.Click += new System.EventHandler(this.bt_Einstellungen_Click);
+            this.bt_Dashboard.Leave += new System.EventHandler(this.bt_Enter);
             // 
             // bt_Kacheln
             // 
@@ -123,22 +138,7 @@
             this.bt_Kacheln.Text = "Kacheln";
             this.bt_Kacheln.UseVisualStyleBackColor = false;
             this.bt_Kacheln.Click += new System.EventHandler(this.bt_Kacheln_Click);
-            // 
-            // bt_Wecker
-            // 
-            this.bt_Wecker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.bt_Wecker.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bt_Wecker.FlatAppearance.BorderSize = 0;
-            this.bt_Wecker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_Wecker.Font = new System.Drawing.Font("Forte", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Wecker.ForeColor = System.Drawing.Color.White;
-            this.bt_Wecker.Location = new System.Drawing.Point(0, 0);
-            this.bt_Wecker.Name = "bt_Wecker";
-            this.bt_Wecker.Size = new System.Drawing.Size(172, 40);
-            this.bt_Wecker.TabIndex = 1;
-            this.bt_Wecker.Text = "Wecker";
-            this.bt_Wecker.UseVisualStyleBackColor = false;
-            this.bt_Wecker.Click += new System.EventHandler(this.bt_Wecker_Click);
+            this.bt_Kacheln.Leave += new System.EventHandler(this.bt_Enter);
             // 
             // p_Content
             // 
@@ -148,36 +148,55 @@
             this.p_Content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Content.Location = new System.Drawing.Point(172, 0);
             this.p_Content.Name = "p_Content";
-            this.p_Content.Size = new System.Drawing.Size(786, 538);
+            this.p_Content.Size = new System.Drawing.Size(658, 538);
             this.p_Content.TabIndex = 1;
+            // 
+            // p_Slider
+            // 
+            this.p_Slider.BackColor = System.Drawing.Color.Black;
+            this.p_Slider.Location = new System.Drawing.Point(0, 126);
+            this.p_Slider.Name = "p_Slider";
+            this.p_Slider.Size = new System.Drawing.Size(5, 40);
+            this.p_Slider.TabIndex = 0;
             // 
             // kacheln1
             // 
             this.kacheln1.Location = new System.Drawing.Point(0, 0);
             this.kacheln1.Name = "kacheln1";
-            this.kacheln1.Size = new System.Drawing.Size(786, 538);
+            this.kacheln1.Size = new System.Drawing.Size(686, 538);
             this.kacheln1.TabIndex = 1;
-            // 
-            // p_Slider
-            // 
-            this.p_Slider.BackColor = System.Drawing.Color.Black;
-            this.p_Slider.Location = new System.Drawing.Point(0, 166);
-            this.p_Slider.Name = "p_Slider";
-            this.p_Slider.Size = new System.Drawing.Size(5, 40);
-            this.p_Slider.TabIndex = 0;
             // 
             // dashboard1
             // 
-            this.dashboard1.Location = new System.Drawing.Point(0, 0);
+            this.dashboard1.Location = new System.Drawing.Point(3, 0);
             this.dashboard1.Name = "dashboard1";
             this.dashboard1.Size = new System.Drawing.Size(786, 538);
             this.dashboard1.TabIndex = 2;
+            // 
+            // bt_Editor
+            // 
+            this.bt_Editor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.bt_Editor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bt_Editor.FlatAppearance.BorderSize = 0;
+            this.bt_Editor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_Editor.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Bold);
+            this.bt_Editor.ForeColor = System.Drawing.Color.White;
+            this.bt_Editor.Image = global::LightVisionSettings.Properties.Resources.home_24px;
+            this.bt_Editor.Location = new System.Drawing.Point(0, 0);
+            this.bt_Editor.Name = "bt_Editor";
+            this.bt_Editor.Size = new System.Drawing.Size(172, 40);
+            this.bt_Editor.TabIndex = 1;
+            this.bt_Editor.Text = "Editor";
+            this.bt_Editor.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.bt_Editor.UseVisualStyleBackColor = true;
+            this.bt_Editor.Click += new System.EventHandler(this.bt_Wecker_Click);
+            this.bt_Editor.Leave += new System.EventHandler(this.bt_Enter);
             // 
             // LightVision_Base
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 538);
+            this.ClientSize = new System.Drawing.Size(830, 538);
             this.ControlBox = false;
             this.Controls.Add(this.p_Content);
             this.Controls.Add(this.p_Nav);
@@ -185,7 +204,8 @@
             this.Name = "LightVision_Base";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.p_Nav.ResumeLayout(false);
-            this.p_Nav.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.p_Content.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -198,13 +218,14 @@
         private System.Windows.Forms.Button bt_Close;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button bt_Wecker;
+        private System.Windows.Forms.Button bt_Editor;
         private System.Windows.Forms.Panel p_Content;
-        private System.Windows.Forms.Button bt_Einstellungen;
+        private System.Windows.Forms.Button bt_Dashboard;
         private System.Windows.Forms.Button bt_Kacheln;
         private System.Windows.Forms.Panel p_Slider;
         private Kacheln kacheln1;
         private Dashboard dashboard1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
