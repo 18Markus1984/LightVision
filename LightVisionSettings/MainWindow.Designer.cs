@@ -38,6 +38,7 @@
             this.p_Content = new System.Windows.Forms.Panel();
             this.kacheln1 = new LightVisionSettings.Kacheln();
             this.p_Slider = new System.Windows.Forms.Panel();
+            this.dashboard1 = new LightVisionSettings.Dashboard();
             this.p_Nav.SuspendLayout();
             this.panel1.SuspendLayout();
             this.p_Content.SuspendLayout();
@@ -141,8 +142,9 @@
             // 
             // p_Content
             // 
-            this.p_Content.Controls.Add(this.kacheln1);
             this.p_Content.Controls.Add(this.p_Slider);
+            this.p_Content.Controls.Add(this.kacheln1);
+            this.p_Content.Controls.Add(this.dashboard1);
             this.p_Content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Content.Location = new System.Drawing.Point(172, 0);
             this.p_Content.Name = "p_Content";
@@ -163,6 +165,13 @@
             this.p_Slider.Name = "p_Slider";
             this.p_Slider.Size = new System.Drawing.Size(5, 40);
             this.p_Slider.TabIndex = 0;
+            // 
+            // dashboard1
+            // 
+            this.dashboard1.Location = new System.Drawing.Point(0, 0);
+            this.dashboard1.Name = "dashboard1";
+            this.dashboard1.Size = new System.Drawing.Size(786, 538);
+            this.dashboard1.TabIndex = 2;
             // 
             // LightVision_Base
             // 
@@ -195,6 +204,7 @@
         private System.Windows.Forms.Button bt_Kacheln;
         private System.Windows.Forms.Panel p_Slider;
         private Kacheln kacheln1;
+        private Dashboard dashboard1;
     }
 }
 

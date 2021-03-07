@@ -24,7 +24,7 @@ namespace LightVisionSettings
             savedPanels = downloadPanels();
             foreach (Panel p in savedPanels)
             {
-                comboBox1.Items.Add(p.name);
+                cb_SelectedPanal.Items.Add(p.name);
             }
         }
 
@@ -75,7 +75,7 @@ namespace LightVisionSettings
         /// <param name="e"></param>
         private void kachel_MouseMove(object sender, MouseEventArgs e)                          
         {
-            if (onClick)                                                                        //die Licke-Maus-Taste muss gedrückt sein
+            if (onClick && cb_SelectedPanal.Text != "")                                                                        //die Licke-Maus-Taste muss gedrückt sein
             {
                 foreach (Pixel p in this.pixel)     
                 {
@@ -101,25 +101,28 @@ namespace LightVisionSettings
         /// <param name="e"></param>
         protected override void OnMouseDown(MouseEventArgs e)     
         {
-            base.OnMouseDown(e);
-            int x = e.X / 25;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
-            int y = e.Y / 25;
-
-            if (fill && x < length && x >= 0 && y < height && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
+            if (cb_SelectedPanal.Text != "")
             {
-                clickedButton = pixel[x, y].Color;                  //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
-                fillButtons(clickedButton, x, y);                                  //Die Rekursive Funktion wird aufgerufen
-                this.Refresh();                                     //Die gemalten Rechtecke werden geudatet
-                return;                                             //Methode wird verlassen
-            }
+                base.OnMouseDown(e);
+                int x = e.X / 25;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
+                int y = e.Y / 25;
 
-            onClick = true;                                         //Der Button wird gedrückt
-            foreach (Pixel p in this.pixel)                         //Falls nur ein Knopf gedrückt wird werden alle Rechteckpositionen durchgegangen, um zu überprüfen ob auf jenes gedrückt wurde
-            {
-                if (e.X - 10> p.X && e.X - 10 < p.X + p.Size && e.Y -10 > p.Y && e.Y -10 < p.Y + p.Size)
+                if (fill && x < length && x >= 0 && y < height && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
                 {
-                    p.Color = colorDialog1.Color;                   //Farbe wird für den Pixel gesetzt
-                    this.Refresh();                                 //alle Rechtecke werden neu gezeichnet
+                    clickedButton = pixel[x, y].Color;                  //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
+                    fillButtons(clickedButton, x, y);                                  //Die Rekursive Funktion wird aufgerufen
+                    this.Refresh();                                     //Die gemalten Rechtecke werden geudatet
+                    return;                                             //Methode wird verlassen
+                }
+
+                onClick = true;                                         //Der Button wird gedrückt
+                foreach (Pixel p in this.pixel)                         //Falls nur ein Knopf gedrückt wird werden alle Rechteckpositionen durchgegangen, um zu überprüfen ob auf jenes gedrückt wurde
+                {
+                    if (e.X - 10 > p.X && e.X - 10 < p.X + p.Size && e.Y - 10 > p.Y && e.Y - 10 < p.Y + p.Size)
+                    {
+                        p.Color = colorDialog1.Color;                   //Farbe wird für den Pixel gesetzt
+                        this.Refresh();                                 //alle Rechtecke werden neu gezeichnet
+                    }
                 }
             }
         }
@@ -160,7 +163,7 @@ namespace LightVisionSettings
             {
                 colors.Add(item.Color.ToArgb());
             }
-            savedPanels[comboBox1.SelectedIndex].colors = colors;
+            savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
             uploadPanels();
         }
 
@@ -210,14 +213,14 @@ namespace LightVisionSettings
                 string name = tb_NamePanel.Text;
                 Panel newP = new Panel(name);
                 savedPanels.Add(newP);
-                comboBox1.Items.Add(newP.name);
+                cb_SelectedPanal.Items.Add(newP.name);
                 tb_NamePanel.Text = "";
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadPanel(savedPanels[comboBox1.SelectedIndex]);
+            loadPanel(savedPanels[cb_SelectedPanal.SelectedIndex]);
         }
     }
 }

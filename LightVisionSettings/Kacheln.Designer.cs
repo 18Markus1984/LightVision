@@ -35,7 +35,7 @@
             this.bt_Color = new System.Windows.Forms.Button();
             this.bt_fill = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cb_SelectedPanal = new System.Windows.Forms.ComboBox();
             this.bt_NewPanel = new System.Windows.Forms.Button();
             this.tb_NamePanel = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -90,14 +90,15 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
             // 
-            // comboBox1
+            // cb_SelectedPanal
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(344, 297);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(155, 21);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cb_SelectedPanal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_SelectedPanal.FormattingEnabled = true;
+            this.cb_SelectedPanal.Location = new System.Drawing.Point(344, 297);
+            this.cb_SelectedPanal.Name = "cb_SelectedPanal";
+            this.cb_SelectedPanal.Size = new System.Drawing.Size(155, 21);
+            this.cb_SelectedPanal.TabIndex = 4;
+            this.cb_SelectedPanal.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // bt_NewPanel
             // 
@@ -124,7 +125,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tb_NamePanel);
             this.Controls.Add(this.bt_NewPanel);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cb_SelectedPanal);
             this.Controls.Add(this.bt_fill);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_Color);
@@ -142,7 +143,7 @@
         private System.Windows.Forms.Button bt_Color;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_fill;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cb_SelectedPanal;
         private System.Windows.Forms.Button bt_NewPanel;
         private System.Windows.Forms.TextBox tb_NamePanel;
     }
