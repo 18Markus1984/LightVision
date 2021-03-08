@@ -22,6 +22,7 @@ namespace LightVisionSettings
         int buttonRadius = 35;
         int buttonOffsetLeft = 5;
 
+        public List<Button> buttons;
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -45,6 +46,7 @@ namespace LightVisionSettings
         public LightVision_Base()
         {
             InitializeComponent();
+            buttons = new List<Button>() {bt_Editor, bt_Dashboard,bt_Kacheln,bt_Settings };
             settings1.contentColor = contentColor;
             settings1.menuColor = menuColor;
             timer1.Start();
@@ -72,33 +74,33 @@ namespace LightVisionSettings
 
         private void bt_Wecker_Click(object sender, EventArgs e)
         {
-            bt_Editor.BackColor = menuColor;
+            //bt_Editor.BackColor = menuColor;
             p_Slider.Location = new Point(0, 126);
             kacheln1.BringToFront();
-            p_Slider.BringToFront();
+            ButtonColorClick(sender);
         }
 
         private void bt_Kacheln_Click(object sender, EventArgs e)
         {
-            bt_Kacheln.BackColor = menuColor;
+            //bt_Kacheln.BackColor = menuColor;
             p_Slider.Location = new Point(0, 166);
-            
+            ButtonColorClick(sender);
         }
 
         private void bt_Einstellungen_Click(object sender, EventArgs e)
         {
-            bt_Dashboard.BackColor = menuColor;
+            //bt_Dashboard.BackColor = menuColor;
             p_Slider.Location = new Point(0, 206);
             dashboard1.BringToFront();
-            p_Slider.BringToFront();
+            ButtonColorClick(sender);
         }
 
         private void bt_Settings_Click(object sender, EventArgs e)
         {
-            bt_Settings.BackColor = menuColor;
+            //bt_Settings.BackColor = menuColor;
             p_Slider.Location = new Point(0, 246);
             settings1.BringToFront();
-            p_Slider.BringToFront();
+            ButtonColorClick(sender);
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)   //Methode zum bewegen der RandlosenForm
@@ -110,10 +112,21 @@ namespace LightVisionSettings
             }
         }
 
-        private void bt_Leave(object sender, EventArgs e)
+        private void ButtonColorClick(object sender)
         {
             Button b = (Button)sender;
-            b.BackColor = Color.Transparent;
+            foreach (var item in buttons)
+            {
+                if (item != b)
+                {
+                    item.BackColor = Color.Transparent;
+                }
+                else
+                {
+                    item.BackColor = menuColor;
+                }
+            }
+            p_Slider.BringToFront();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

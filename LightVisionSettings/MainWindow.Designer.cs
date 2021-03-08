@@ -77,7 +77,6 @@
             this.bt_Close.Text = "Beenden";
             this.bt_Close.UseVisualStyleBackColor = false;
             this.bt_Close.Click += new System.EventHandler(this.bt_Close_Click);
-            this.bt_Close.Enter += new System.EventHandler(this.bt_Leave);
             // 
             // panel1
             // 
@@ -107,7 +106,6 @@
             this.bt_Settings.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.bt_Settings.UseVisualStyleBackColor = false;
             this.bt_Settings.Click += new System.EventHandler(this.bt_Settings_Click);
-            this.bt_Settings.Leave += new System.EventHandler(this.bt_Leave);
             // 
             // bt_Dashboard
             // 
@@ -126,7 +124,6 @@
             this.bt_Dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.bt_Dashboard.UseVisualStyleBackColor = false;
             this.bt_Dashboard.Click += new System.EventHandler(this.bt_Einstellungen_Click);
-            this.bt_Dashboard.Leave += new System.EventHandler(this.bt_Leave);
             // 
             // bt_Kacheln
             // 
@@ -145,7 +142,6 @@
             this.bt_Kacheln.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.bt_Kacheln.UseVisualStyleBackColor = false;
             this.bt_Kacheln.Click += new System.EventHandler(this.bt_Kacheln_Click);
-            this.bt_Kacheln.Leave += new System.EventHandler(this.bt_Leave);
             // 
             // bt_Editor
             // 
@@ -164,7 +160,6 @@
             this.bt_Editor.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.bt_Editor.UseVisualStyleBackColor = false;
             this.bt_Editor.Click += new System.EventHandler(this.bt_Wecker_Click);
-            this.bt_Editor.Leave += new System.EventHandler(this.bt_Leave);
             // 
             // panel2
             // 

@@ -158,13 +158,16 @@ namespace LightVisionSettings
 
         private void bt_Speichern_Click(object sender, EventArgs e)     //Die Leinwand wird gespeichert
         {
-            List<int> colors = new List<int>();
-            foreach (var item in pixel)
+            if (cb_SelectedPanal.Text != "")
             {
-                colors.Add(item.Color.ToArgb());
+                List<int> colors = new List<int>();
+                foreach (var item in pixel)
+                {
+                    colors.Add(item.Color.ToArgb());
+                }
+                savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
+                uploadPanels();
             }
-            savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
-            uploadPanels();
         }
 
         private void uploadPanels()

@@ -19,6 +19,8 @@ namespace LightVisionSettings
         public Settings()
         {
             InitializeComponent();
+            bt_ContentColor.BackColor = menuColor;
+            bt_MenuColor.BackColor = contentColor;
         }
 
         private void cB_RGB_CheckedChanged(object sender, EventArgs e)
