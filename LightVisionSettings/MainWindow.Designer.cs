@@ -44,6 +44,7 @@
             this.kacheln1 = new LightVisionSettings.Kacheln();
             this.dashboard1 = new LightVisionSettings.Dashboard();
             this.settings1 = new LightVisionSettings.Settings();
+            this.vorlagen1 = new LightVisionSettings.Vorlagen();
             this.p_Nav.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -198,6 +199,7 @@
             this.p_Content.Controls.Add(this.kacheln1);
             this.p_Content.Controls.Add(this.dashboard1);
             this.p_Content.Controls.Add(this.settings1);
+            this.p_Content.Controls.Add(this.vorlagen1);
             this.p_Content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Content.Location = new System.Drawing.Point(172, 0);
             this.p_Content.Name = "p_Content";
@@ -231,6 +233,13 @@
             this.settings1.Name = "settings1";
             this.settings1.Size = new System.Drawing.Size(618, 538);
             this.settings1.TabIndex = 3;
+            // 
+            // vorlagen1
+            // 
+            this.vorlagen1.Location = new System.Drawing.Point(0, 0);
+            this.vorlagen1.Name = "vorlagen1";
+            this.vorlagen1.Size = new System.Drawing.Size(621, 538);
+            this.vorlagen1.TabIndex = 4;
             // 
             // LightVision_Base
             // 
@@ -269,6 +278,7 @@
         private System.Windows.Forms.Button bt_Settings;
         private System.Windows.Forms.Timer timer1;
         private Settings settings1;
+        private Vorlagen vorlagen1;
     }
 }
 

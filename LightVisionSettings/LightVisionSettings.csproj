@@ -102,6 +102,12 @@
     <Compile Include="UC_Login.Designer.cs">
       <DependentUpon>UC_Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vorlagen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vorlagen.Designer.cs">
+      <DependentUpon>Vorlagen.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Login.resx">
       <DependentUpon>UC_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vorlagen.resx">
+      <DependentUpon>Vorlagen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

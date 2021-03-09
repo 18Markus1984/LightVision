@@ -84,6 +84,7 @@ namespace LightVisionSettings
         {
             //bt_Kacheln.BackColor = menuColor;
             p_Slider.Location = new Point(0, 166);
+            vorlagen1.BringToFront();
             ButtonColorClick(sender);
         }
 
@@ -157,6 +158,14 @@ namespace LightVisionSettings
             dashboard1.BackColor = menuColor;
             kacheln1.BackColor = menuColor;
             p_Content.BackColor = menuColor;
+            vorlagen1.BackColor = menuColor;
+            foreach (var item in buttons)
+            {
+                if (item.BackColor != Color.Transparent)
+                {
+                    item.BackColor = menuColor;
+                }
+            }
 
             panel2.BackColor = contentColor;
             p_Nav.BackColor = contentColor;
