@@ -66,9 +66,9 @@ def downloadPanels():
             buffer = json.loads(buffer)
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
-            t = Thread(target=showPanel, daemon=True)
+            t = Thread(target=showPanel, args=(strip, 5), daemon=True)
             t.start()
-            sleep(30)
+            time.sleep(30)
  
 # Main program logic follows:
 if __name__ == '__main__':
