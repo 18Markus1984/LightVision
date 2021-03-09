@@ -37,7 +37,7 @@ def showPanel(strip, wait):
         count = 0
         for k in range(0, len(recvPanels[i])):
             colors = RGBAfromInt(recvPanels[i][k])
-            setPixel(strip, Color(colors[0], colors[2], colors[1]), count)
+            setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
             count += 1
         strip.show()
         time.sleep(wait)
