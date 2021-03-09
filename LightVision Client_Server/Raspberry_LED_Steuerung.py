@@ -21,6 +21,13 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 Array = [None] *192
 
+def RGBAfromInt(argb_int):
+    blue =  argb_int & 255
+    green = (argb_int >> 8) & 255
+    red =   (argb_int >> 16) & 255
+    alpha = (argb_int >> 24) & 255
+    return (red, green, blue, alpha)
+
 def setPixel(strip,color,i):
     strip.setPixelColor(Array[i], color)
 
@@ -29,7 +36,8 @@ def showPanel(strip, wait):
     for i in range(0, len(recvPanels)):
         count = 0
         for k in range(0, len(recvPanels[i])):
-            setPixel(strip, recvPanels[i][k], count)
+            colors = RGBAfromInt(recvPanels[i][k])
+            setPixel(strip, Color(colors[0], colors[2], colors[1]), count)
             count += 1
         time.sleep(wait)
         
