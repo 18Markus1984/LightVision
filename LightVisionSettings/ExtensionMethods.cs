@@ -31,7 +31,7 @@ namespace LightVisionSettings
             name = name.Substring(0, name.IndexOf('\"'));
             colors = getStringInBetween(source, '[', ']')[0];
             colors = colors.Remove(0,1);
-            colors = colors.Remove(colors.Length - 1, 1);
+            //colors = colors.Remove(colors.Length - 1, 1);
             return new Panel(name, colors.Split(',').Select(Int32.Parse).ToList());
         }
     }

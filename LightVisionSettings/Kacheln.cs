@@ -57,12 +57,16 @@ namespace LightVisionSettings
         private void loadPanel(Panel selectedPanel)
         {
             int k = 0;
+            int a = 0;
+            int b = 0;
             for (int i = 0; i < length; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
                     pixel[i, j].Color = Color.FromArgb(selectedPanel.colors[k]);
                     k += 1;
+                    a = i;
+                    b = j;
                 }
             }
             this.Refresh();
