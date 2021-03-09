@@ -96,6 +96,12 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="SmallKachel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmallKachel.Designer.cs">
+      <DependentUpon>SmallKachel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC_Login.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </Compile>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SmallKachel.resx">
+      <DependentUpon>SmallKachel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Login.resx">
       <DependentUpon>UC_Login.cs</DependentUpon>

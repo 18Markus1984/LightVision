@@ -13,6 +13,17 @@ namespace LightVisionSettings
 {
     public partial class Kacheln : UserControl
     {
+
+        private Pixel[,] pixel;             //Zweidimensionales Array für die Speicherung der Pixel Position und der Farbe 
+        private bool onClick;               //speichert, ob die Linke-Maus gedrückt ist oder nicht
+        private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
+        private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
+        private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
+        private List<Panel> savedPanels = new List<Panel>(); //Speichert alle erstellten Panels
+        protected int length = 24;
+        protected int height = 8;
+
+
         public Kacheln()
         {
             InitializeComponent();
@@ -27,16 +38,6 @@ namespace LightVisionSettings
                 cb_SelectedPanal.Items.Add(p.name);
             }
         }
-
-        private Pixel[,] pixel;             //Zweidimensionales Array für die Speicherung der Pixel Position und der Farbe 
-        private bool onClick;               //speichert, ob die Linke-Maus gedrückt ist oder nicht
-        private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
-        private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
-        private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
-        private List<Panel> savedPanels = new List<Panel>(); //Speichert alle erstellten Panels
-        protected int length = 24;
-        protected int height = 8;
-
 
         private void AddButtons()       //Fügt 280 Pixel hinzu
         {
