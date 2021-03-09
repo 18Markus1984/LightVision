@@ -52,7 +52,7 @@ def getPositionOuterMatrix(x, y):
 def getPositionInnerMatrix(x, y):
     return x + y * 8 
 
-def downloadPanels():
+def downloadPanels(strip):
     #Methode zieht Panels vom Root-Server, speichert die Color Werte in recvPanels, startet die showPanel Methode in einem extra Thread und startet nach 30s erneut
     global recvPanels
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     ArrayErzeugen()
     
     try:
-        downloadPanels()
+        downloadPanels(strip)
     except KeyboardInterrupt:
         if args.clear:
             colorWipe(strip, Color(0,0,0), 10)
