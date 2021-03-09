@@ -42,10 +42,12 @@ namespace LightVisionSettings
         {
             pixel = new Pixel[length, height]; 
             onClick = false;
-            for (int i = 0; i < length; i++)
+
+            for (int k = 0; k < height; k++)
             {
-                for (int k = 0; k < height; k++)
+                for (int i = 0; i < length; i++)
                 {
+
                     pixel[i, k] = new Pixel(i * 25, k * 25, 25);
                 }
             }
@@ -59,10 +61,11 @@ namespace LightVisionSettings
             int k = 0;
             int a = 0;
             int b = 0;
-            for (int i = 0; i < length; i++)
+            for (int j = 0; j < height; j++)
             {
-                for (int j = 0; j < height; j++)
+                for (int i = 0; i < length; i++)
                 {
+
                     pixel[i, j].Color = Color.FromArgb(selectedPanel.colors[k]);
                     k += 1;
                     a = i;
@@ -165,9 +168,20 @@ namespace LightVisionSettings
             if (cb_SelectedPanal.Text != "")
             {
                 List<int> colors = new List<int>();
-                foreach (var item in pixel)
+                /*foreach (var item in pixel)
                 {
                     colors.Add(item.Color.ToArgb());
+                }*/
+
+                int k = 0;
+                for (int j = 0; j < height; j++)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+
+                        colors.Add(pixel[i, j].Color.ToArgb());
+                        k += 1;
+                    }
                 }
                 savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
                 uploadPanels();
