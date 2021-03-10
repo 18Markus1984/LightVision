@@ -15,10 +15,12 @@ namespace LightVisionSettings
         public bool rgb = false;
         public Color menuColor;
         public Color contentColor;
+        private LightVision_Base mw;
 
-        public Settings()
+        public Settings(LightVision_Base mw)
         {
             InitializeComponent();
+            this.mw = mw;
         }
 
         private void cB_RGB_CheckedChanged(object sender, EventArgs e)

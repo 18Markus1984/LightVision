@@ -15,44 +15,59 @@ namespace LightVisionSettings
     //Hier sollen dann alle Kacheln angezeigt werden, die gerade auf dem Server laufen
     public partial class Dashboard : UserControl
     {
-        private List<Panel> savedPanels = new List<Panel>(); //Speichert alle erstellten Panels
         public List<SmallKachel> kacheln;
         public List<System.Windows.Forms.Panel> panels;
-        public bool onclick = false; 
+        public bool onclick = false;
+        private LightVision_Base mw;
 
-        public Dashboard()
+        public Dashboard(LightVision_Base mw)
         {
             InitializeComponent();
-            timer1.Start();
+            this.mw = mw;
         }
 
-        private void Dashboard_TabIndexChanged(object sender, EventArgs e)
+        public void DashboardPanels()
         {
-            savedPanels = downloadPanels();
+            if (kacheln != null)
+            {
+                foreach (var item in kacheln)
+                {
+                    Controls.Remove(item);
+                }
+                foreach (var item in panels)
+                {
+                    Controls.Remove(item);
+                }
+            }
+            //mw.savedPanels = mw.downloadPanels();
             kacheln = new List<SmallKachel>();
             panels = new List<System.Windows.Forms.Panel>();
             CreatePanel();
 
-            for (int i = 0; i < savedPanels.Count; i++)
+            for (int i = 0; i < mw.savedPanels.Count; i++)
             {
-                SmallKachel s = new SmallKachel(10, savedPanels[i].colors, 8, 24);
+                SmallKachel s = new SmallKachel(10, mw.savedPanels[i].colors, 8, 24);
                 s.MouseDown += MouseDown;
                 s.MouseMove += MouseMove;
                 s.MouseUp += MouseUp;
+                s.DoubleClick += DoubleClick;
                 kacheln.Add(s);
                 Controls.Add(s);
                 s.BringToFront();
                 s.Width = 240;
                 s.Height = 80;
                 s.Location = panels[i].Location;
+                s.Cursor = Cursors.Hand;
+                s.LocationChanged += PostionChanged;
+                s.matchingPanel = i;
             }
-            
+
         }
 
         private void CreatePanel()  //Es sollen mehrere Panels erstellt werden, die als Lagerbehälter für die Panels gelten. Dann überprüfe ich wenn sich ein Panel bewegt einfach die Distance zu einem anderen Position eines Panels, wenn der Benutzer das PAnel nicht mehr mit der Linken Maustaste festhält und setze es an diese Position
         {
-            int spalten = savedPanels.Count % 3;
-            int reihen = savedPanels.Count / 3;
+            int spalten = mw.savedPanels.Count % 3;
+            int reihen = mw.savedPanels.Count / 3;
 
             for (int i = 0; i < reihen; i++)
             {
@@ -92,18 +107,6 @@ namespace LightVisionSettings
             }
         }
 
-        private void uploadPanels()
-        {
-            Client client = new Client("135.181.35.212", 65432);
-            client.SendPanel(savedPanels);
-        }
-
-        private List<Panel> downloadPanels()
-        {
-            Client client = new Client("135.181.35.212", 65432);
-            return client.GetPanel();
-        }
-
         private void MouseDown(object sender, MouseEventArgs e)
         {
             SmallKachel kachel = (SmallKachel)sender;
@@ -125,18 +128,106 @@ namespace LightVisionSettings
 
         }
 
-        private void PostionChanged(object sender)
+        private void PostionChanged(object sender, EventArgs e)
         {
-
+            SmallKachel s = (SmallKachel)sender;
+            s.moved = true;
         }
 
         private void MouseUp(object sender, MouseEventArgs e)
         {
             onclick = false;
-            for (int i = 0; i < savedPanels.Count; i++)
+            SmallKachel s = (SmallKachel)sender;
+
+            if (s.moved == true)
             {
-                
+
+                int nearestPanel = 0;
+                double length = 10;
+                List<System.Windows.Forms.Panel> p = new List<System.Windows.Forms.Panel>();
+
+                for (int i = 0; i < panels.Count; i++)
+                {
+                    for (int t = 0; t < panels.Count; t++)
+                    {
+                        if (panels[i].Location != kacheln[t].Location)
+                        {
+                            p.Add(panels[i]);
+                            int x = s.Location.X - panels[i].Location.X;
+                            int y = s.Location.Y - panels[i].Location.Y;
+                            if (length > Math.Sqrt(x * x + y * y))
+                            {
+                                length = Math.Sqrt(x * x + y * y);
+                                nearestPanel = i;
+                            }
+                        }
+                    }
+                }
+                if (length <= 9.0)
+                {
+                    s.Location = panels[nearestPanel].Location;
+                    s.moved = false;
+
+                    //List<Panel> puffer = new List<Panel>();
+                    //List<SmallKachel> smallsPuffer = new List<SmallKachel>();
+
+
+                    //for (int i = 0; i < panels.Count; i++)
+                    //{
+                    //    for (int t = 0; t < panels.Count; t++)
+                    //    {
+                    //        if (panels[i].Location == kacheln[t].Location)
+                    //        {
+                    //            puffer.Add(savedPanels[kacheln[t].matchingPanel]);
+                    //            kacheln[t].matchingPanel = puffer.Count-1;
+                    //            smallsPuffer.Add(kacheln[t]);
+                    //        }
+                    //    }
+                    //}
+                    //savedPanels = puffer;
+                    //kacheln = smallsPuffer;
+
+                }
             }
+        }
+
+        private List<Panel> createList()
+        {
+            List<Panel> p = new List<Panel>();
+            for (int i = 0; i < panels.Count; i++)
+            {
+                foreach (var item in kacheln)
+                {
+                    if (item.Location == panels[i].Location)
+                    {
+                        p.Add(mw.savedPanels[item.matchingPanel]);
+                    }
+                }
+            }
+            return p;
+        }
+
+        private void bt_Speichern_Click(object sender, EventArgs e)
+        {
+            List<Panel> p = createList();
+            if (p.Count == mw.savedPanels.Count)
+            {
+                mw.savedPanels = p;
+                mw.uploadPanels();
+                MessageBox.Show("Speichern erfolgreich!");
+                mw.kacheln.reloadComboBox();
+                return;
+            }
+            MessageBox.Show("Speichern fehlgeschlagen!");
+        }
+
+        private new void DoubleClick(object sender, EventArgs e)
+        {
+            SmallKachel kachel = (SmallKachel)sender;
+            mw.kacheln.cbText.Text = mw.savedPanels[kachel.matchingPanel].name;
+            mw.kacheln.BringToFront();
+            mw.buttons[0].BackColor = mw.menuColor;
+            mw.buttons[2].BackColor = Color.Transparent;
         }
     }
 }

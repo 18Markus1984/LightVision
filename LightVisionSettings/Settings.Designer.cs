@@ -103,7 +103,7 @@ namespace LightVisionSettings
             this.Controls.Add(this.bt_MenuColor);
             this.Controls.Add(this.cB_RGB);
             this.Name = "Settings";
-            this.Size = new System.Drawing.Size(555, 415);
+            this.Size = new System.Drawing.Size(804, 415);
             this.ResumeLayout(false);
             this.PerformLayout();
 

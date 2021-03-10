@@ -12,9 +12,11 @@ namespace LightVisionSettings
 {
     public partial class Vorlagen : UserControl
     {
-        public Vorlagen()
+        private LightVision_Base mw;
+        public Vorlagen(LightVision_Base mw)
         {
             InitializeComponent();
+            this.mw = mw;
         }
     }
 }

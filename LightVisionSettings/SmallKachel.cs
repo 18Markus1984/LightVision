@@ -17,6 +17,8 @@ namespace LightVisionSettings
         public int height;
         public int length;
         public Point mouseDown;
+        public bool moved = false;
+        public int matchingPanel;
 
         public SmallKachel()
         {

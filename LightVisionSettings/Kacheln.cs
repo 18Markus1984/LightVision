@@ -19,12 +19,14 @@ namespace LightVisionSettings
         private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
-        private List<Panel> savedPanels = new List<Panel>(); //Speichert alle erstellten Panels
+        
         protected int length = 24;
         protected int height = 8;
+        private LightVision_Base mw;
+        public ComboBox cbText;
 
 
-        public Kacheln()
+        public Kacheln(LightVision_Base mw)
         {
             InitializeComponent();
             AddButtons();
@@ -32,8 +34,15 @@ namespace LightVisionSettings
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256),r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             bt_Color.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
-            savedPanels = downloadPanels();
-            foreach (Panel p in savedPanels)
+            this.mw = mw;
+            cbText = cb_SelectedPanal;
+            reloadComboBox();
+        }
+
+        public void reloadComboBox()
+        {
+            cb_SelectedPanal.Items.Clear();
+            foreach (Panel p in mw.savedPanels)
             {
                 cb_SelectedPanal.Items.Add(p.name);
             }
@@ -64,7 +73,6 @@ namespace LightVisionSettings
             {
                 for (int i = 0; i < length; i++)
                 {
-
                     pixel[i, j].Color = Color.FromArgb(selectedPanel.colors[k]);
                     k += 1;
                 }
@@ -181,23 +189,11 @@ namespace LightVisionSettings
                         k += 1;
                     }
                 }
-                savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
-                savedPanels[cb_SelectedPanal.SelectedIndex].showtime = Convert.ToDouble(tb_showtime.Text);
-                uploadPanels();
+                mw.savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
+                mw.savedPanels[cb_SelectedPanal.SelectedIndex].showtime = Convert.ToDouble(tb_showtime.Text);
+                mw.uploadPanels();
                 MessageBox.Show("Speichern erfolgreich!");
             }
-        }
-
-        private void uploadPanels()
-        {
-            Client client = new Client("135.181.35.212", 65432);
-            client.SendPanel(savedPanels);
-        }
-
-        private List<Panel> downloadPanels()
-        {
-            Client client = new Client("135.181.35.212", 65432);
-            return client.GetPanel();
         }
 
         private void Fill_Click(object sender, EventArgs e)     //Methode für den Fill-Modus
@@ -233,7 +229,7 @@ namespace LightVisionSettings
             {
                 string name = tb_NamePanel.Text;
                 Panel newP = new Panel(name);
-                savedPanels.Add(newP);
+                mw.savedPanels.Add(newP);
                 cb_SelectedPanal.Items.Add(newP.name);
                 tb_NamePanel.Text = "";
             }
@@ -241,7 +237,7 @@ namespace LightVisionSettings
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadPanel(savedPanels[cb_SelectedPanal.SelectedIndex]);
+            loadPanel(mw.savedPanels[cb_SelectedPanal.SelectedIndex]);
         }
     }
 }

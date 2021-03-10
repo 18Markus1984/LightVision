@@ -16,14 +16,25 @@ namespace LightVisionSettings
     public partial class LightVision_Base : Form
     {
         //Werte für die Veränderung des Aussehens
-        Color menuColor = Color.FromArgb(43, 147, 72);
-        Color contentColor = Color.FromArgb(0, 127, 95);
+        public Color menuColor = Color.FromArgb(43, 147, 72);
+        public Color contentColor = Color.FromArgb(0, 127, 95);
 
         int buttonRadius = 35;
         int buttonOffsetLeft = 5;
 
+        //Werte zum Arbeiten
         public List<Button> buttons;
+        public List<Panel> savedPanels; //Speichert alle erstellten Panels
 
+
+        //Alle UserControl Panels
+        public Dashboard dashboard;
+        public Kacheln kacheln;
+        public Settings settings;
+        public Vorlagen vorlagen;
+
+
+        //Werte und dlls für das Bewegen einer borderlosen form und Abrundung von Regions
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -43,18 +54,41 @@ namespace LightVisionSettings
             int nHeightEllipse // height of ellipse
         );
 
+
         public LightVision_Base()
         {
             InitializeComponent();
-            buttons = new List<Button>() {bt_Editor, bt_Dashboard,bt_Kacheln,bt_Settings };
-            settings1.contentColor = contentColor;
-            settings1.menuColor = menuColor;
+
+            savedPanels = downloadPanels();
+
+            dashboard = new Dashboard(this);
+            p_Content.Controls.Add(dashboard);
+
+            kacheln = new Kacheln(this);
+            p_Content.Controls.Add(kacheln);
+            kacheln.BringToFront();
+
+            settings = new Settings(this);
+            p_Content.Controls.Add(settings);
+
+            vorlagen = new Vorlagen(this);
+            p_Content.Controls.Add(vorlagen);
+
+            buttons = new List<Button>() {bt_Editor, bt_Kacheln, bt_Dashboard, bt_Settings };
+
+            settings.contentColor = contentColor;
+            settings.menuColor = menuColor;
             timer1.Start();
 
+            design();
+        }
+
+        private void design()
+        {
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
-            bt_Editor.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width+20,bt_Editor.Height, buttonRadius, buttonRadius));
+            bt_Editor.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
             bt_Dashboard.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
             bt_Kacheln.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
             bt_Settings.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
@@ -62,21 +96,30 @@ namespace LightVisionSettings
             p_Slider.Location = new Point(0, 126);
             p_Slider.Enabled = true;
             bt_Editor.BackColor = menuColor;
-
         }
 
-        //public Client c = new Client("135.181.35.212", 1337);
+        public void uploadPanels()
+        {
+            Client client = new Client("135.181.35.212", 65432);
+            client.SendPanel(savedPanels);
+        }
+
+        public List<Panel> downloadPanels()
+        {
+            Client client = new Client("135.181.35.212", 65432);
+            return client.GetPanel();
+        }
 
         private void bt_Close_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void bt_Wecker_Click(object sender, EventArgs e)
+        private void bt_Editor_Click(object sender, EventArgs e)
         {
             //bt_Editor.BackColor = menuColor;
             p_Slider.Location = new Point(0, 126);
-            kacheln1.BringToFront();
+            kacheln.BringToFront();
             ButtonColorClick(sender);
         }
 
@@ -84,23 +127,24 @@ namespace LightVisionSettings
         {
             //bt_Kacheln.BackColor = menuColor;
             p_Slider.Location = new Point(0, 166);
-            vorlagen1.BringToFront();
+            vorlagen.BringToFront();
             ButtonColorClick(sender);
         }
 
-        private void bt_Einstellungen_Click(object sender, EventArgs e)
+        private void bt_Dashboard_Click(object sender, EventArgs e)
         {
             //bt_Dashboard.BackColor = menuColor;
             p_Slider.Location = new Point(0, 206);
-            dashboard1.BringToFront();
+            dashboard.BringToFront();
             ButtonColorClick(sender);
+            dashboard.DashboardPanels();
         }
 
         private void bt_Settings_Click(object sender, EventArgs e)
         {
             //bt_Settings.BackColor = menuColor;
             p_Slider.Location = new Point(0, 246);
-            settings1.BringToFront();
+            settings.BringToFront();
             ButtonColorClick(sender);
         }
 
@@ -132,7 +176,7 @@ namespace LightVisionSettings
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (settings1.rgb)
+            if (settings.rgb)
             {
                 Random rnd = new Random();
                 int A = rnd.Next(0, 255);
@@ -151,14 +195,14 @@ namespace LightVisionSettings
 
         private void ChangeColor()
         {
-            menuColor = settings1.menuColor;
-            contentColor = settings1.contentColor;
+            menuColor = settings.menuColor;
+            contentColor = settings.contentColor;
 
-            settings1.BackColor = menuColor;
-            dashboard1.BackColor = menuColor;
-            kacheln1.BackColor = menuColor;
+            settings.BackColor = menuColor;
+            dashboard.BackColor = menuColor;
+            kacheln.BackColor = menuColor;
             p_Content.BackColor = menuColor;
-            vorlagen1.BackColor = menuColor;
+            vorlagen.BackColor = menuColor;
             foreach (var item in buttons)
             {
                 if (item.BackColor != Color.Transparent)
