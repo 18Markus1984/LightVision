@@ -30,7 +30,6 @@ namespace LightVisionSettings
 
         public SmallKachel(int size, List<int> colors, int heigh, int lengt)
         {
-            
             height = heigh;
             length = lengt;
             pixel = new Pixel[length, height];

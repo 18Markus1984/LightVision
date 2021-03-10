@@ -45,7 +45,7 @@ namespace LightVisionSettings
         public static extern bool ReleaseCapture();
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
+        public static extern IntPtr CreateRoundRectRgn
         (
             int nLeftRect,     // x-coordinate of upper-left corner
             int nTopRect,      // y-coordinate of upper-left corner
@@ -55,7 +55,7 @@ namespace LightVisionSettings
             int nHeightEllipse // height of ellipse
         );
 
-
+        
         public LightVision_Base()
         {
             InitializeComponent();
@@ -75,20 +75,25 @@ namespace LightVisionSettings
             vorlagen = new Vorlagen(this);
             p_Content.Controls.Add(vorlagen);
 
-            animator = new Animator(this);
+            animator = new Animator(this,25,8,24);
             p_Content.Controls.Add(animator);
 
             buttons = new List<Button>() {bt_Editor, bt_Animator, bt_Templates, bt_Dashboard, bt_Settings };
 
-            settings.contentColor = contentColor;
-            settings.menuColor = menuColor;
             timer1.Start();
 
             design();
         }
 
+
+        /// <summary>
+        /// Alle Befehle, die beim start der Form ausgeführt werden und hauptsächlich kosmetischer Art sind.
+        /// </summary>
         private void design()
         {
+            settings.contentColor = contentColor;
+            settings.menuColor = menuColor;
+
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
@@ -99,8 +104,7 @@ namespace LightVisionSettings
             bt_Animator.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
 
 
-            p_Slider.Location = new Point(0, 126);
-            p_Slider.Enabled = true;
+           
             bt_Editor.BackColor = menuColor;
         }
 
@@ -123,24 +127,18 @@ namespace LightVisionSettings
 
         private void bt_Editor_Click(object sender, EventArgs e)
         {
-            //bt_Editor.BackColor = menuColor;
-            p_Slider.Location = new Point(0, 126);
             kacheln.BringToFront();
             ButtonColorClick(sender);
         }
 
         private void bt_templates_Click(object sender, EventArgs e)
         {
-            //bt_Kacheln.BackColor = menuColor;
-            p_Slider.Location = new Point(0, 166);
             vorlagen.BringToFront();
             ButtonColorClick(sender);
         }
 
         private void bt_Dashboard_Click(object sender, EventArgs e)
         {
-            //bt_Dashboard.BackColor = menuColor;
-            p_Slider.Location = new Point(0, 206);
             dashboard.BringToFront();
             ButtonColorClick(sender);
             dashboard.DashboardPanels();
@@ -148,8 +146,6 @@ namespace LightVisionSettings
 
         private void bt_Settings_Click(object sender, EventArgs e)
         {
-            //bt_Settings.BackColor = menuColor;
-            p_Slider.Location = new Point(0, 246);
             settings.BringToFront();
             ButtonColorClick(sender);
         }
@@ -182,7 +178,6 @@ namespace LightVisionSettings
                     item.BackColor = menuColor;
                 }
             }
-            p_Slider.BringToFront();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

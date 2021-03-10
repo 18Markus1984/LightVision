@@ -72,6 +72,7 @@
     <Compile Include="Animator.Designer.cs">
       <DependentUpon>Animator.cs</DependentUpon>
     </Compile>
+    <Compile Include="CircleAnimator.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>UserControl</SubType>

@@ -32,16 +32,15 @@
             this.p_Nav = new System.Windows.Forms.Panel();
             this.bt_Close = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.p_Slider = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.p_Content = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.bt_Settings = new System.Windows.Forms.Button();
             this.bt_Dashboard = new System.Windows.Forms.Button();
             this.bt_Templates = new System.Windows.Forms.Button();
             this.bt_Animator = new System.Windows.Forms.Button();
             this.bt_Editor = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.p_Content = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.p_Nav.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -87,50 +86,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(172, 214);
             this.panel1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(127)))), ((int)(((byte)(95)))));
-            this.panel2.Controls.Add(this.p_Slider);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(172, 117);
-            this.panel2.TabIndex = 2;
-            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            // 
-            // p_Slider
-            // 
-            this.p_Slider.BackColor = System.Drawing.Color.White;
-            this.p_Slider.Location = new System.Drawing.Point(77, 77);
-            this.p_Slider.Name = "p_Slider";
-            this.p_Slider.Size = new System.Drawing.Size(5, 40);
-            this.p_Slider.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Forte", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(13, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 30);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "LightVision";
-            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            // 
-            // p_Content
-            // 
-            this.p_Content.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.p_Content.Location = new System.Drawing.Point(172, 0);
-            this.p_Content.Name = "p_Content";
-            this.p_Content.Size = new System.Drawing.Size(747, 458);
-            this.p_Content.TabIndex = 1;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // bt_Settings
             // 
@@ -222,6 +177,42 @@
             this.bt_Editor.UseVisualStyleBackColor = false;
             this.bt_Editor.Click += new System.EventHandler(this.bt_Editor_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(127)))), ((int)(((byte)(95)))));
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(172, 117);
+            this.panel2.TabIndex = 2;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Forte", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(13, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(138, 30);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "LightVision";
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            // 
+            // p_Content
+            // 
+            this.p_Content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
+            this.p_Content.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.p_Content.Location = new System.Drawing.Point(172, 0);
+            this.p_Content.Name = "p_Content";
+            this.p_Content.Size = new System.Drawing.Size(747, 458);
+            this.p_Content.TabIndex = 1;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // LightVision_Base
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,7 +242,6 @@
         private System.Windows.Forms.Panel p_Content;
         private System.Windows.Forms.Button bt_Templates;
         private System.Windows.Forms.Button bt_Animator;
-        private System.Windows.Forms.Panel p_Slider;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button bt_Dashboard;
         private System.Windows.Forms.Timer timer1;

@@ -81,7 +81,7 @@ namespace LightVisionSettings
                     l.Text = "" + (k + i * 3 + 1);
                     panel.Controls.Add(l);
                     panel.Size = new Size(240, 80);
-                    panel.Location = new Point(5 + k * 245, 20+i*85);
+                    panel.Location = new Point(7 + k * 245, 20+i*85);
                     panel.BorderStyle = BorderStyle.FixedSingle;
                     panels.Add(panel);
                     Controls.Add(panel);

@@ -47,10 +47,10 @@ namespace LightVisionSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Green;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
             this.Controls.Add(this.label2);
             this.Name = "Animator";
-            this.Size = new System.Drawing.Size(894, 642);
+            this.Size = new System.Drawing.Size(820, 517);
             this.ResumeLayout(false);
             this.PerformLayout();
 
