@@ -60,8 +60,6 @@ namespace LightVisionSettings
         private void loadPanel(Panel selectedPanel)
         {
             int k = 0;
-            int a = 0;
-            int b = 0;
             for (int j = 0; j < height; j++)
             {
                 for (int i = 0; i < length; i++)
@@ -69,8 +67,6 @@ namespace LightVisionSettings
 
                     pixel[i, j].Color = Color.FromArgb(selectedPanel.colors[k]);
                     k += 1;
-                    a = i;
-                    b = j;
                 }
             }
             tb_showtime.Text = Convert.ToString(selectedPanel.showtime);
@@ -188,6 +184,7 @@ namespace LightVisionSettings
                 savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
                 savedPanels[cb_SelectedPanal.SelectedIndex].showtime = Convert.ToDouble(tb_showtime.Text);
                 uploadPanels();
+                MessageBox.Show("Speichern erfolgreich!");
             }
         }
 

@@ -41,6 +41,7 @@ namespace LightVisionSettings
             {
                 panels.Add(ExtensionMethods.getPanelFromString(s));
             }
+            socket.Close();
             return panels;
         }
 
@@ -52,6 +53,7 @@ namespace LightVisionSettings
                 sw.WriteLine(json);
                 sw.Flush();
             }
+            socket.Close();
         }
     }
 }
