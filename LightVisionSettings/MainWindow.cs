@@ -32,6 +32,7 @@ namespace LightVisionSettings
         public Kacheln kacheln;
         public Settings settings;
         public Vorlagen vorlagen;
+        public Animator animator;
 
 
         //Werte und dlls für das Bewegen einer borderlosen form und Abrundung von Regions
@@ -74,7 +75,10 @@ namespace LightVisionSettings
             vorlagen = new Vorlagen(this);
             p_Content.Controls.Add(vorlagen);
 
-            buttons = new List<Button>() {bt_Editor, bt_Kacheln, bt_Dashboard, bt_Settings };
+            animator = new Animator(this);
+            p_Content.Controls.Add(animator);
+
+            buttons = new List<Button>() {bt_Editor, bt_Animator, bt_Templates, bt_Dashboard, bt_Settings };
 
             settings.contentColor = contentColor;
             settings.menuColor = menuColor;
@@ -89,9 +93,11 @@ namespace LightVisionSettings
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
             bt_Editor.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
-            bt_Dashboard.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
-            bt_Kacheln.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
+            bt_Templates.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
             bt_Settings.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
+            bt_Dashboard.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
+            bt_Animator.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
+
 
             p_Slider.Location = new Point(0, 126);
             p_Slider.Enabled = true;
@@ -123,7 +129,7 @@ namespace LightVisionSettings
             ButtonColorClick(sender);
         }
 
-        private void bt_Kacheln_Click(object sender, EventArgs e)
+        private void bt_templates_Click(object sender, EventArgs e)
         {
             //bt_Kacheln.BackColor = menuColor;
             p_Slider.Location = new Point(0, 166);
@@ -145,6 +151,11 @@ namespace LightVisionSettings
             //bt_Settings.BackColor = menuColor;
             p_Slider.Location = new Point(0, 246);
             settings.BringToFront();
+            ButtonColorClick(sender);
+        }
+        private void bt_Animator_Click(object sender, EventArgs e)
+        {
+            animator.BringToFront();
             ButtonColorClick(sender);
         }
 
@@ -203,6 +214,7 @@ namespace LightVisionSettings
             kacheln.BackColor = menuColor;
             p_Content.BackColor = menuColor;
             vorlagen.BackColor = menuColor;
+            animator.BackColor = menuColor;
             foreach (var item in buttons)
             {
                 if (item.BackColor != Color.Transparent)
@@ -214,5 +226,7 @@ namespace LightVisionSettings
             panel2.BackColor = contentColor;
             p_Nav.BackColor = contentColor;
         }
+
+       
     }
 }

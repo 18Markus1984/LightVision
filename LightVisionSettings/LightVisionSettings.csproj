@@ -66,6 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Animator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Animator.Designer.cs">
+      <DependentUpon>Animator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>UserControl</SubType>
@@ -114,6 +120,9 @@
     <Compile Include="Vorlagen.Designer.cs">
       <DependentUpon>Vorlagen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Animator.resx">
+      <DependentUpon>Animator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +245,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\services_26px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play_30px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

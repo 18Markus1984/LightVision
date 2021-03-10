@@ -58,7 +58,7 @@ namespace LightVisionSettings
                 for (int i = 0; i < length; i++)
                 {
 
-                    pixel[i, k] = new Pixel(i * 25, k * 25, 25);
+                    pixel[i, k] = new Pixel(i * 30, k * 30, 30);
                 }
             }
             this.DoubleBuffered = true;             //damit die refresh rate höher ist
@@ -117,8 +117,8 @@ namespace LightVisionSettings
             if (cb_SelectedPanal.Text != "")
             {
                 base.OnMouseDown(e);
-                int x = e.X / 25;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
-                int y = e.Y / 25;
+                int x = e.X / 30;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
+                int y = e.Y / 30;
 
                 if (fill && x < length && x >= 0 && y < height && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
                 {
