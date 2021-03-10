@@ -40,10 +40,11 @@
             this.p_Slider = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.p_Content = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.kacheln1 = new LightVisionSettings.Kacheln();
             this.dashboard1 = new LightVisionSettings.Dashboard();
             this.settings1 = new LightVisionSettings.Settings();
+            this.vorlagen1 = new LightVisionSettings.Vorlagen();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.p_Nav.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -198,22 +199,19 @@
             this.p_Content.Controls.Add(this.kacheln1);
             this.p_Content.Controls.Add(this.dashboard1);
             this.p_Content.Controls.Add(this.settings1);
+            this.p_Content.Controls.Add(this.vorlagen1);
             this.p_Content.Dock = System.Windows.Forms.DockStyle.Fill;
             this.p_Content.Location = new System.Drawing.Point(172, 0);
             this.p_Content.Name = "p_Content";
-            this.p_Content.Size = new System.Drawing.Size(621, 538);
+            this.p_Content.Size = new System.Drawing.Size(747, 538);
             this.p_Content.TabIndex = 1;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // kacheln1
             // 
             this.kacheln1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
             this.kacheln1.Location = new System.Drawing.Point(0, 0);
             this.kacheln1.Name = "kacheln1";
-            this.kacheln1.Size = new System.Drawing.Size(658, 538);
+            this.kacheln1.Size = new System.Drawing.Size(747, 538);
             this.kacheln1.TabIndex = 1;
             // 
             // dashboard1
@@ -232,11 +230,22 @@
             this.settings1.Size = new System.Drawing.Size(618, 538);
             this.settings1.TabIndex = 3;
             // 
+            // vorlagen1
+            // 
+            this.vorlagen1.Location = new System.Drawing.Point(0, 0);
+            this.vorlagen1.Name = "vorlagen1";
+            this.vorlagen1.Size = new System.Drawing.Size(621, 538);
+            this.vorlagen1.TabIndex = 4;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // LightVision_Base
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(793, 538);
+            this.ClientSize = new System.Drawing.Size(919, 538);
             this.ControlBox = false;
             this.Controls.Add(this.p_Content);
             this.Controls.Add(this.p_Nav);
@@ -269,6 +278,7 @@
         private System.Windows.Forms.Button bt_Settings;
         private System.Windows.Forms.Timer timer1;
         private Settings settings1;
+        private Vorlagen vorlagen1;
     }
 }
 

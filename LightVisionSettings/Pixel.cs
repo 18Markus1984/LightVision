@@ -20,6 +20,14 @@ namespace LightVisionSettings
             this.Color = Color.White;       //Startfarbe ist weiß
         }
 
+        public Pixel(int x, int y, int size, Color color)
+        {
+            this.Size = size;
+            this.x = x;
+            this.y = y;
+            this.Color = color;       //Startfarbe ist weiß
+        }
+
         public int Size { get => size; set => size = value; }
         public Color Color { get => color; set => color = value; }
         public int X { get => x; set => x = value; }

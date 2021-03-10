@@ -96,11 +96,23 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="SmallKachel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SmallKachel.Designer.cs">
+      <DependentUpon>SmallKachel.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC_Login.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UC_Login.Designer.cs">
       <DependentUpon>UC_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vorlagen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vorlagen.Designer.cs">
+      <DependentUpon>Vorlagen.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
@@ -124,8 +136,14 @@
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SmallKachel.resx">
+      <DependentUpon>SmallKachel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_Login.resx">
       <DependentUpon>UC_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vorlagen.resx">
+      <DependentUpon>Vorlagen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

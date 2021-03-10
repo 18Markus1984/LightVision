@@ -21,6 +21,13 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 Array = [None] *192
 
+def RGBAfromInt(argb_int):
+    blue =  argb_int & 255
+    green = (argb_int >> 8) & 255
+    red =   (argb_int >> 16) & 255
+    alpha = (argb_int >> 24) & 255
+    return (red, green, blue, alpha)
+
 def setPixel(strip,color,i):
     strip.setPixelColor(Array[i], color)
 
@@ -29,8 +36,10 @@ def showPanel(strip, wait):
     for i in range(0, len(recvPanels)):
         count = 0
         for k in range(0, len(recvPanels[i])):
-            setPixel(strip, recvPanels[i][k], count)
+            colors = RGBAfromInt(recvPanels[i][k])
+            setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
             count += 1
+        strip.show()
         time.sleep(wait)
         
 def ArrayErzeugen():
@@ -52,7 +61,7 @@ def getPositionOuterMatrix(x, y):
 def getPositionInnerMatrix(x, y):
     return x + y * 8 
 
-def downloadPanels():
+def downloadPanels(strip):
     #Methode zieht Panels vom Root-Server, speichert die Color Werte in recvPanels, startet die showPanel Methode in einem extra Thread und startet nach 30s erneut
     global recvPanels
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -66,9 +75,9 @@ def downloadPanels():
             buffer = json.loads(buffer)
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
-            t = Thread(target=showPanel, daemon=True)
+            t = Thread(target=showPanel, args=(strip, 5), daemon=True)
             t.start()
-            sleep(30)
+            time.sleep(30)
  
 # Main program logic follows:
 if __name__ == '__main__':
@@ -88,7 +97,7 @@ if __name__ == '__main__':
     ArrayErzeugen()
     
     try:
-        downloadPanels()
+        downloadPanels(strip)
     except KeyboardInterrupt:
         if args.clear:
             colorWipe(strip, Color(0,0,0), 10)

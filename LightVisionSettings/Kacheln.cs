@@ -13,6 +13,17 @@ namespace LightVisionSettings
 {
     public partial class Kacheln : UserControl
     {
+
+        private Pixel[,] pixel;             //Zweidimensionales Array für die Speicherung der Pixel Position und der Farbe 
+        private bool onClick;               //speichert, ob die Linke-Maus gedrückt ist oder nicht
+        private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
+        private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
+        private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
+        private List<Panel> savedPanels = new List<Panel>(); //Speichert alle erstellten Panels
+        protected int length = 24;
+        protected int height = 8;
+
+
         public Kacheln()
         {
             InitializeComponent();
@@ -28,24 +39,16 @@ namespace LightVisionSettings
             }
         }
 
-        private Pixel[,] pixel;             //Zweidimensionales Array für die Speicherung der Pixel Position und der Farbe 
-        private bool onClick;               //speichert, ob die Linke-Maus gedrückt ist oder nicht
-        private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
-        private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
-        private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
-        private List<Panel> savedPanels = new List<Panel>(); //Speichert alle erstellten Panels
-        protected int length = 24;
-        protected int height = 8;
-
-
         private void AddButtons()       //Fügt 280 Pixel hinzu
         {
             pixel = new Pixel[length, height]; 
             onClick = false;
-            for (int i = 0; i < length; i++)
+
+            for (int k = 0; k < height; k++)
             {
-                for (int k = 0; k < height; k++)
+                for (int i = 0; i < length; i++)
                 {
+
                     pixel[i, k] = new Pixel(i * 25, k * 25, 25);
                 }
             }
@@ -59,10 +62,11 @@ namespace LightVisionSettings
             int k = 0;
             int a = 0;
             int b = 0;
-            for (int i = 0; i < length; i++)
+            for (int j = 0; j < height; j++)
             {
-                for (int j = 0; j < height; j++)
+                for (int i = 0; i < length; i++)
                 {
+
                     pixel[i, j].Color = Color.FromArgb(selectedPanel.colors[k]);
                     k += 1;
                     a = i;
@@ -166,9 +170,20 @@ namespace LightVisionSettings
             if (cb_SelectedPanal.Text != "")
             {
                 List<int> colors = new List<int>();
-                foreach (var item in pixel)
+                /*foreach (var item in pixel)
                 {
                     colors.Add(item.Color.ToArgb());
+                }*/
+
+                int k = 0;
+                for (int j = 0; j < height; j++)
+                {
+                    for (int i = 0; i < length; i++)
+                    {
+
+                        colors.Add(pixel[i, j].Color.ToArgb());
+                        k += 1;
+                    }
                 }
                 savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
                 savedPanels[cb_SelectedPanal.SelectedIndex].showtime = Convert.ToDouble(tb_showtime.Text);
