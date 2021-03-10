@@ -50,7 +50,7 @@ namespace LightVisionSettings
             {
                 var json = JsonConvert.SerializeObject(listOfPanel);
                 sw.WriteLine(json);
-                //sw.Flush();
+                sw.Flush();
             }
         }
     }
