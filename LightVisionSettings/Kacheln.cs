@@ -69,6 +69,7 @@ namespace LightVisionSettings
                     b = j;
                 }
             }
+            tb_showtime.Text = Convert.ToString(selectedPanel.showtime);
             this.Refresh();
         }
 
@@ -170,6 +171,7 @@ namespace LightVisionSettings
                     colors.Add(item.Color.ToArgb());
                 }
                 savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
+                savedPanels[cb_SelectedPanal.SelectedIndex].showtime = Convert.ToDouble(tb_showtime.Text);
                 uploadPanels();
             }
         }

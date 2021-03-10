@@ -45,12 +45,12 @@ namespace LightVisionSettings
         }
 
         public void SendPanel(List<Panel> listOfPanel)
-        {
+         {
             using (StreamWriter sw = new StreamWriter(ns))
             {
                 var json = JsonConvert.SerializeObject(listOfPanel);
                 sw.WriteLine(json);
-                sw.Flush();
+                //sw.Flush();
             }
         }
     }
