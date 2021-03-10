@@ -38,6 +38,7 @@
             this.cb_SelectedPanal = new System.Windows.Forms.ComboBox();
             this.bt_NewPanel = new System.Windows.Forms.Button();
             this.tb_NamePanel = new System.Windows.Forms.TextBox();
+            this.tb_showtime = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // bt_Speichern
@@ -119,11 +120,19 @@
             this.tb_NamePanel.Size = new System.Drawing.Size(155, 20);
             this.tb_NamePanel.TabIndex = 6;
             // 
+            // tb_showtime
+            // 
+            this.tb_showtime.Location = new System.Drawing.Point(505, 271);
+            this.tb_showtime.Name = "tb_showtime";
+            this.tb_showtime.Size = new System.Drawing.Size(100, 20);
+            this.tb_showtime.TabIndex = 7;
+            // 
             // Kacheln
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Controls.Add(this.tb_showtime);
             this.Controls.Add(this.tb_NamePanel);
             this.Controls.Add(this.bt_NewPanel);
             this.Controls.Add(this.cb_SelectedPanal);
@@ -147,5 +156,6 @@
         private System.Windows.Forms.ComboBox cb_SelectedPanal;
         private System.Windows.Forms.Button bt_NewPanel;
         private System.Windows.Forms.TextBox tb_NamePanel;
+        private System.Windows.Forms.TextBox tb_showtime;
     }
 }

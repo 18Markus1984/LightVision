@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace LightVisionSettings
 {
@@ -27,12 +28,14 @@ namespace LightVisionSettings
         {
             string name;
             string colors;
+            double showtime;
             name = source.Remove(0, 9);
             name = name.Substring(0, name.IndexOf('\"'));
             colors = getStringInBetween(source, '[', ']')[0];
             colors = colors.Remove(0,1);
+            showtime = double.Parse(source.Remove(0, source.LastIndexOf(':') + 1), CultureInfo.InvariantCulture);
             //colors = colors.Remove(colors.Length - 1, 1);
-            return new Panel(name, colors.Split(',').Select(Int32.Parse).ToList());
+            return new Panel(name, colors.Split(',').Select(Int32.Parse).ToList(), showtime);
         }
     }
 }

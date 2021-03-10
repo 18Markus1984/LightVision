@@ -41,17 +41,19 @@ namespace LightVisionSettings
             {
                 panels.Add(ExtensionMethods.getPanelFromString(s));
             }
+            socket.Close();
             return panels;
         }
 
         public void SendPanel(List<Panel> listOfPanel)
-        {
+         {
             using (StreamWriter sw = new StreamWriter(ns))
             {
                 var json = JsonConvert.SerializeObject(listOfPanel);
                 sw.WriteLine(json);
                 sw.Flush();
             }
+            socket.Close();
         }
     }
 }

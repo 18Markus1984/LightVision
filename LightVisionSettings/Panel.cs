@@ -11,6 +11,7 @@ namespace LightVisionSettings
     {
         public string name;
         public List<int> colors;
+        public double showtime;
 
         public Panel(string name)
         {
@@ -21,12 +22,14 @@ namespace LightVisionSettings
                 defaultColors.Add(Color.Green.ToArgb());
             }
             colors = defaultColors;
+            showtime = 5;
         }
         
-        public Panel(string name, List<int> colors)
+        public Panel(string name, List<int> colors, double showtime)
         {
             this.colors = colors;
             this.name = name;
+            this.showtime = showtime;
         }
 
         //public void fill(Color color, int row, int colume)
