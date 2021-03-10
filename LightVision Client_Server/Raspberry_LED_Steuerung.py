@@ -8,7 +8,9 @@ import argparse
 
 HOST = '135.181.35.212'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
+
 recvPanels = []
+recvTimes = []
 
 # LED strip configuration:
 LED_COUNT      = 192      # Number of LED pixels.
@@ -33,14 +35,14 @@ def setPixel(strip,color,i):
 
 def showPanel(strip, wait):
     #Methode liest ARGB Werte aus recvPanels aus und leitet diese jeweils einzeln an setPixel weiter
-    for i in range(0, len(recvPanels)):
-        count = 0
-        for k in range(0, len(recvPanels[i])):
-            colors = RGBAfromInt(recvPanels[i][k])
-            setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
-            count += 1
-        strip.show()
-        time.sleep(wait)
+    while True:
+        for i in range(0, len(recvPanels)):
+            count = 0
+            for k in range(0, len(recvPanels[i])):
+                colors = RGBAfromInt(recvPanels[i][k])
+                setPixel(strip, Color(colors[0], colors[2], colors[1]), count)
+                count += 1
+            time.sleep(recvTimes[i])
         
 def ArrayErzeugen():
     for x in range(24):
@@ -75,6 +77,7 @@ def downloadPanels(strip):
             buffer = json.loads(buffer)
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
+                recvTimes.append(buffer[i]['showtime'])
             t = Thread(target=showPanel, args=(strip, 5), daemon=True)
             t.start()
             time.sleep(30)
