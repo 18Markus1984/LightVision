@@ -71,24 +71,23 @@ namespace LightVisionSettings
                     panels.Add(panel);
                     Controls.Add(panel);
                 }
-
-                if (spalten != 0)
+            }
+            if (spalten != 0)
+            {
+                for (int z = 0; z < spalten; z++)
                 {
-                    for (int z = 0; z < spalten; z++)
-                    {
-                        System.Windows.Forms.Panel panel = new System.Windows.Forms.Panel();
-                        Label l = new Label();
-                        l.Location = new Point(240 / 2 - l.Width / 8, 80 / 2-l.Height/2);
-                        l.ForeColor = Color.White;
-                        l.Font = new Font("Microsoft Sans Serif", 14, FontStyle.Bold);
-                        l.Text = "" + (z + reihen * 3 + 1);
-                        panel.Controls.Add(l);
-                        panel.Size = new Size(240, 80);
-                        panel.Location = new Point(5 + z * 245, 20 + reihen * 85);
-                        panel.BorderStyle = BorderStyle.FixedSingle;
-                        panels.Add(panel);
-                        Controls.Add(panel);
-                    }
+                    System.Windows.Forms.Panel panel = new System.Windows.Forms.Panel();
+                    Label l = new Label();
+                    l.Location = new Point(240 / 2 - l.Width / 8, 80 / 2 - l.Height / 2);
+                    l.ForeColor = Color.White;
+                    l.Font = new Font("Microsoft Sans Serif", 14, FontStyle.Bold);
+                    l.Text = "" + (z + reihen * 3 + 1);
+                    panel.Controls.Add(l);
+                    panel.Size = new Size(240, 80);
+                    panel.Location = new Point(5 + z * 245, 20 + reihen * 85);
+                    panel.BorderStyle = BorderStyle.FixedSingle;
+                    panels.Add(panel);
+                    Controls.Add(panel);
                 }
             }
         }
