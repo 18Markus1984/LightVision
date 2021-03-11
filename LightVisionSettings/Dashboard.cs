@@ -62,12 +62,30 @@ namespace LightVisionSettings
                 s.matchingPanel = i;
             }
 
+            for (int i = mw.savedPanels.Count; i < mw.savedPanels.Count+mw.savedAnimations.Count; i++)
+            {
+                SmallKachel s = new SmallKachel(10, mw.savedAnimations[i- mw.savedPanels.Count].animation, 8, 24,mw);
+                s.MouseDown += MouseDown;
+                s.MouseMove += MouseMove;
+                s.MouseUp += MouseUp;
+                s.DoubleClick += DoubleClick;
+                kacheln.Add(s);
+                Controls.Add(s);
+                s.BringToFront();
+                s.Width = 240;
+                s.Height = 80;
+                s.Location = panels[i].Location;
+                s.Cursor = Cursors.Hand;
+                s.LocationChanged += PostionChanged;
+                s.matchingPanel = i- mw.savedPanels.Count;
+            }
+
         }
 
         private void CreatePanel()  //Es sollen mehrere Panels erstellt werden, die als Lagerbehälter für die Panels gelten. Dann überprüfe ich wenn sich ein Panel bewegt einfach die Distance zu einem anderen Position eines Panels, wenn der Benutzer das PAnel nicht mehr mit der Linken Maustaste festhält und setze es an diese Position
         {
-            int spalten = mw.savedPanels.Count % 3;
-            int reihen = mw.savedPanels.Count / 3;
+            int spalten = (mw.savedPanels.Count + mw.savedAnimations.Count) % 3;
+            int reihen = (mw.savedPanels.Count + mw.savedAnimations.Count) / 3;
 
             for (int i = 0; i < reihen; i++)
             {
@@ -180,7 +198,17 @@ namespace LightVisionSettings
                 {
                     if (item.Location == panels[i].Location)
                     {
-                        p.Add(mw.savedPanels[item.matchingPanel]);
+                        if (item.thisISAnAnimation)
+                        {
+                            //foreach(Panel panel in mw.savedAnimations[item.matchingPanel].animation)
+                            //{
+                            //    p.Add(panel);
+                            //}
+                        }
+                        else
+                        {
+                            p.Add(mw.savedPanels[item.matchingPanel]);
+                        }
                     }
                 }
             }
@@ -204,10 +232,20 @@ namespace LightVisionSettings
         private new void DoubleClick(object sender, EventArgs e)
         {
             SmallKachel kachel = (SmallKachel)sender;
-            mw.kacheln.cbText.Text = mw.savedPanels[kachel.matchingPanel].name;
-            mw.kacheln.BringToFront();
-            mw.buttons[0].BackColor = mw.menuColor;
-            mw.buttons[3].BackColor = Color.Transparent;
+            if (kachel.thisISAnAnimation)
+            {
+                mw.animator.comboBoxText.Text = mw.savedAnimations[kachel.matchingPanel].name;
+                mw.animator.BringToFront();
+                mw.buttons[1].BackColor = mw.menuColor;
+                mw.buttons[3].BackColor = Color.Transparent;
+            }
+            else
+            {
+                mw.kacheln.cbText.Text = mw.savedPanels[kachel.matchingPanel].name;
+                mw.kacheln.BringToFront();
+                mw.buttons[0].BackColor = mw.menuColor;
+                mw.buttons[3].BackColor = Color.Transparent;
+            }
         }
     }
 }

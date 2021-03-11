@@ -35,6 +35,7 @@ namespace LightVisionSettings
             this.bt_ContentColor = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.animation = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // cB_RGB
@@ -53,7 +54,7 @@ namespace LightVisionSettings
             // bt_MenuColor
             // 
             this.bt_MenuColor.BackColor = System.Drawing.Color.White;
-            this.bt_MenuColor.Location = new System.Drawing.Point(184, 146);
+            this.bt_MenuColor.Location = new System.Drawing.Point(184, 161);
             this.bt_MenuColor.Name = "bt_MenuColor";
             this.bt_MenuColor.Size = new System.Drawing.Size(24, 24);
             this.bt_MenuColor.TabIndex = 21;
@@ -63,7 +64,7 @@ namespace LightVisionSettings
             // bt_ContentColor
             // 
             this.bt_ContentColor.BackColor = System.Drawing.Color.White;
-            this.bt_ContentColor.Location = new System.Drawing.Point(184, 107);
+            this.bt_ContentColor.Location = new System.Drawing.Point(184, 122);
             this.bt_ContentColor.Name = "bt_ContentColor";
             this.bt_ContentColor.Size = new System.Drawing.Size(24, 24);
             this.bt_ContentColor.TabIndex = 22;
@@ -75,7 +76,7 @@ namespace LightVisionSettings
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(36, 107);
+            this.label1.Location = new System.Drawing.Point(36, 122);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 24);
             this.label1.TabIndex = 23;
@@ -86,17 +87,33 @@ namespace LightVisionSettings
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(36, 146);
+            this.label2.Location = new System.Drawing.Point(32, 161);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(139, 24);
             this.label2.TabIndex = 24;
             this.label2.Text = "Content-Color";
+            // 
+            // animation
+            // 
+            this.animation.AutoSize = true;
+            this.animation.Checked = true;
+            this.animation.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.animation.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.animation.ForeColor = System.Drawing.Color.White;
+            this.animation.Location = new System.Drawing.Point(36, 76);
+            this.animation.Name = "animation";
+            this.animation.Size = new System.Drawing.Size(122, 28);
+            this.animation.TabIndex = 25;
+            this.animation.Text = "Animation";
+            this.animation.UseVisualStyleBackColor = true;
+            this.animation.CheckedChanged += new System.EventHandler(this.animation_CheckedChanged);
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
+            this.Controls.Add(this.animation);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bt_ContentColor);
@@ -117,5 +134,6 @@ namespace LightVisionSettings
         private System.Windows.Forms.Button bt_ContentColor;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox animation;
     }
 }

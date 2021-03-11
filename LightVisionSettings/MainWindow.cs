@@ -104,8 +104,6 @@ namespace LightVisionSettings
             bt_Dashboard.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
             bt_Animator.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(buttonOffsetLeft, 0, bt_Editor.Width + 20, bt_Editor.Height, buttonRadius, buttonRadius));
 
-
-           
             bt_Editor.BackColor = menuColor;
         }
 
@@ -123,6 +121,16 @@ namespace LightVisionSettings
 
         private void bt_Close_Click(object sender, EventArgs e)
         {
+            if (dashboard.kacheln != null)
+            {
+                foreach (SmallKachel small in dashboard.kacheln)
+                {
+                    if (small.thisISAnAnimation)
+                    {
+                        small.thread.Abort();
+                    }
+                }
+            }
             this.Close();
         }
 
@@ -154,6 +162,9 @@ namespace LightVisionSettings
         {
             animator.BringToFront();
             ButtonColorClick(sender);
+            animator.AddButton();
+            animator.AddCircles();
+            animator.Refresh();
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)   //Methode zum bewegen der RandlosenForm

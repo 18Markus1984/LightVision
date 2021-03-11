@@ -13,6 +13,7 @@ namespace LightVisionSettings
     public partial class Settings : UserControl
     {
         public bool rgb = false;
+        public bool animationValue = true;
         public Color menuColor;
         public Color contentColor;
         private LightVision_Base mw;
@@ -43,6 +44,18 @@ namespace LightVisionSettings
             {
                 bt_MenuColor.BackColor = colorDialog1.Color;
                 menuColor = colorDialog1.Color;
+            }
+        }
+
+        private void animation_CheckedChanged(object sender, EventArgs e)
+        {
+            animationValue = !animationValue;
+            foreach (SmallKachel small in mw.dashboard.kacheln)
+            {
+                if (small.thisISAnAnimation)
+                {
+                    small.animations = false;
+                }
             }
         }
     }

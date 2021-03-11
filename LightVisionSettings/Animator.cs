@@ -26,6 +26,7 @@ namespace LightVisionSettings
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
         private int selectedPanel = 0;
+        public ComboBox comboBoxText;
 
         private int numberOfPanels = 5;
 
@@ -38,8 +39,9 @@ namespace LightVisionSettings
             this.height = height;
             this.length = length;
             this.Size = new Size(747, 458);
-            AddButton();
-            AddCircles();
+
+            comboBoxText = cb_SelectedPanal;
+
             Random r = new Random();
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             bt_Color.BackColor = colorDialog1.Color;
@@ -75,7 +77,7 @@ namespace LightVisionSettings
             this.Refresh();
         }
 
-        private void AddCircles()
+        public void AddCircles()
         {
             circles = new CircleAnimator[numberOfPanels];
             for (int i = 0; i < numberOfPanels; i++)
@@ -102,15 +104,18 @@ namespace LightVisionSettings
 
         protected override void OnPaint(PaintEventArgs e)       //überschreibt die OnPaint Funktion, damit wir die Refresh funktion benutzen können
         {
-            base.OnPaint(e);
-            foreach (Pixel p in this.pixel)                     //Es werden alle Pixel durchgegangen und diese malen sich dann selber
+            if (pixel != null && circles != null)
             {
-                p.Render(e.Graphics);
-            }
-            foreach (CircleAnimator c in circles)
-            {
-                c.Render(e.Graphics);
-            }
+                base.OnPaint(e);
+                foreach (Pixel p in this.pixel)                     //Es werden alle Pixel durchgegangen und diese malen sich dann selber
+                {
+                    p.Render(e.Graphics);
+                }
+                foreach (CircleAnimator c in circles)
+                {
+                    c.Render(e.Graphics);
+                }
+            } 
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
