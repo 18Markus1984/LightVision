@@ -30,7 +30,7 @@ namespace LightVisionSettings
 
         private void contentColor_Click(object sender, EventArgs e)
         {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            if (colorDialog1.ShowDialog() == DialogResult.OK && colorDialog1.Color != menuColor)
             {
                 bt_ContentColor.BackColor = colorDialog1.Color;
                 contentColor = colorDialog1.Color;
@@ -39,7 +39,7 @@ namespace LightVisionSettings
 
         private void MenuColor_Click(object sender, EventArgs e)
         {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            if (colorDialog1.ShowDialog() == DialogResult.OK && colorDialog1.Color != contentColor)
             {
                 bt_MenuColor.BackColor = colorDialog1.Color;
                 menuColor = colorDialog1.Color;

@@ -36,7 +36,7 @@ namespace LightVisionSettings
             this.bt_fill = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_Color = new System.Windows.Forms.Button();
-            this.bt_Speichern = new System.Windows.Forms.Button();
+            this.bt_Löschen = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.number = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -117,16 +117,17 @@ namespace LightVisionSettings
             this.bt_Color.UseVisualStyleBackColor = true;
             this.bt_Color.Click += new System.EventHandler(this.bt_Color_Click_1);
             // 
-            // bt_Speichern
+            // bt_Löschen
             // 
-            this.bt_Speichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_Speichern.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Speichern.Location = new System.Drawing.Point(95, 355);
-            this.bt_Speichern.Name = "bt_Speichern";
-            this.bt_Speichern.Size = new System.Drawing.Size(91, 41);
-            this.bt_Speichern.TabIndex = 8;
-            this.bt_Speichern.Text = "Speichern";
-            this.bt_Speichern.UseVisualStyleBackColor = true;
+            this.bt_Löschen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_Löschen.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_Löschen.Location = new System.Drawing.Point(95, 355);
+            this.bt_Löschen.Name = "bt_Löschen";
+            this.bt_Löschen.Size = new System.Drawing.Size(91, 41);
+            this.bt_Löschen.TabIndex = 8;
+            this.bt_Löschen.Text = "Löschen";
+            this.bt_Löschen.UseVisualStyleBackColor = true;
+            this.bt_Löschen.Click += new System.EventHandler(this.bt_Löschen_Click);
             // 
             // number
             // 
@@ -173,7 +174,7 @@ namespace LightVisionSettings
             this.Controls.Add(this.bt_fill);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_Color);
-            this.Controls.Add(this.bt_Speichern);
+            this.Controls.Add(this.bt_Löschen);
             this.Name = "Animator";
             this.Size = new System.Drawing.Size(820, 517);
             ((System.ComponentModel.ISupportInitialize)(this.number)).EndInit();
@@ -190,7 +191,7 @@ namespace LightVisionSettings
         private System.Windows.Forms.Button bt_fill;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_Color;
-        private System.Windows.Forms.Button bt_Speichern;
+        private System.Windows.Forms.Button bt_Löschen;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.NumericUpDown number;
         private System.Windows.Forms.Label label1;
