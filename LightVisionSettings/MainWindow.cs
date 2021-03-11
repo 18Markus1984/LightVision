@@ -25,6 +25,7 @@ namespace LightVisionSettings
         //Werte zum Arbeiten
         public List<Button> buttons;
         public List<Panel> savedPanels; //Speichert alle erstellten Panels
+        public List<Animation> savedAnimations; //Speichert alle erstellten Animation
 
 
         //Alle UserControl Panels

@@ -167,26 +167,6 @@ namespace LightVisionSettings
                 {
                     s.Location = panels[nearestPanel].Location;
                     s.moved = false;
-
-                    //List<Panel> puffer = new List<Panel>();
-                    //List<SmallKachel> smallsPuffer = new List<SmallKachel>();
-
-
-                    //for (int i = 0; i < panels.Count; i++)
-                    //{
-                    //    for (int t = 0; t < panels.Count; t++)
-                    //    {
-                    //        if (panels[i].Location == kacheln[t].Location)
-                    //        {
-                    //            puffer.Add(savedPanels[kacheln[t].matchingPanel]);
-                    //            kacheln[t].matchingPanel = puffer.Count-1;
-                    //            smallsPuffer.Add(kacheln[t]);
-                    //        }
-                    //    }
-                    //}
-                    //savedPanels = puffer;
-                    //kacheln = smallsPuffer;
-
                 }
             }
         }
