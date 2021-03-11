@@ -207,7 +207,7 @@ namespace LightVisionSettings
             mw.kacheln.cbText.Text = mw.savedPanels[kachel.matchingPanel].name;
             mw.kacheln.BringToFront();
             mw.buttons[0].BackColor = mw.menuColor;
-            mw.buttons[2].BackColor = Color.Transparent;
+            mw.buttons[3].BackColor = Color.Transparent;
         }
     }
 }

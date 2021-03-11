@@ -29,7 +29,6 @@ namespace LightVisionSettings
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
             this.tb_showtime = new System.Windows.Forms.TextBox();
             this.tb_NamePanel = new System.Windows.Forms.TextBox();
             this.bt_NewPanel = new System.Windows.Forms.Button();
@@ -40,19 +39,9 @@ namespace LightVisionSettings
             this.bt_Speichern = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.number = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.number)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 24);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Animator";
             // 
             // tb_showtime
             // 
@@ -88,6 +77,7 @@ namespace LightVisionSettings
             this.cb_SelectedPanal.Name = "cb_SelectedPanal";
             this.cb_SelectedPanal.Size = new System.Drawing.Size(155, 21);
             this.cb_SelectedPanal.TabIndex = 12;
+            this.cb_SelectedPanal.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedPanal_SelectedIndexChanged);
             // 
             // bt_fill
             // 
@@ -160,11 +150,21 @@ namespace LightVisionSettings
             0,
             0});
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 361);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "label1";
+            // 
             // Animator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.number);
             this.Controls.Add(this.tb_showtime);
             this.Controls.Add(this.tb_NamePanel);
@@ -174,7 +174,6 @@ namespace LightVisionSettings
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_Color);
             this.Controls.Add(this.bt_Speichern);
-            this.Controls.Add(this.label2);
             this.Name = "Animator";
             this.Size = new System.Drawing.Size(820, 517);
             ((System.ComponentModel.ISupportInitialize)(this.number)).EndInit();
@@ -184,8 +183,6 @@ namespace LightVisionSettings
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tb_showtime;
         private System.Windows.Forms.TextBox tb_NamePanel;
         private System.Windows.Forms.Button bt_NewPanel;
@@ -196,5 +193,6 @@ namespace LightVisionSettings
         private System.Windows.Forms.Button bt_Speichern;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.NumericUpDown number;
+        private System.Windows.Forms.Label label1;
     }
 }

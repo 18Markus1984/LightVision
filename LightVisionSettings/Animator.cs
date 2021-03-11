@@ -18,10 +18,6 @@ namespace LightVisionSettings
         private int length;
         private int size;
         private Pixel[,] pixel;
-
-        private List<Pixel[,]> animation;
-
-
         private CircleAnimator[] circles;
         
 
@@ -33,18 +29,6 @@ namespace LightVisionSettings
 
         private int numberOfPanels = 5;
 
-
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // width of ellipse
-            int nHeightEllipse // height of ellipse
-        );
-
         public Animator(LightVision_Base mw, int size, int height, int length)
         {
             InitializeComponent();
@@ -53,7 +37,9 @@ namespace LightVisionSettings
             this.size = size;
             this.height = height;
             this.length = length;
-            AddButtonCircles();
+            this.Size = new Size(747, 458);
+            AddButton();
+            AddCircles();
             Random r = new Random();
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             bt_Color.BackColor = colorDialog1.Color;
@@ -70,7 +56,7 @@ namespace LightVisionSettings
             }
         }
 
-        public void AddButtonCircles()
+        public void AddButton()
         {
             pixel = new Pixel[length, height];
             int d = 0;
@@ -82,19 +68,21 @@ namespace LightVisionSettings
 
                 }
             }
-
-            circles = new CircleAnimator[numberOfPanels];
-            for (int i = 0; i < numberOfPanels; i++)
-            {
-                circles[i] = new CircleAnimator(10, Color.White, ((747 - 24 * 25) / 2+55)+i*(24*25/numberOfPanels), 20);
-                
-            }circles[0].Color = mw.contentColor;
-
             this.DoubleBuffered = true;             //damit die refresh rate höher ist
             this.MouseMove += kachel_MouseMove;     //da man nicht hover und mousedown gleichzeitig als event verwenden kann mussten wir überprüfen, ob sich die Maus bewegt und über einem der Rechtecken befindet
             this.fill = false;                      //fill-Modus deaktiviert
 
             this.Refresh();
+        }
+
+        private void AddCircles()
+        {
+            circles = new CircleAnimator[numberOfPanels];
+            for (int i = 0; i < numberOfPanels; i++)
+            {
+                circles[i] = new CircleAnimator(10, Color.White, ((747 - 24 * 25) / 2 + 55) + i * (24 * 25 / numberOfPanels), 20);
+
+            }
         }
 
         private void loadPanel(Panel selectedPanel)
@@ -156,8 +144,12 @@ namespace LightVisionSettings
             {
                 if (e.X +10 >= c.X && e.X < c.X + c.Radius && e.Y+10 >= c.Y && e.Y < c.Y + c.Radius)
                 {
+                    savePanel();
                     selectedPanel = counter;
                     c.Color = mw.contentColor;
+                    label1.Text = "" + counter;
+                    tb_showtime.Text = ""+mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].showtime;
+                    loadPanel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel]);
                     foreach(CircleAnimator ci in circles)
                     {
                         if (ci != c)
@@ -171,6 +163,25 @@ namespace LightVisionSettings
                 counter++;
             }
             
+        }
+
+        private void savePanel()
+        {
+            List<int> puffer = new List<int>();
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int m = 0; m < 24; m++)
+                {
+                    puffer.Add(pixel[m,i].Color.ToArgb());
+                }
+            }
+
+            if (tb_showtime.Text != "")
+            {
+                mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].colors = puffer;
+                mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].showtime = Convert.ToDouble(tb_showtime.Text);
+            }
         }
 
         private void kachel_MouseMove(object sender, MouseEventArgs e)
@@ -245,10 +256,28 @@ namespace LightVisionSettings
             {
                 string name = tb_NamePanel.Text;
                 Animation animation = new Animation(name,numberOfPanels);
+                animation.numberOfPanels = (int)number.Value;
+                numberOfPanels = (int)number.Value;
                 mw.savedAnimations.Add(animation);
                 cb_SelectedPanal.Items.Add(name);
+                cb_SelectedPanal.Text = "";
                 tb_NamePanel.Text = "";
+                AddCircles();
             }
+        }
+
+        private void cb_SelectedPanal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedPanel = 0;
+            circles[0].Color = mw.contentColor;
+            foreach (CircleAnimator circle in circles)
+            {
+                if (circles[0] != circle)
+                {
+                    circle.Color = Color.White;
+                }
+            }
+            loadPanel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel]);
         }
     }
 }
