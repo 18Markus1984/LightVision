@@ -39,8 +39,8 @@ namespace LightVisionSettings
             this.bt_Color = new System.Windows.Forms.Button();
             this.bt_Speichern = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.number = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.number)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -78,6 +78,7 @@ namespace LightVisionSettings
             this.bt_NewPanel.TabIndex = 13;
             this.bt_NewPanel.Text = "Neu";
             this.bt_NewPanel.UseVisualStyleBackColor = true;
+            this.bt_NewPanel.Click += new System.EventHandler(this.bt_NewPanel_Click);
             // 
             // cb_SelectedPanal
             // 
@@ -137,19 +138,34 @@ namespace LightVisionSettings
             this.bt_Speichern.Text = "Speichern";
             this.bt_Speichern.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // number
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(582, 382);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(100, 20);
-            this.numericUpDown1.TabIndex = 16;
+            this.number.Location = new System.Drawing.Point(582, 382);
+            this.number.Maximum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.number.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.number.Name = "number";
+            this.number.Size = new System.Drawing.Size(100, 20);
+            this.number.TabIndex = 16;
+            this.number.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             // 
             // Animator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.number);
             this.Controls.Add(this.tb_showtime);
             this.Controls.Add(this.tb_NamePanel);
             this.Controls.Add(this.bt_NewPanel);
@@ -161,7 +177,7 @@ namespace LightVisionSettings
             this.Controls.Add(this.label2);
             this.Name = "Animator";
             this.Size = new System.Drawing.Size(820, 517);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.number)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,6 +195,6 @@ namespace LightVisionSettings
         private System.Windows.Forms.Button bt_Color;
         private System.Windows.Forms.Button bt_Speichern;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown number;
     }
 }

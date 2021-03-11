@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LightVisionSettings
 {
-    class Animation
+    public class Animation
     {
         public Panel[] animation;
         public double showtime;

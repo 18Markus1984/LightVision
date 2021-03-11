@@ -18,6 +18,10 @@ namespace LightVisionSettings
         private int length;
         private int size;
         private Pixel[,] pixel;
+
+        private List<Pixel[,]> animation;
+
+
         private CircleAnimator[] circles;
         
 
@@ -57,6 +61,15 @@ namespace LightVisionSettings
 
         }
 
+        public void reloadComboBox()
+        {
+            cb_SelectedPanal.Items.Clear();
+            foreach (Animation a in mw.savedAnimations)
+            {
+                cb_SelectedPanal.Items.Add(a.name);
+            }
+        }
+
         public void AddButtonCircles()
         {
             pixel = new Pixel[length, height];
@@ -75,7 +88,7 @@ namespace LightVisionSettings
             {
                 circles[i] = new CircleAnimator(10, Color.White, ((747 - 24 * 25) / 2+55)+i*(24*25/numberOfPanels), 20);
                 
-            }circles[2].Color = mw.contentColor;
+            }circles[0].Color = mw.contentColor;
 
             this.DoubleBuffered = true;             //damit die refresh rate höher ist
             this.MouseMove += kachel_MouseMove;     //da man nicht hover und mousedown gleichzeitig als event verwenden kann mussten wir überprüfen, ob sich die Maus bewegt und über einem der Rechtecken befindet
@@ -137,10 +150,13 @@ namespace LightVisionSettings
                 }
             }
 
+
+            int counter = 0;
             foreach (CircleAnimator c in circles)
             {
                 if (e.X +10 >= c.X && e.X < c.X + c.Radius && e.Y+10 >= c.Y && e.Y < c.Y + c.Radius)
                 {
+                    selectedPanel = counter;
                     c.Color = mw.contentColor;
                     foreach(CircleAnimator ci in circles)
                     {
@@ -152,6 +168,7 @@ namespace LightVisionSettings
                     this.Refresh();
                     break;
                 }
+                counter++;
             }
             
         }
@@ -222,7 +239,16 @@ namespace LightVisionSettings
             }
         }
 
-        
-
+        private void bt_NewPanel_Click(object sender, EventArgs e)
+        {
+            if (tb_NamePanel.Text != "")
+            {
+                string name = tb_NamePanel.Text;
+                Animation animation = new Animation(name,numberOfPanels);
+                mw.savedAnimations.Add(animation);
+                cb_SelectedPanal.Items.Add(name);
+                tb_NamePanel.Text = "";
+            }
+        }
     }
 }

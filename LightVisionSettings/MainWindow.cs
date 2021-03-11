@@ -62,7 +62,7 @@ namespace LightVisionSettings
             InitializeComponent();
 
             savedPanels = downloadPanels();
-
+            savedAnimations = new List<Animation>();
             dashboard = new Dashboard(this);
             p_Content.Controls.Add(dashboard);
 
