@@ -235,6 +235,7 @@ namespace LightVisionSettings
             if (kachel.thisISAnAnimation)
             {
                 mw.animator.comboBoxText.Text = mw.savedAnimations[kachel.matchingPanel].name;
+                mw.animator.selectedPanel = 0;
                 mw.animator.BringToFront();
                 mw.buttons[1].BackColor = mw.menuColor;
                 mw.buttons[3].BackColor = Color.Transparent;

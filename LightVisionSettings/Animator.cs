@@ -25,7 +25,7 @@ namespace LightVisionSettings
         private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
-        private int selectedPanel = 0;
+        public int selectedPanel = 0;
         public ComboBox comboBoxText;
 
         private int numberOfPanels = 5;
