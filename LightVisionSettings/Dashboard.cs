@@ -234,9 +234,9 @@ namespace LightVisionSettings
             SmallKachel kachel = (SmallKachel)sender;
             if (kachel.thisISAnAnimation)
             {
-                mw.animator.comboBoxText.Text = mw.savedAnimations[kachel.matchingPanel].name;
-                mw.animator.selectedPanel = 0;
                 mw.animator.BringToFront();
+                mw.animator.comboBoxText.Text = mw.savedAnimations[kachel.matchingPanel].name;
+                mw.animator.RealoadAnimator();
                 mw.buttons[1].BackColor = mw.menuColor;
                 mw.buttons[3].BackColor = Color.Transparent;
             }

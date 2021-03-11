@@ -75,6 +75,7 @@ namespace LightVisionSettings
                     d++;
                 }
             }
+            this.DoubleBuffered = true;
             thread = new Thread(Animation);
             thread.Start();
         }

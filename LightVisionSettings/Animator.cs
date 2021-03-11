@@ -144,14 +144,14 @@ namespace LightVisionSettings
                         this.Refresh();                                 //alle Rechtecke werden neu gezeichnet
                     }
                 }
-
+                savePanel();
 
                 int counter = 0;
                 foreach (CircleAnimator c in circles)
                 {
                     if (e.X + 10 >= c.X && e.X < c.X + c.Radius && e.Y + 10 >= c.Y && e.Y < c.Y + c.Radius)
                     {
-                        savePanel();
+                        
                         selectedPanel = counter;
                         c.Color = mw.contentColor;
                         label1.Text = "" + counter;
@@ -175,7 +175,6 @@ namespace LightVisionSettings
         private void savePanel()
         {
             List<int> puffer = new List<int>();
-
             for (int i = 0; i < 8; i++)
             {
                 for (int m = 0; m < 24; m++)
@@ -203,6 +202,7 @@ namespace LightVisionSettings
                         this.Refresh();                                                         //Die Pixel Rechtecke werden neu gezeichnet
                     }
                 }
+                savePanel();
             }
         }
 
@@ -241,6 +241,7 @@ namespace LightVisionSettings
                 bt_fill.BackColor = Color.LightGray;
             }
             fill = !fill;           //beim drücken auf den Knopf wird die aktivität des Modus geändert
+            savePanel();
         }
 
         public void fillButtons(Color original, int x, int y)       //Die rekursive Funktion für die Ausfüllung der Fläche verwendet
@@ -262,7 +263,7 @@ namespace LightVisionSettings
             if (tb_NamePanel.Text != "")
             {
                 string name = tb_NamePanel.Text;
-                Animation animation = new Animation(name,numberOfPanels);
+                Animation animation = new Animation(name,(int)number.Value);
                 animation.numberOfPanels = (int)number.Value;
                 numberOfPanels = (int)number.Value;
                 mw.savedAnimations.Add(animation);
@@ -270,21 +271,13 @@ namespace LightVisionSettings
                 cb_SelectedPanal.Text = "";
                 tb_NamePanel.Text = "";
                 AddCircles();
+                label1.Text = selectedPanel + "";
             }
         }
 
         private void cb_SelectedPanal_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedPanel = 0;
-            circles[0].Color = mw.contentColor;
-            foreach (CircleAnimator circle in circles)
-            {
-                if (circles[0] != circle)
-                {
-                    circle.Color = Color.White;
-                }
-            }
-            loadPanel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel]);
+            RealoadAnimator();
         }
 
         private void bt_Löschen_Click(object sender, EventArgs e)
@@ -296,6 +289,21 @@ namespace LightVisionSettings
             tb_showtime.Text = "";
             mw.savedAnimations.Remove(mw.savedAnimations[cb_SelectedPanal.SelectedIndex]);
             reloadComboBox();
+        }
+
+        public void RealoadAnimator()
+        {
+            selectedPanel = 0;
+            circles[0].Color = mw.contentColor;
+            foreach (CircleAnimator circle in circles)
+            {
+                if (circles[0] != circle)
+                {
+                    circle.Color = Color.White;
+                }
+            }
+            label1.Text = selectedPanel + "";
+            loadPanel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel]);
         }
     }
 }
