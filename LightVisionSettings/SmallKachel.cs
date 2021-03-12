@@ -39,6 +39,7 @@ namespace LightVisionSettings
 
         public SmallKachel(int size, List<int> colors, int heigh, int lengt)
         {
+            InitializeComponent();
             height = heigh;
             length = lengt;
             pixel = new Pixel[length, height];
@@ -57,6 +58,7 @@ namespace LightVisionSettings
 
         public SmallKachel(int size, Panel[] panels, int heigh, int lengt,LightVision_Base mw)
         {
+            InitializeComponent();
             this.mw = mw;
             height = heigh;
             length = lengt;

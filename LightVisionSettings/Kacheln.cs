@@ -239,5 +239,11 @@ namespace LightVisionSettings
         {
             loadPanel(mw.savedPanels[cb_SelectedPanal.SelectedIndex]);
         }
+
+        private void bt_Löschen_Click(object sender, EventArgs e)
+        {
+            mw.savedPanels.Remove(mw.savedPanels[cb_SelectedPanal.SelectedIndex]);
+            reloadComboBox();
+        }
     }
 }

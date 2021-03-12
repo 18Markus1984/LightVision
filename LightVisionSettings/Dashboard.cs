@@ -62,8 +62,8 @@ namespace LightVisionSettings
                 s.matchingPanel = i;
             }
 
-            for (int i = mw.savedPanels.Count; i < mw.savedPanels.Count+mw.savedAnimations.Count; i++)
-            {
+            for (int i = mw.savedPanels.Count; i < mw.savedPanels.Count + mw.savedAnimations.Count; i++)
+            { 
                 SmallKachel s = new SmallKachel(10, mw.savedAnimations[i- mw.savedPanels.Count].animation, 8, 24,mw);
                 s.MouseDown += MouseDown;
                 s.MouseMove += MouseMove;
