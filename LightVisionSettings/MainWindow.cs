@@ -90,17 +90,31 @@ namespace LightVisionSettings
 
         public void extractPanelsAnimations()
         {
-            //List<Panel> puffer = downloadPanels();
+            List<Panel> copySavedPanels = savedPanels;
+            List<Panel> puffer = new List<Panel>();
+            List<Animation> animations = new List<Animation>();
 
-            //foreach (Panel item in puffer)
-            //{
-            //    if (item.name)
-            //    {
-
-            //    }
-            //}
-
-
+            for (int j = 0; j < copySavedPanels.Count; j++)
+            {
+                for (int i = 0; i < copySavedPanels.Count; i++)
+                {
+                    if (savedPanels[i].name.Any(char.IsDigit))
+                    {
+                        puffer.Add(savedPanels[i]);
+                        string nameWODigits = ExtensionMethods.RemoveDigits(puffer[0].name);
+                        if (savedPanels[i + 1].name.StartsWith(nameWODigits) == false)
+                        {
+                            break;
+                        }
+                    }
+                }
+                Animation a = new Animation(ExtensionMethods.RemoveDigits(puffer[0].name), puffer.Count, puffer[0].showtime, puffer);
+                foreach (Panel p in puffer)
+                {
+                    copySavedPanels.Remove(p);
+                }
+                puffer.Clear();
+            }
         }
 
         /// <summary>

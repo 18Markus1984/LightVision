@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace LightVisionSettings
 {
@@ -36,6 +37,10 @@ namespace LightVisionSettings
             showtime = double.Parse(source.Remove(0, source.LastIndexOf(':') + 1), CultureInfo.InvariantCulture);
             //colors = colors.Remove(colors.Length - 1, 1);
             return new Panel(name, colors.Split(',').Select(Int32.Parse).ToList(), showtime);
+        }
+        public static string RemoveDigits(string source)
+        {
+            return Regex.Replace(source, @"\d", "");
         }
     }
 }
