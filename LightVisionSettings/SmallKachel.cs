@@ -76,8 +76,13 @@ namespace LightVisionSettings
                 }
             }
             this.DoubleBuffered = true;
+            
+
             thread = new Thread(Animation);
             thread.Start();
+
+            Thread t = new Thread(Render);
+            t.Start();
         }
 
 
@@ -94,6 +99,7 @@ namespace LightVisionSettings
                         d++;
                     }
                 }
+                
                 System.Threading.Thread.Sleep((int)panels[shownPanel].showtime * 1000);
                 shownPanel++;
                 if (shownPanel == panels.Length)
@@ -102,8 +108,19 @@ namespace LightVisionSettings
                 }
                 
             }
+            thread.Abort();
         }
 
+        private void Render()
+        {
+            while (animations && thisISAnAnimation)
+            {
+                this.Invoke(new MethodInvoker(() =>
+                {
+                    this.Refresh();
+                }));
+            }
+        }
 
         protected override void OnPaint(PaintEventArgs e)       //überschreibt die OnPaint Funktion, damit wir die Refresh funktion benutzen können
         {
