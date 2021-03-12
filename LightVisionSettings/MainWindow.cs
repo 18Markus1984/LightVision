@@ -166,7 +166,7 @@ namespace LightVisionSettings
                     }
                 }
             }
-            this.Close();
+            Environment.Exit(Environment.ExitCode);
         }
 
         private void bt_Editor_Click(object sender, EventArgs e)
