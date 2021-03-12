@@ -250,6 +250,11 @@ namespace LightVisionSettings
             p_Nav.BackColor = contentColor;
         }
 
-       
+        private void p_Content_Paint(object sender, PaintEventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Normal;
+            this.Focus(); this.Show();
+        }
     }
 }

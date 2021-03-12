@@ -208,6 +208,7 @@
             this.p_Content.Name = "p_Content";
             this.p_Content.Size = new System.Drawing.Size(747, 458);
             this.p_Content.TabIndex = 1;
+            this.p_Content.Paint += new System.Windows.Forms.PaintEventHandler(this.p_Content_Paint);
             // 
             // timer1
             // 

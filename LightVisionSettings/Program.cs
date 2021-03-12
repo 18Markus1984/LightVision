@@ -16,7 +16,10 @@ namespace LightVisionSettings
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LightVision_Base());
+            Loading.ShowLoadingScreen();
+            LightVision_Base mainForm = new LightVision_Base();
+            Loading.CloseForm();
+            Application.Run(mainForm);
         }
     }
 }
