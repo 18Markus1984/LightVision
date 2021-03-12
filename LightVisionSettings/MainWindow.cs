@@ -61,7 +61,9 @@ namespace LightVisionSettings
         {
             InitializeComponent();
 
+
             savedPanels = downloadPanels();
+            extractPanelsAnimations();
             savedAnimations = new List<Animation>();
             dashboard = new Dashboard(this);
             p_Content.Controls.Add(dashboard);
@@ -86,6 +88,20 @@ namespace LightVisionSettings
             design();
         }
 
+        public void extractPanelsAnimations()
+        {
+            //List<Panel> puffer = downloadPanels();
+
+            //foreach (Panel item in puffer)
+            //{
+            //    if (item.name)
+            //    {
+
+            //    }
+            //}
+
+
+        }
 
         /// <summary>
         /// Alle Befehle, die beim start der Form ausgeführt werden und hauptsächlich kosmetischer Art sind.
