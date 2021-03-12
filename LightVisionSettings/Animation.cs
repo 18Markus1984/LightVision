@@ -13,16 +13,16 @@ namespace LightVisionSettings
         public int numberOfPanels;
         public string name;
 
-        public Animation(string name,int numberOfPanels)
+        public Animation(string name,int numberOfPanels, double showtime)
         {
             this.numberOfPanels = numberOfPanels;
             this.name = name;
             animation = new Panel[numberOfPanels];
-            showtime = 5;
+            this.showtime = showtime;
 
             for (int i = 0; i < numberOfPanels; i++)
             {
-                animation[i] = new Panel(name + i);
+                animation[i] = new Panel(name + i, showtime);
             }
         }
 

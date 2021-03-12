@@ -12,7 +12,7 @@ namespace LightVisionSettings
         public string name;
         public List<int> colors;
         public double showtime;
-             
+
         public Panel(string name)
         {
             this.name = name;
@@ -24,7 +24,19 @@ namespace LightVisionSettings
             colors = defaultColors;
             showtime = 5;
         }
-        
+
+        public Panel(string name, double showtime)
+        {
+            this.name = name;
+            List<int> defaultColors = new List<int>();
+            for (int i = 0; i < 192; i++)
+            {
+                defaultColors.Add(Color.White.ToArgb());
+            }
+            colors = defaultColors;
+            this.showtime = showtime;
+        }
+
         public Panel(string name, List<int> colors, double showtime)
         {
             this.colors = colors;

@@ -187,7 +187,7 @@ namespace LightVisionSettings
                 }
             }
 
-            if (tb_showtime.Text != "")
+            if (cb_SelectedPanal.Text != "")
             {
                 mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].colors = puffer;
                 mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].showtime = Convert.ToDouble(tb_showtime.Text);
@@ -238,14 +238,13 @@ namespace LightVisionSettings
         {
             if (fill)               //ändert die Farbe das der Benutzer sieht, dass er den Fill-Modus aktiviert hat
             {
-                bt_fill.BackColor = mw.contentColor;
+                bt_fill.BackColor = mw.menuColor;
             }
             else
             {
-                bt_fill.BackColor = mw.menuColor;
+                bt_fill.BackColor = mw.contentColor;
             }
             fill = !fill;           //beim drücken auf den Knopf wird die aktivität des Modus geändert
-            savePanel();
         }
 
         public void fillButtons(Color original, int x, int y)       //Die rekursive Funktion für die Ausfüllung der Fläche verwendet
@@ -272,7 +271,7 @@ namespace LightVisionSettings
             if (tb_NamePanel.Text.Trim() != "" && tb_NamePanel.Text.Any(char.IsDigit) == false && nameOfPanels.Contains(tb_NamePanel.Text) == false)
             {
                 string name = tb_NamePanel.Text;
-                Animation animation = new Animation(name,(int)number.Value);
+                Animation animation = new Animation(name,(int)number.Value, Convert.ToDouble(tb_showtime.Text));
                 animation.numberOfPanels = (int)number.Value;
                 numberOfPanels = (int)number.Value;
                 mw.savedAnimations.Add(animation);
