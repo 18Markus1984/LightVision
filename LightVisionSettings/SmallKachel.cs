@@ -83,7 +83,6 @@ namespace LightVisionSettings
             thread.Start();
         }
 
-
         public void Animation()
         {
             while (thisISAnAnimation)
@@ -103,6 +102,7 @@ namespace LightVisionSettings
                 {
                     shownPanel = 0;
                     pb.Image = images[shownPanel];
+                    System.Threading.Thread.Sleep((int)panels[shownPanel].showtime * 1000);
                 }
             }
         }

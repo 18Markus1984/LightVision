@@ -50,13 +50,6 @@ namespace LightVisionSettings
         private void animation_CheckedChanged(object sender, EventArgs e)
         {
             animationValue = !animationValue;
-            foreach (SmallKachel small in mw.dashboard.kacheln)
-            {
-                if (small.thisISAnAnimation)
-                {
-                    small.animations = false;
-                }
-            }
         }
     }
 }
