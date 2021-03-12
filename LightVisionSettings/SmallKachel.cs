@@ -124,6 +124,31 @@ namespace LightVisionSettings
             }
         }
 
+        private void CreateBitmapes(Panel[] panels)
+        {
+            for (int i = 0; i < panels.Length; i++)
+            {
+                Bitmap b = new Bitmap(10 * 24, 8 * 24);
+                Graphics g = Graphics.FromImage(b);
+                int d = 0;
+                for (int k = 0; k < 8; k++)
+                {
+                    for (int t = 0; t < 24; t++)
+                    {
+                        Render(g,k*10,t*10,10,Color.FromArgb(panels[i].colors[d]));
+                        d++;
+                    }
+                }
+                Image image = (Image)b;
+                g.Dispose();
+            }
+        }
+
+        public void Render(Graphics g,int x,int y,int size, Color color)
+        {
+            g.FillRectangle(new SolidBrush(color), x , y , size, size);
+        }
+
         protected override void OnPaint(PaintEventArgs e)       //überschreibt die OnPaint Funktion, damit wir die Refresh funktion benutzen können
         {
             base.OnPaint(e);
