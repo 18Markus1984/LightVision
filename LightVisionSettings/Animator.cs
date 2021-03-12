@@ -28,7 +28,7 @@ namespace LightVisionSettings
         public int selectedPanel = 0;
         public ComboBox comboBoxText;
 
-        private int numberOfPanels = 5;
+        public int numberOfPanels = 5;
 
         public Animator(LightVision_Base mw, int size, int height, int length)
         {
@@ -122,36 +122,12 @@ namespace LightVisionSettings
         {
             if (cb_SelectedPanal.Text != "")
             {
-                base.OnMouseDown(e);
-                int x = e.X / 30;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
-                int y = e.Y / 30;
-
-                if (fill && x < length && x >= 0 && y < height && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
-                {
-                    clickedButton = pixel[x, y].Color;                  //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
-                    fillButtons(clickedButton, x, y);                                  //Die Rekursive Funktion wird aufgerufen
-                    this.Refresh();                                     //Die gemalten Rechtecke werden geudatet
-                    return;                                             //Methode wird verlassen
-                }
-
-                onClick = true;                                         //Der Button wird gedrückt
-
-                foreach (Pixel p in this.pixel)                         //Falls nur ein Knopf gedrückt wird werden alle Rechteckpositionen durchgegangen, um zu überprüfen ob auf jenes gedrückt wurde
-                {
-                    if (e.X - 10 > p.X && e.X - 10 < p.X + p.Size && e.Y - 10 > p.Y && e.Y - 10 < p.Y + p.Size)
-                    {
-                        p.Color = colorDialog1.Color;                   //Farbe wird für den Pixel gesetzt
-                        this.Refresh();                                 //alle Rechtecke werden neu gezeichnet
-                    }
-                }
-                savePanel();
-
                 int counter = 0;
                 foreach (CircleAnimator c in circles)
                 {
                     if (e.X + 10 >= c.X && e.X < c.X + c.Radius && e.Y + 10 >= c.Y && e.Y < c.Y + c.Radius)
                     {
-                        
+
                         selectedPanel = counter;
                         c.Color = mw.contentColor;
                         label1.Text = "" + counter;
@@ -165,10 +141,38 @@ namespace LightVisionSettings
                             }
                         }
                         this.Refresh();
-                        break;
+                        return;
                     }
                     counter++;
                 }
+
+
+                base.OnMouseDown(e);
+                int x = e.X / 30;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
+                int y = e.Y / 30;
+
+                if (fill && x < length && x >= 0 && y < height && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
+                {
+                    clickedButton = pixel[x, y].Color;                  //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
+                    fillButtons(clickedButton, x, y);                                  //Die Rekursive Funktion wird aufgerufen
+                    this.Refresh();                                     //Die gemalten Rechtecke werden geudatet
+                    savePanel();
+                    return;                                             //Methode wird verlassen
+                }
+
+                onClick = true;                                         //Der Button wird gedrückt
+
+                foreach (Pixel p in this.pixel)                         //Falls nur ein Knopf gedrückt wird werden alle Rechteckpositionen durchgegangen, um zu überprüfen ob auf jenes gedrückt wurde
+                {
+                    if (e.X - 10 > p.X && e.X - 10 < p.X + p.Size && e.Y - 10 > p.Y && e.Y - 10 < p.Y + p.Size)
+                    {
+                        p.Color = colorDialog1.Color;                   //Farbe wird für den Pixel gesetzt
+                        this.Refresh();                                 //alle Rechtecke werden neu gezeichnet
+                    }
+                }
+
+                savePanel();
+
             }
         }
 
@@ -234,11 +238,11 @@ namespace LightVisionSettings
         {
             if (fill)               //ändert die Farbe das der Benutzer sieht, dass er den Fill-Modus aktiviert hat
             {
-                bt_fill.BackColor = SystemColors.Control;
+                bt_fill.BackColor = mw.contentColor;
             }
             else
             {
-                bt_fill.BackColor = Color.LightGray;
+                bt_fill.BackColor = mw.menuColor;
             }
             fill = !fill;           //beim drücken auf den Knopf wird die aktivität des Modus geändert
             savePanel();
@@ -311,6 +315,8 @@ namespace LightVisionSettings
         public void RealoadAnimator()
         {
             selectedPanel = 0;
+            numberOfPanels = mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation.Length;
+            AddCircles();
             circles[0].Color = mw.contentColor;
             foreach (CircleAnimator circle in circles)
             {
@@ -321,6 +327,11 @@ namespace LightVisionSettings
             }
             label1.Text = selectedPanel + "";
             loadPanel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel]);
+        }
+
+        private void tb_showtime_MouseLeave(object sender, EventArgs e)
+        {
+            savePanel();
         }
     }
 }

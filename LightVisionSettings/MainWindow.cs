@@ -61,10 +61,9 @@ namespace LightVisionSettings
         {
             InitializeComponent();
 
-
+            savedAnimations = new List<Animation>();
             savedPanels = downloadPanels();
             extractPanelsAnimations();
-            savedAnimations = new List<Animation>();
             dashboard = new Dashboard(this);
             p_Content.Controls.Add(dashboard);
 
@@ -102,19 +101,25 @@ namespace LightVisionSettings
                     {
                         puffer.Add(savedPanels[i]);
                         string nameWODigits = ExtensionMethods.RemoveDigits(puffer[0].name);
-                        if (savedPanels[i + 1].name.StartsWith(nameWODigits) == false)
+                        if (i == copySavedPanels.Count && savedPanels[i + 1].name.StartsWith(nameWODigits))
                         {
+                            puffer.Clear();
                             break;
                         }
                     }
                 }
-                Animation a = new Animation(ExtensionMethods.RemoveDigits(puffer[0].name), puffer.Count, puffer[0].showtime, puffer);
-                foreach (Panel p in puffer)
+                if (puffer.Count >= 2)
                 {
-                    copySavedPanels.Remove(p);
+                    Animation a = new Animation(ExtensionMethods.RemoveDigits(puffer[0].name), puffer.Count, puffer[0].showtime, puffer);
+                    savedAnimations.Add(a);
+                    foreach (Panel p in puffer)
+                    {
+                        copySavedPanels.Remove(p);
+                    }
+                    puffer.Clear();
                 }
-                puffer.Clear();
             }
+            savedPanels = copySavedPanels;
         }
 
         /// <summary>
@@ -192,6 +197,7 @@ namespace LightVisionSettings
         {
             animator.BringToFront();
             ButtonColorClick(sender);
+            animator.reloadComboBox();
             animator.AddButton();
             animator.AddCircles();
             animator.Refresh();
@@ -269,6 +275,11 @@ namespace LightVisionSettings
             this.WindowState = FormWindowState.Minimized;
             this.WindowState = FormWindowState.Normal;
             this.Focus(); this.Show();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

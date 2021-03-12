@@ -18,6 +18,9 @@ namespace LightVisionSettings
 
         public int shownPanel = 0;
         public Panel[] panels;
+        public Image[] images;
+        public PictureBox pb;
+
         public bool animations = true;
         public int size;
         public int height;
@@ -67,79 +70,64 @@ namespace LightVisionSettings
             this.size = size;
             thisISAnAnimation = true;
             animations = mw.settings.animationValue;
+ 
+            CreateBitmapes(panels);
 
-            int d = 0;
-            for (int i = 0; i < height; i++)
-            {
-                for (int m = 0; m < length; m++)
-                {
-                    pixel[m, i] = new Pixel(m * size - 10, i * size - 10, size);
-                    d++;
-                }
-            }
-            this.DoubleBuffered = true;
-            
+            pb = new PictureBox();
+            pb.Size = new Size(1000,1000);
+            pb.Enabled = false;
+            this.Controls.Add(pb);
+
 
             thread = new Thread(Animation);
             thread.Start();
-
-            Thread t = new Thread(Render);
-            t.Start();
         }
 
 
         public void Animation()
         {
-            while (true && animations && thisISAnAnimation)
+            while (thisISAnAnimation)
             {
-                int d = 0;
-                for (int i = 0; i < height; i++)
+                if (animations)
                 {
-                    for (int m = 0; m < length; m++)
+                    pb.Image = images[shownPanel];
+
+                    System.Threading.Thread.Sleep((int)panels[shownPanel].showtime * 1000);
+                    shownPanel++;
+                    if (shownPanel == panels.Length)
                     {
-                        pixel[m, i].Color = Color.FromArgb(panels[shownPanel].colors[d]);
-                        d++;
+                        shownPanel = 0;
                     }
                 }
-                
-                System.Threading.Thread.Sleep((int)panels[shownPanel].showtime * 1000);
-                shownPanel++;
-                if (shownPanel == panels.Length)
+                else
                 {
                     shownPanel = 0;
+                    pb.Image = images[shownPanel];
                 }
-                
-            }
-            thread.Abort();
-        }
-
-        private void Render()
-        {
-            while (animations && thisISAnAnimation)
-            {
-                this.Invoke(new MethodInvoker(() =>
-                {
-                    this.Refresh();
-                }));
             }
         }
 
         private void CreateBitmapes(Panel[] panels)
         {
+            images = new Image[panels.Length];
             for (int i = 0; i < panels.Length; i++)
             {
-                Bitmap b = new Bitmap(10 * 24, 8 * 24);
+                Bitmap b = new Bitmap(24*10, 8*10);
                 Graphics g = Graphics.FromImage(b);
                 int d = 0;
+
+
                 for (int k = 0; k < 8; k++)
                 {
                     for (int t = 0; t < 24; t++)
                     {
-                        Render(g,k*10,t*10,10,Color.FromArgb(panels[i].colors[d]));
+
+                        Render(g, t * 10, k * 10, 10, Color.FromArgb(panels[i].colors[d]));
                         d++;
                     }
                 }
                 Image image = (Image)b;
+                images[i] = image;
                 g.Dispose();
             }
         }
@@ -151,14 +139,12 @@ namespace LightVisionSettings
 
         protected override void OnPaint(PaintEventArgs e)       //überschreibt die OnPaint Funktion, damit wir die Refresh funktion benutzen können
         {
-            base.OnPaint(e);
-            foreach (Pixel p in this.pixel)                     //Es werden alle Pixel durchgegangen und diese malen sich dann selber
-                p.Render(e.Graphics);
+            if (!thisISAnAnimation)
+            {
+                base.OnPaint(e);
+                foreach (Pixel p in this.pixel)                     //Es werden alle Pixel durchgegangen und diese malen sich dann selber
+                    p.Render(e.Graphics);
+            }
         }
-
-        //private void timer_Tick(object sender, EventArgs e)
-        //{
-        //    //Animation();
-        //}
     }
 }

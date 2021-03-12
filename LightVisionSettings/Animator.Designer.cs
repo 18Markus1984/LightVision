@@ -49,6 +49,7 @@ namespace LightVisionSettings
             this.tb_showtime.Name = "tb_showtime";
             this.tb_showtime.Size = new System.Drawing.Size(100, 20);
             this.tb_showtime.TabIndex = 15;
+            this.tb_showtime.MouseLeave += new System.EventHandler(this.tb_showtime_MouseLeave);
             // 
             // tb_NamePanel
             // 

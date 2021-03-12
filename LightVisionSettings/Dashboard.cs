@@ -200,10 +200,10 @@ namespace LightVisionSettings
                     {
                         if (item.thisISAnAnimation)
                         {
-                            //foreach(Panel panel in mw.savedAnimations[item.matchingPanel].animation)
-                            //{
-                            //    p.Add(panel);
-                            //}
+                            foreach (Panel panel in mw.savedAnimations[item.matchingPanel].animation)
+                            {
+                                p.Add(panel);
+                            }
                         }
                         else
                         {
@@ -218,7 +218,15 @@ namespace LightVisionSettings
         private void bt_Speichern_Click(object sender, EventArgs e)
         {
             List<Panel> p = createList();
-            if (p.Count == mw.savedPanels.Count)
+            int number = 0;
+            foreach (SmallKachel item in kacheln)
+            {
+                if (item.thisISAnAnimation)
+                {
+                    number += item.panels.Length;
+                }
+            }
+            if (p.Count == mw.savedPanels.Count+number)
             {
                 mw.savedPanels = p;
                 mw.uploadPanels();
@@ -235,10 +243,15 @@ namespace LightVisionSettings
             if (kachel.thisISAnAnimation)
             {
                 mw.animator.BringToFront();
-                mw.animator.comboBoxText.Text = mw.savedAnimations[kachel.matchingPanel].name;
+                mw.animator.numberOfPanels = kachel.panels.Length;
+                mw.animator.AddButton();
+                mw.animator.AddCircles();
+                mw.animator.reloadComboBox();
+                mw.animator.comboBoxText.SelectedIndex = kachel.matchingPanel;
                 mw.animator.RealoadAnimator();
                 mw.buttons[1].BackColor = mw.menuColor;
                 mw.buttons[3].BackColor = Color.Transparent;
+                mw.animator.comboBoxText.Text = mw.savedAnimations[kachel.matchingPanel].name;
             }
             else
             {

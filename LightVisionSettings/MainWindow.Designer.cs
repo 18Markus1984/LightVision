@@ -198,6 +198,7 @@
             this.label1.Size = new System.Drawing.Size(138, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "LightVision";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
             // p_Content
