@@ -119,6 +119,9 @@
             this.tb_NamePanel.Name = "tb_NamePanel";
             this.tb_NamePanel.Size = new System.Drawing.Size(155, 20);
             this.tb_NamePanel.TabIndex = 6;
+            this.tb_NamePanel.Text = "Name";
+            this.tb_NamePanel.Enter += new System.EventHandler(this.tb_NamePanel_Enter);
+            this.tb_NamePanel.Leave += new System.EventHandler(this.tb_NamePanel_Enter);
             // 
             // tb_showtime
             // 
@@ -126,6 +129,9 @@
             this.tb_showtime.Name = "tb_showtime";
             this.tb_showtime.Size = new System.Drawing.Size(100, 20);
             this.tb_showtime.TabIndex = 7;
+            this.tb_showtime.Text = "Anzeigedauer";
+            this.tb_showtime.Enter += new System.EventHandler(this.tb_showtime_Enter);
+            this.tb_showtime.Leave += new System.EventHandler(this.tb_showtime_Enter);
             // 
             // Kacheln
             // 

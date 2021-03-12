@@ -260,7 +260,12 @@ namespace LightVisionSettings
 
         private void bt_NewPanel_Click(object sender, EventArgs e)
         {
-            if (tb_NamePanel.Text != "")
+            List<string> nameOfPanels = new List<string>();
+            foreach (Panel p in mw.savedPanels)
+            {
+                nameOfPanels.Add(p.name);
+            }
+            if (tb_NamePanel.Text.Trim() != "" && tb_NamePanel.Text.Any(char.IsDigit) == false && nameOfPanels.Contains(tb_NamePanel.Text) == false)
             {
                 string name = tb_NamePanel.Text;
                 Animation animation = new Animation(name,(int)number.Value);
@@ -272,6 +277,18 @@ namespace LightVisionSettings
                 tb_NamePanel.Text = "";
                 AddCircles();
                 label1.Text = selectedPanel + "";
+            }
+            else if(tb_NamePanel.Text.Trim() == "")
+            {
+                MessageBox.Show("Bitte einen Namen in das Textfeld eingeben!");
+            }
+            else if(tb_NamePanel.Text.Any(char.IsDigit) == true)
+            {
+                MessageBox.Show("Ziffern im Namen des Panels sind nicht erlaubt!");
+            }
+            else if (nameOfPanels.Contains(tb_NamePanel.Text) == true)
+            {
+                MessageBox.Show("Name des Panels ist bereits vergeben!");
             }
         }
 

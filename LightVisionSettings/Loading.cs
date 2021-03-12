@@ -28,7 +28,7 @@ namespace LightVisionSettings
             t.Start();
         }
 
-        static private void ShowForm()
+        private static void ShowForm()
         {
             if(loadingForm != null)
             {

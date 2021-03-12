@@ -225,7 +225,12 @@ namespace LightVisionSettings
 
         private void bt_NewPanel_Click(object sender, EventArgs e)
         {
-            if(tb_NamePanel.Text != "")
+            List<string> nameOfPanels = new List<string>();
+            foreach (Panel p in mw.savedPanels)
+            {
+                nameOfPanels.Add(p.name);
+            }
+            if(tb_NamePanel.Text != "" && tb_NamePanel.Text.Any(char.IsDigit) == false && nameOfPanels.Contains(tb_NamePanel.Text) == false)
             {
                 string name = tb_NamePanel.Text;
                 Panel newP = new Panel(name);
@@ -233,11 +238,47 @@ namespace LightVisionSettings
                 cb_SelectedPanal.Items.Add(newP.name);
                 tb_NamePanel.Text = "";
             }
+            else if (tb_NamePanel.Text.Trim() == "")
+            {
+                MessageBox.Show("Bitte einen Namen in das Textfeld eingeben!");
+            }
+            else if (tb_NamePanel.Text.Any(char.IsDigit) == true)
+            {
+                MessageBox.Show("Ziffern im Namen des Panels sind nicht erlaubt!");
+            }
+            else if (nameOfPanels.Contains(tb_NamePanel.Text) == true)
+            {
+                MessageBox.Show("Name des Panels ist bereits vergeben!");
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadPanel(mw.savedPanels[cb_SelectedPanal.SelectedIndex]);
+        }
+
+        private void tb_NamePanel_Enter(object sender, EventArgs e)
+        {
+            if (tb_NamePanel.Text == "")
+            {
+                tb_NamePanel.Text = "Name";
+            }
+            else
+            {
+                tb_NamePanel.Text = "";
+            }
+        }
+
+        private void tb_showtime_Enter(object sender, EventArgs e)
+        {
+            if (tb_showtime.Text == "")
+            {
+                tb_showtime.Text = "Anzeigedauer";
+            }
+            else
+            {
+                tb_showtime.Text = "";
+            }
         }
     }
 }
