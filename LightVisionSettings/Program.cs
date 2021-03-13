@@ -16,7 +16,7 @@ namespace LightVisionSettings
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Loading.ShowLoadingScreen();
+            Loading.ShowLoadingScreen();        //Die LoadingForm wird erstellt
             LightVision_Base mainForm = new LightVision_Base();
             Loading.CloseForm();
             Application.Run(mainForm);

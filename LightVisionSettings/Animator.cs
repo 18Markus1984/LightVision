@@ -41,6 +41,7 @@ namespace LightVisionSettings
             this.Size = new Size(747, 458);
 
             comboBoxText = cb_SelectedPanal;
+            tb_showtime.Text = ""+5;
 
             Random r = new Random();
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)

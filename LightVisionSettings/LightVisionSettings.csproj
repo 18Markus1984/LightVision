@@ -268,5 +268,8 @@
   <ItemGroup>
     <None Include="Resources\play_30px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\templates\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

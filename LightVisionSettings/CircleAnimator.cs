@@ -9,9 +9,9 @@ namespace LightVisionSettings
 {
     public class CircleAnimator
     {
-        private int radius;
-        private Color color;
-        private int x, y;
+        private int radius;     //Radius des Kreises
+        private Color color;    //Farbe des Kreises
+        private int x, y;       //X/Y Position
 
         public CircleAnimator(int radius, Color color, int x, int y)
         {
@@ -28,7 +28,7 @@ namespace LightVisionSettings
 
         public void Render(Graphics g)
         {
-            g.FillEllipse(new SolidBrush(color), x - radius, y - radius, radius + radius, radius + radius);
+            g.FillEllipse(new SolidBrush(color), x - radius, y - radius, radius + radius, radius + radius); //Radius wird gemalt
         }
     }
 }

@@ -14,19 +14,19 @@ namespace LightVisionSettings
 {
     public partial class Loading : Form
     {
+        static Form loadingForm;
+        private delegate void CloseDelegate();
+
         public Loading()
         {
             InitializeComponent();
         }
-        static Form loadingForm;
-        private delegate void CloseDelegate();
-        
-    
-        static public void ShowLoadingScreen()
+
+        static public void ShowLoadingScreen()      //die startische Methode wird in der Programm Main ausgeführt
         {
             loadingForm = new Loading();
-            Thread t = new Thread(new ThreadStart(Loading.ShowForm));
-            t.Start();
+            Thread t = new Thread(new ThreadStart(Loading.ShowForm));       //die MainWindow Form wird geladen
+            t.Start();      //der Thread wird gestartet
         }
 
         private static void ShowForm()

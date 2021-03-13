@@ -36,7 +36,7 @@ namespace LightVisionSettings
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "SmallKachel";
-            this.Size = new System.Drawing.Size(391, 318);
+            this.Size = new System.Drawing.Size(489, 486);
             this.ResumeLayout(false);
 
         }

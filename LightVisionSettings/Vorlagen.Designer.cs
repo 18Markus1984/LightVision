@@ -35,7 +35,7 @@ namespace LightVisionSettings
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(146, 137);
+            this.label2.Location = new System.Drawing.Point(32, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(374, 13);
             this.label2.TabIndex = 1;
@@ -47,7 +47,7 @@ namespace LightVisionSettings
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label2);
             this.Name = "Vorlagen";
-            this.Size = new System.Drawing.Size(775, 547);
+            this.Size = new System.Drawing.Size(917, 552);
             this.ResumeLayout(false);
             this.PerformLayout();
 

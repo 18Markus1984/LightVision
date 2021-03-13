@@ -40,6 +40,7 @@ namespace LightVisionSettings
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.number = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.bt_Tamplate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.number)).BeginInit();
             this.SuspendLayout();
             // 
@@ -161,11 +162,23 @@ namespace LightVisionSettings
             this.label1.TabIndex = 17;
             this.label1.Text = "label1";
             // 
+            // bt_Tamplate
+            // 
+            this.bt_Tamplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_Tamplate.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_Tamplate.Location = new System.Drawing.Point(95, 402);
+            this.bt_Tamplate.Name = "bt_Tamplate";
+            this.bt_Tamplate.Size = new System.Drawing.Size(91, 41);
+            this.bt_Tamplate.TabIndex = 18;
+            this.bt_Tamplate.Text = "Template";
+            this.bt_Tamplate.UseVisualStyleBackColor = true;
+            // 
             // Animator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
+            this.Controls.Add(this.bt_Tamplate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.number);
             this.Controls.Add(this.tb_showtime);
@@ -196,5 +209,6 @@ namespace LightVisionSettings
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.NumericUpDown number;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button bt_Tamplate;
     }
 }

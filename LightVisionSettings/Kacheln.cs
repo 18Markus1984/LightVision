@@ -20,26 +20,26 @@ namespace LightVisionSettings
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
         
-        protected int length = 24;
-        protected int height = 8;
-        private LightVision_Base mw;
-        public ComboBox cbText;
+        protected int length = 24;          //Pixel-Breite des Displays
+        protected int height = 8;           //Pixel-Höhe des displays
+        private LightVision_Base mw;        //Main Form mit allen anderen User Controll Panels
+        public ComboBox cbText;             //ComboBox für bei dem augewählt wird welches Panel angezeigt wird(beinhaltet die Namen aller Panels)
 
 
-        public Kacheln(LightVision_Base mw)
+        public Kacheln(LightVision_Base mw)     //
         {
             InitializeComponent();
-            AddButtons();
+            AddButtons();       //Die Pixels werden erstellt
             Random r = new Random();        
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256),r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             bt_Color.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
             this.mw = mw;
-            cbText = cb_SelectedPanal;
-            reloadComboBox();
+            cbText = cb_SelectedPanal;      //Die ComboBox wird auf cbText gesetzt, damit man von überall auf den cb_SelectedPanel.Text zugreifen kann
+            reloadComboBox();               //Die Items der ComboBox werden geladen
         }
 
-        public void reloadComboBox()
+        public void reloadComboBox()        //Beim erstellen/Löschen von Panels muss der Inhalt der ComboBox angepasst werden
         {
             cb_SelectedPanal.Items.Clear();
             foreach (Panel p in mw.savedPanels)
@@ -48,25 +48,25 @@ namespace LightVisionSettings
             }
         }
 
-        private void AddButtons()       //Fügt 280 Pixel hinzu
+        private void AddButtons()       //Fügt 192 Pixel hinzu
         {
-            pixel = new Pixel[length, height]; 
-            onClick = false;
+            pixel = new Pixel[length, height]; //zweidimensionales Array mit der Höhe und Breite des Dispalays wird erstellt
+            onClick = false;        //Die Variabele zur Prüfung, ob der User die Linke Maustaste drückt wird auf false gesetzt
 
             for (int k = 0; k < height; k++)
             {
                 for (int i = 0; i < length; i++)
                 {
 
-                    pixel[i, k] = new Pixel(i * 30, k * 30, 30);
+                    pixel[i, k] = new Pixel(i * 30, k * 30, 30);        //Alle Buttons werden mit einer Breite und Höhe von 30 erstellt
                 }
             }
-            this.DoubleBuffered = true;             //damit die refresh rate höher ist
+            this.DoubleBuffered = true;     //damit die refresh rate höher ist
             this.MouseMove += kachel_MouseMove;     //da man nicht hover und mousedown gleichzeitig als event verwenden kann mussten wir überprüfen, ob sich die Maus bewegt und über einem der Rechtecken befindet
-            this.fill = false;                      //fill-Modus deaktiviert
+            this.fill = false;      //fill-Modus deaktiviert
         }
 
-        private void loadPanel(Panel selectedPanel)
+        private void loadPanel(Panel selectedPanel)     //Mit der Eingabe eines Panels werden dessen Farbdaten auf die jeweiligen Pixel übertragen
         {
             int k = 0;
             for (int j = 0; j < height; j++)
@@ -77,25 +77,20 @@ namespace LightVisionSettings
                     k += 1;
                 }
             }
-            tb_showtime.Text = Convert.ToString(selectedPanel.showtime);
-            this.Refresh();
+            tb_showtime.Text = Convert.ToString(selectedPanel.showtime);        //Die TextBox erhält die Information wie lange das Panel angezeigt werden soll
+            this.Refresh();         //Die Graphis werden neue gemalt
         }
 
-        /// <summary>
-        /// Event wenn sich die Maus bewegt
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void kachel_MouseMove(object sender, MouseEventArgs e)                          
+        private void kachel_MouseMove(object sender, MouseEventArgs e)       //Wird ausgelöst wenn sich die Maus bewegt                   
         {
-            if (onClick && cb_SelectedPanal.Text != "")                                                                        //die Licke-Maus-Taste muss gedrückt sein
+            if (onClick && cb_SelectedPanal.Text != "")     //die Licke-Maus-Taste muss gedrückt sein
             {
                 foreach (Pixel p in this.pixel)     
                 {
                     if (e.X - 10 > p.X && e.X - 10 < p.X + p.Size && e.Y - 10 > p.Y && e.Y - 10 < p.Y + p.Size)    //Es wird überprüft über welchem Pixel sich die Maus bewegt
                     {
-                        p.Color = colorDialog1.Color;                                           //Die Hintergrundfarbe des entsprechenden Pixel wird auf die Ausgewählte geändert
-                        this.Refresh();                                                         //Die Pixel Rechtecke werden neu gezeichnet
+                        p.Color = colorDialog1.Color;       //Die Hintergrundfarbe des entsprechenden Pixel wird auf die ausgewählte Farbe geändert
+                        this.Refresh();     //Die Pixel Rechtecke werden neu gezeichnet
                     }
                 }
             }
@@ -104,63 +99,54 @@ namespace LightVisionSettings
         protected override void OnPaint(PaintEventArgs e)       //überschreibt die OnPaint Funktion, damit wir die Refresh funktion benutzen können
         {
             base.OnPaint(e);
-            foreach (Pixel p in this.pixel)                     //Es werden alle Pixel durchgegangen und diese malen sich dann selber
+            foreach (Pixel p in this.pixel)     //Es werden alle Pixel durchgegangen und diese malen sich dann mit der Render Methode selber
                 p.Render(e.Graphics);
         }
 
-        /// <summary>
-        /// wird für das malen bzw. hinterherziehen und fill tool verwendet
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnMouseDown(MouseEventArgs e)     
+        protected override void OnMouseDown(MouseEventArgs e)     //Wenn die Linke Maus gedrückt wird
         {
-            if (cb_SelectedPanal.Text != "")
+            if (cb_SelectedPanal.Text != "")        //Falls ein Panel in der ComboBox ausgewählt ist
             {
                 base.OnMouseDown(e);
-                int x = e.X / 30;                                      //Die x und y Koordinaten werden durch 25 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
+                int x = e.X / 30;       //Die x und y Koordinaten werden durch 30 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
                 int y = e.Y / 30;
 
                 if (fill && x < length && x >= 0 && y < height && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
                 {
-                    clickedButton = pixel[x, y].Color;                  //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
-                    fillButtons(clickedButton, x, y);                                  //Die Rekursive Funktion wird aufgerufen
-                    this.Refresh();                                     //Die gemalten Rechtecke werden geudatet
-                    return;                                             //Methode wird verlassen
+                    clickedButton = pixel[x, y].Color;      //Die Farbe auf das geklickte Feld wird gespeichert, da man ja wissen muss welche Fläche, umgefärbt werden soll
+                    fillButtons(clickedButton, x, y);       //Die Rekursive Funktion wird aufgerufen
+                    this.Refresh();     //Die Rechtecke werden geudatet
+                    return;         //Methode wird verlassen
                 }
 
-                onClick = true;                                         //Der Button wird gedrückt
-                foreach (Pixel p in this.pixel)                         //Falls nur ein Knopf gedrückt wird werden alle Rechteckpositionen durchgegangen, um zu überprüfen ob auf jenes gedrückt wurde
+                onClick = true;     //Der Button wird gedrückt
+                foreach (Pixel p in this.pixel)     //Falls nur ein Knopf gedrückt wird werden alle Rechteckpositionen durchgegangen, um zu überprüfen auf welches gedrückt wurde
                 {
                     if (e.X - 10 > p.X && e.X - 10 < p.X + p.Size && e.Y - 10 > p.Y && e.Y - 10 < p.Y + p.Size)
                     {
-                        p.Color = colorDialog1.Color;                   //Farbe wird für den Pixel gesetzt
-                        this.Refresh();                                 //alle Rechtecke werden neu gezeichnet
+                        p.Color = colorDialog1.Color;       //Farbe wird für den Pixel gesetzt
+                        this.Refresh();     //alle Rechtecke werden neu gezeichnet
                     }
                 }
             }
         }
 
-        protected override void OnMouseUp(MouseEventArgs e)         //Wird aktiviert, wenn die Linke Maus Taste aufgehört wird zu drücken
+        protected override void OnMouseUp(MouseEventArgs e)     //Wird aktiviert, wenn die Linke Maus Taste aufgehört wird zu drücken
         {
             base.OnMouseUp(e);
-            onClick = false;                                        //der druckstatus der Maus wird geändert
+            onClick = false;        //der druckstatus der Maus wird geändert
         }
 
-        private void bt_Color_Click_1(object sender, EventArgs e)       //Hier wird die Farbe zum Malen ausgewählt
+        private void bt_Color_Click_1(object sender, EventArgs e)       //Farbe zum Malen ausgewählt
         {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
             {
                 bt_Color.BackColor = colorDialog1.Color;
                 backColorButtons = colorDialog1.Color;
             }
         }
 
-        /// <summary>
-        /// Die Leinwand wird weiß gemacht/ resetet
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Clear_Click(object sender, EventArgs e)    
+        private void Clear_Click(object sender, EventArgs e)        //Das Panel wird zurück gesetzt und alle Pixel werden Weiß 
         {
             foreach (var item in pixel)
             {
@@ -169,36 +155,29 @@ namespace LightVisionSettings
             this.Refresh();
         }
 
-        private void bt_Speichern_Click(object sender, EventArgs e)     //Die Leinwand wird gespeichert
+        private void bt_Speichern_Click(object sender, EventArgs e)     //Das Panel wird gespeichert
         {
-            if (cb_SelectedPanal.Text != "")
+            if (cb_SelectedPanal.Text != "")        //Es muss ein Panel ausgewählt sein
             {
-                List<int> colors = new List<int>();
-                /*foreach (var item in pixel)
-                {
-                    colors.Add(item.Color.ToArgb());
-                }*/
+                List<int> colors = new List<int>();     //Eine Pufferliste wird erstellt in die alle Farb-Werte gespeichert werden
 
-                int k = 0;
                 for (int j = 0; j < height; j++)
                 {
                     for (int i = 0; i < length; i++)
                     {
-
                         colors.Add(pixel[i, j].Color.ToArgb());
-                        k += 1;
                     }
                 }
-                mw.savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;
-                mw.savedPanels[cb_SelectedPanal.SelectedIndex].showtime = Convert.ToDouble(tb_showtime.Text);
-                mw.uploadPanels();
-                MessageBox.Show("Speichern erfolgreich!");
+                mw.savedPanels[cb_SelectedPanal.SelectedIndex].colors = colors;     //Die Liste color wird in dem entsprechenden Panel, das mit dem Index in der ComboBox übereinstimmt gespeichert(Beim reloaden der ComboBox wird jedes mal auf die Reihenfolge der Panels geachtet)
+                mw.savedPanels[cb_SelectedPanal.SelectedIndex].showtime = Convert.ToDouble(tb_showtime.Text);       //Die angegebene Anzeigezeit für das Panel wird gespeichert
+                mw.uploadPanels();          //Die Panels und Animationen werden hochgeladen
+                MessageBox.Show("Speichern erfolgreich!");      //Der User erhält eine Messages das alles erfolgreich gespeichert wurde
             }
         }
 
         private void Fill_Click(object sender, EventArgs e)     //Methode für den Fill-Modus
         {
-            if (fill)               //ändert die Farbe das der Benutzer sieht, dass er den Fill-Modus aktiviert hat
+            if (fill)       //ändert die Farbe das der Benutzer sieht, dass er den Fill-Modus aktiviert hat
             {
                 bt_fill.BackColor = SystemColors.Control;
             }
@@ -206,7 +185,7 @@ namespace LightVisionSettings
             {
                 bt_fill.BackColor = Color.LightGray;
             }
-            fill = !fill;           //beim drücken auf den Knopf wird die aktivität des Modus geändert
+            fill = !fill;       //beim drücken auf den Knopf wird die aktivität des Modus geändert
         }
 
         public void fillButtons(Color original, int x, int y)       //Die rekursive Funktion für die Ausfüllung der Fläche verwendet
@@ -215,30 +194,34 @@ namespace LightVisionSettings
             {
                 if (pixel[x, y].Color == backColorButtons)
                     return;
-                pixel[x, y].Color = backColorButtons;   //Die Farbe des aktuelle betrachteten Pixels wird geändert
-                fillButtons(original, x, y + 1);                  //nach oben
-                fillButtons(original, x + 1, y);                  //nach rechts
-                fillButtons(original, x, y - 1);                  //nach unten
-                fillButtons(original, x - 1, y);                  //nach links    
+                pixel[x, y].Color = backColorButtons;       //Die Farbe des aktuelle betrachteten Pixels wird geändert
+                fillButtons(original, x, y + 1);        //nach oben
+                fillButtons(original, x + 1, y);        //nach rechts
+                fillButtons(original, x, y - 1);        //nach unten
+                fillButtons(original, x - 1, y);        //nach links    
             }
         }
 
-        private void bt_NewPanel_Click(object sender, EventArgs e)
+        private void bt_NewPanel_Click(object sender, EventArgs e)      //Ein neues Panel wird erstellt
         {
             List<string> nameOfPanels = new List<string>();
-            foreach (Panel p in mw.savedPanels)
+            foreach (Panel p in mw.savedPanels)     //Eine Liste mit bis jetzt allen exsistierenden Panel und Animations Namen wird erstellt
             {
                 nameOfPanels.Add(p.name);
             }
-            if(tb_NamePanel.Text != "" && tb_NamePanel.Text.Any(char.IsDigit) == false && nameOfPanels.Contains(tb_NamePanel.Text) == false)
+            foreach (Animation a in mw.savedAnimations)     
             {
-                string name = tb_NamePanel.Text;
-                Panel newP = new Panel(name);
+                nameOfPanels.Add(a.name);
+            }
+            if(tb_NamePanel.Text != "" && tb_NamePanel.Text.Any(char.IsDigit) == false && nameOfPanels.Contains(tb_NamePanel.Text) == false)        //Ein neues Panel wird nur erstellt, wenn sie nicht leer ist, keine Zahl beinhaltet und einen schon exsistierenden Namen beinhalten
+            {
+                string name = tb_NamePanel.Text;        
+                Panel newP = new Panel(name);       //neues PAnel mit dem eingegebenen Namen wird erstellt
                 mw.savedPanels.Add(newP);
                 cb_SelectedPanal.Items.Add(newP.name);
                 tb_NamePanel.Text = "";
             }
-            else if (tb_NamePanel.Text.Trim() == "")
+            else if (tb_NamePanel.Text.Trim() == "")        //Hier werden ein paar Rückmeldungen an den User gegeben, warum das speichern nicht funktioniert hat
             {
                 MessageBox.Show("Bitte einen Namen in das Textfeld eingeben!");
             }
@@ -252,12 +235,12 @@ namespace LightVisionSettings
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)     //Das ausgewählte Panel in der ComboBox wird ausgewählt und geladen
         {
             loadPanel(mw.savedPanels[cb_SelectedPanal.SelectedIndex]);
         }
 
-        private void tb_NamePanel_Enter(object sender, EventArgs e)
+        private void tb_NamePanel_Enter(object sender, EventArgs e)     //Ein Foreshadowing Text der dem User zeigt, was er hier eingeben soll
         {
             if (tb_NamePanel.Text == "")
             {
@@ -269,7 +252,7 @@ namespace LightVisionSettings
             }
         }
 
-        private void tb_showtime_Enter(object sender, EventArgs e)
+        private void tb_showtime_Enter(object sender, EventArgs e)      //Ein Foreshadowing Text der dem User zeigt, was er hier eingeben soll
         {
             if (tb_showtime.Text == "")
             {
@@ -281,10 +264,10 @@ namespace LightVisionSettings
             }
         }
 
-        private void bt_Löschen_Click(object sender, EventArgs e)
+        private void bt_Löschen_Click(object sender, EventArgs e)       //Löschen
         {
-            mw.savedPanels.Remove(mw.savedPanels[cb_SelectedPanal.SelectedIndex]);
-            reloadComboBox();
+            mw.savedPanels.Remove(mw.savedPanels[cb_SelectedPanal.SelectedIndex]);      //Das ausgewählt Panel wird aus der savedPanel Liste gelöscht
+            reloadComboBox();       //Der Inahlt der ComboBox wird auf die neue savedPanel Liste angepast
         }
     }
 }
