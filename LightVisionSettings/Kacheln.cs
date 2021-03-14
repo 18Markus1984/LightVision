@@ -242,26 +242,26 @@ namespace LightVisionSettings
 
         private void tb_NamePanel_Enter(object sender, EventArgs e)     //Ein Foreshadowing Text der dem User zeigt, was er hier eingeben soll
         {
-            if (tb_NamePanel.Text == "")
-            {
-                tb_NamePanel.Text = "Name";
-            }
-            else
-            {
-                tb_NamePanel.Text = "";
-            }
+            //if (tb_NamePanel.Text == "")          //Ich musste das hier auskommentieren, da wenn man den namen eingegeben hat und man auf den neu Button drücken wollte, der Text ja wieder zurück gesetzt wurde eher kritisch
+            //{
+            //    tb_NamePanel.Text = "Name";
+            //}
+            //else
+            //{
+            //    tb_NamePanel.Text = "";
+            //}
         }
 
         private void tb_showtime_Enter(object sender, EventArgs e)      //Ein Foreshadowing Text der dem User zeigt, was er hier eingeben soll
         {
-            if (tb_showtime.Text == "")
-            {
-                tb_showtime.Text = "Anzeigedauer";
-            }
-            else
-            {
-                tb_showtime.Text = "";
-            }
+            //if (tb_showtime.Text == "")
+            //{
+            //    tb_showtime.Text = "Anzeigedauer";
+            //}
+            //else
+            //{
+            //    tb_showtime.Text = "";
+            //}
         }
 
         private void bt_Löschen_Click(object sender, EventArgs e)       //Löschen

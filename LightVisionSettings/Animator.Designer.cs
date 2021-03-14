@@ -135,7 +135,7 @@ namespace LightVisionSettings
             // 
             this.number.Location = new System.Drawing.Point(582, 382);
             this.number.Maximum = new decimal(new int[] {
-            6,
+            8,
             0,
             0,
             0});
