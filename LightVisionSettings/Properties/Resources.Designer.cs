@@ -83,6 +83,16 @@ namespace LightVisionSettings.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap color_dropper_30px {
+            get {
+                object obj = ResourceManager.GetObject("color_dropper_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Dashboard_Layout_24px {
             get {
                 object obj = ResourceManager.GetObject("Dashboard_Layout_24px", resourceCulture);

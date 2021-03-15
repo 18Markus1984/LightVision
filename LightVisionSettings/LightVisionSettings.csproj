@@ -280,5 +280,8 @@
   <ItemGroup>
     <Folder Include="Resources\templates\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\color_dropper_30px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

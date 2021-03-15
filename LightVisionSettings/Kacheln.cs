@@ -34,7 +34,7 @@ namespace LightVisionSettings
             AddButtons();       //Die Pixels werden erstellt
             Random r = new Random();
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
-            bt_Color.BackColor = colorDialog1.Color;
+            bt_Color1.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
             this.mw = mw;
             cbText = cb_SelectedPanal;      //Die ComboBox wird auf cbText gesetzt, damit man von überall auf den cb_SelectedPanel.Text zugreifen kann
@@ -60,7 +60,7 @@ namespace LightVisionSettings
                 for (int i = 0; i < length; i++)
                 {
 
-                    pixel[i, k] = new Pixel(i * 30, k * 30, 30);        //Alle Buttons werden mit einer Breite und Höhe von 30 erstellt
+                    pixel[i, k] = new Pixel(i * 30+3, k * 30, 30);        //Alle Buttons werden mit einer Breite und Höhe von 30 erstellt
                 }
             }
             this.DoubleBuffered = true;     //damit die refresh rate höher ist
@@ -143,7 +143,8 @@ namespace LightVisionSettings
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
             {
-                bt_Color.BackColor = colorDialog1.Color;
+                bt_Color1.BackColor = colorDialog1.Color;
+                //bt_color2.BackColor = colorDialog1.
                 backColorButtons = colorDialog1.Color;
             }
         }
@@ -309,6 +310,7 @@ namespace LightVisionSettings
         public void ImportPanel(Panel p)
         {
             mw.savedPanels.Add(p);
+            mw.uploadPanels();
             reloadComboBox();
             cb_SelectedPanal.Text = "example";
         }

@@ -83,6 +83,7 @@ namespace LightVisionSettings
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Name";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Name";
             this.ResumeLayout(false);
             this.PerformLayout();

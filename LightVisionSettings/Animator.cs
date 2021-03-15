@@ -68,7 +68,7 @@ namespace LightVisionSettings
             {
                 for (int m = 0; m < length; m++)
                 {
-                    pixel[m, i] = new Pixel(m * size + ((747-24*25)/2), i * size + 30, size);
+                    pixel[m, i] = new Pixel(m * size + ((747-24*30)/2)-10, i * size + 30, size);
 
                 }
             }
@@ -84,7 +84,7 @@ namespace LightVisionSettings
             circles = new CircleAnimator[numberOfPanels];
             for (int i = 0; i < numberOfPanels; i++)
             {
-                circles[i] = new CircleAnimator(10, Color.White,i*((24*25- 20) / numberOfPanels)+ ((747 - 24 * 25) / 2)+((24 * 25 - 20) / numberOfPanels)/2 + 20, 20);
+                circles[i] = new CircleAnimator(10, Color.White, i * ((24 * 30 - 20) / numberOfPanels) - 10 + ((747 - 24 * 30) / 2) + ((24 * 30 - 20) / numberOfPanels) / 2 + 20, 20);
 
             }
         }
@@ -177,26 +177,6 @@ namespace LightVisionSettings
 
             }
         }
-
-        private void Animator_KeyDown(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show("Hallo");
-        }
-
-        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        //{
-        //    if (keyData == Keys.Left)
-        //    {
-        //        MessageBox.Show("Left");
-        //        return true;
-        //    }
-        //    else if (keyData == Keys.Right)
-        //    {
-        //        MessageBox.Show("Right");
-        //        return true;
-        //    }
-        //    return base.ProcessCmdKey(ref msg, keyData);
-        //}
 
         private void savePanel()
         {
@@ -354,7 +334,5 @@ namespace LightVisionSettings
         {
             savePanel();
         }
-
-       
     }
 }
