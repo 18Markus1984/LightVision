@@ -81,7 +81,7 @@ namespace LightVisionSettings
                 {
                     pb.Image = images[shownPanel];
 
-                    System.Threading.Thread.Sleep((int)panels[shownPanel].showtime * 1000);     //warte so lange wie das Panel als showtime eingetragen hat
+                    System.Threading.Thread.Sleep((int)(panels[shownPanel].showtime * 1000));     //warte so lange wie das Panel als showtime eingetragen hat
                     shownPanel++;       //Das aktuelle Panel wird um einz dazu addiert
                     if (shownPanel == panels.Length)        //Falls der Counter das ende des Arrays erreicht hat soll dieser Wert wieder auf 0 gesetzt werden
                     {
@@ -92,7 +92,7 @@ namespace LightVisionSettings
                 {
                     shownPanel = 0;
                     pb.Image = images[shownPanel];
-                    System.Threading.Thread.Sleep((int)panels[shownPanel].showtime * 1000);     //Man braucht hier auch einen stop, da sonst das Programm diesen Prozzes so oft wiederholt und schnell wiederholt, dass das ganze Programm buget
+                    System.Threading.Thread.Sleep((int)(panels[shownPanel].showtime * 1000));     //Man braucht hier auch einen stop, da sonst das Programm diesen Prozzes so oft wiederholt und schnell wiederholt, dass das ganze Programm buget
                 }
             }
         }
