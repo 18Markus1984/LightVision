@@ -97,7 +97,7 @@ namespace LightVisionSettings
                                                     //Panels können keine Digits im Namen haben
                                                     //Animationen bestehen aus Panels, die den Animationsnamen + eine  Zahl mit der entsprechenden Stelle in der Animation
         {
-            List<Panel> copySavedPanels = savedPanels;      //Die heruntergeladenen Panels werden als Copy gespeichert
+            List<Panel> copySavedPanels = new List<Panel>(savedPanels);      //Die heruntergeladenen Panels werden als Copy gespeichert
             List<Panel> puffer = new List<Panel>();     //Liste für die Panels einer Animation
             List<Animation> animations = new List<Animation>();     //Liste für die erstellten Animationen
 
