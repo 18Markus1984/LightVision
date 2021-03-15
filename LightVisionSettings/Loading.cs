@@ -29,7 +29,8 @@ namespace LightVisionSettings
             player = new SoundPlayer();
             loadingForm = new Loading();
             Random rnd = new Random();
-            player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "..\\..\\Wartemusik"+rnd.Next(0,1)+".wav";
+
+            player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "..\\..\\Resources\\Wartemusik"+rnd.Next(0,2)+".wav";
             player.Play();
             Thread t = new Thread(new ThreadStart(Loading.ShowForm));       //die MainWindow Form wird geladen
             t.Start();      //der Thread wird gestartet
