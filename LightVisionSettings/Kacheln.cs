@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 
 namespace LightVisionSettings
@@ -19,19 +20,20 @@ namespace LightVisionSettings
         private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
-        
+
         protected int length = 24;          //Pixel-Breite des Displays
         protected int height = 8;           //Pixel-Höhe des displays
         private LightVision_Base mw;        //Main Form mit allen anderen User Controll Panels
         public ComboBox cbText;             //ComboBox für bei dem augewählt wird welches Panel angezeigt wird(beinhaltet die Namen aller Panels)
+        public string name = "";
 
 
         public Kacheln(LightVision_Base mw)     //
         {
             InitializeComponent();
             AddButtons();       //Die Pixels werden erstellt
-            Random r = new Random();        
-            colorDialog1.Color = Color.FromArgb(r.Next(0, 256),r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
+            Random r = new Random();
+            colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             bt_Color.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
             this.mw = mw;
@@ -85,7 +87,7 @@ namespace LightVisionSettings
         {
             if (onClick && cb_SelectedPanal.Text != "")     //die Licke-Maus-Taste muss gedrückt sein
             {
-                foreach (Pixel p in this.pixel)     
+                foreach (Pixel p in this.pixel)
                 {
                     if (e.X - 10 > p.X && e.X - 10 < p.X + p.Size && e.Y - 10 > p.Y && e.Y - 10 < p.Y + p.Size)    //Es wird überprüft über welchem Pixel sich die Maus bewegt
                     {
@@ -151,7 +153,7 @@ namespace LightVisionSettings
             foreach (var item in pixel)
             {
                 item.Color = Color.White;
-            }    
+            }
             this.Refresh();
         }
 
@@ -209,13 +211,13 @@ namespace LightVisionSettings
             {
                 nameOfPanels.Add(p.name);
             }
-            foreach (Animation a in mw.savedAnimations)     
+            foreach (Animation a in mw.savedAnimations)
             {
                 nameOfPanels.Add(a.name);
             }
-            if(tb_NamePanel.Text != "" && tb_NamePanel.Text.Any(char.IsDigit) == false && nameOfPanels.Contains(tb_NamePanel.Text) == false)        //Ein neues Panel wird nur erstellt, wenn sie nicht leer ist, keine Zahl beinhaltet und einen schon exsistierenden Namen beinhalten
+            if (tb_NamePanel.Text != "" && tb_NamePanel.Text.Any(char.IsDigit) == false && nameOfPanels.Contains(tb_NamePanel.Text) == false)        //Ein neues Panel wird nur erstellt, wenn sie nicht leer ist, keine Zahl beinhaltet und einen schon exsistierenden Namen beinhalten
             {
-                string name = tb_NamePanel.Text;        
+                string name = tb_NamePanel.Text;
                 Panel newP = new Panel(name);       //neues PAnel mit dem eingegebenen Namen wird erstellt
                 mw.savedPanels.Add(newP);
                 cb_SelectedPanal.Items.Add(newP.name);
@@ -268,6 +270,47 @@ namespace LightVisionSettings
         {
             mw.savedPanels.Remove(mw.savedPanels[cb_SelectedPanal.SelectedIndex]);      //Das ausgewählt Panel wird aus der savedPanel Liste gelöscht
             reloadComboBox();       //Der Inahlt der ComboBox wird auf die neue savedPanel Liste angepast
+        }
+
+        private void bt_picture_Click(object sender, EventArgs e)
+        {
+            Panel p;
+            List<int> puffer = new List<int>();
+            
+            Bitmap b;
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                b = new Bitmap(open.FileName);
+                if (b.Width != 24 || b.Height != 8)
+                {
+                    MessageBox.Show("Bitte füge ein Bild hinzu das eine maximale Breite von 24 und Höhe 8 Pixeln hat.");
+                }
+                else
+                {
+                    for (int i = 0; i < height; i++)
+                    {
+                        for (int m = 0; m < length; m++)
+                        {
+                            puffer.Add(b.GetPixel(m,i).ToArgb());
+                        }
+                    }
+                    Name n = new Name(mw,puffer);
+                    n.Show();
+
+                   
+                    
+                }
+            }
+            name = "";
+        }
+
+        public void ImportPanel(Panel p)
+        {
+            mw.savedPanels.Add(p);
+            reloadComboBox();
+            cb_SelectedPanal.Text = "example";
         }
     }
 }

@@ -191,7 +191,6 @@ namespace LightVisionSettings
             this.Controls.Add(this.bt_Löschen);
             this.Name = "Animator";
             this.Size = new System.Drawing.Size(820, 517);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Animator_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.number)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

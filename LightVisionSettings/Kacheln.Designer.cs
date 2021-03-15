@@ -40,6 +40,7 @@
             this.tb_NamePanel = new System.Windows.Forms.TextBox();
             this.tb_showtime = new System.Windows.Forms.TextBox();
             this.bt_Löschen = new System.Windows.Forms.Button();
+            this.bt_picture = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_Speichern
@@ -146,11 +147,24 @@
             this.bt_Löschen.UseVisualStyleBackColor = true;
             this.bt_Löschen.Click += new System.EventHandler(this.bt_Löschen_Click);
             // 
+            // bt_picture
+            // 
+            this.bt_picture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_picture.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_picture.Location = new System.Drawing.Point(115, 318);
+            this.bt_picture.Name = "bt_picture";
+            this.bt_picture.Size = new System.Drawing.Size(62, 41);
+            this.bt_picture.TabIndex = 9;
+            this.bt_picture.Text = "Bild";
+            this.bt_picture.UseVisualStyleBackColor = true;
+            this.bt_picture.Click += new System.EventHandler(this.bt_picture_Click);
+            // 
             // Kacheln
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.ForestGreen;
+            this.Controls.Add(this.bt_picture);
             this.Controls.Add(this.bt_Löschen);
             this.Controls.Add(this.tb_showtime);
             this.Controls.Add(this.tb_NamePanel);
@@ -178,5 +192,6 @@
         private System.Windows.Forms.TextBox tb_NamePanel;
         private System.Windows.Forms.TextBox tb_showtime;
         private System.Windows.Forms.Button bt_Löschen;
+        private System.Windows.Forms.Button bt_picture;
     }
 }

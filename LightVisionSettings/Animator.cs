@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 
 namespace LightVisionSettings
 {
@@ -182,20 +183,20 @@ namespace LightVisionSettings
             MessageBox.Show("Hallo");
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Left)
-            {
-                MessageBox.Show("Left");
-                return true;
-            }
-            else if (keyData == Keys.Right)
-            {
-                MessageBox.Show("Right");
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (keyData == Keys.Left)
+        //    {
+        //        MessageBox.Show("Left");
+        //        return true;
+        //    }
+        //    else if (keyData == Keys.Right)
+        //    {
+        //        MessageBox.Show("Right");
+        //        return true;
+        //    }
+        //    return base.ProcessCmdKey(ref msg, keyData);
+        //}
 
         private void savePanel()
         {
