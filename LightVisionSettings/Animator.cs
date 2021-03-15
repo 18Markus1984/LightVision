@@ -177,6 +177,26 @@ namespace LightVisionSettings
             }
         }
 
+        private void Animator_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("Hallo");
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Left)
+            {
+                MessageBox.Show("Left");
+                return true;
+            }
+            else if (keyData == Keys.Right)
+            {
+                MessageBox.Show("Right");
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void savePanel()
         {
             List<int> puffer = new List<int>();
@@ -333,5 +353,7 @@ namespace LightVisionSettings
         {
             savePanel();
         }
+
+       
     }
 }

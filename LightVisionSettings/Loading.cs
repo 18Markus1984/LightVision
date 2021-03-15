@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
+using System.Media;
 
 namespace LightVisionSettings
 {
@@ -16,6 +17,7 @@ namespace LightVisionSettings
     {
         static Form loadingForm;
         private delegate void CloseDelegate();
+        private static SoundPlayer player;
 
         public Loading()
         {
@@ -24,7 +26,10 @@ namespace LightVisionSettings
 
         static public void ShowLoadingScreen()      //die startische Methode wird in der Programm Main ausgeführt
         {
+            player = new SoundPlayer();
             loadingForm = new Loading();
+            player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\Wartemusik.wav";
+            player.Play();
             Thread t = new Thread(new ThreadStart(Loading.ShowForm));       //die MainWindow Form wird geladen
             t.Start();      //der Thread wird gestartet
         }
@@ -46,6 +51,7 @@ namespace LightVisionSettings
         {
             if(loadingForm != null)
             {
+                player.Stop();
                 loadingForm.Close();
                 loadingForm = null;
             }
