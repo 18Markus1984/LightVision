@@ -38,7 +38,6 @@ namespace LightVisionSettings
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.number = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.bt_Tamplate = new System.Windows.Forms.Button();
             this.bt_fill = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_color8 = new System.Windows.Forms.Button();
@@ -144,17 +143,6 @@ namespace LightVisionSettings
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "label1";
-            // 
-            // bt_Tamplate
-            // 
-            this.bt_Tamplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_Tamplate.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Tamplate.Location = new System.Drawing.Point(13, 349);
-            this.bt_Tamplate.Name = "bt_Tamplate";
-            this.bt_Tamplate.Size = new System.Drawing.Size(91, 41);
-            this.bt_Tamplate.TabIndex = 18;
-            this.bt_Tamplate.Text = "Template";
-            this.bt_Tamplate.UseVisualStyleBackColor = true;
             // 
             // bt_fill
             // 
@@ -281,6 +269,7 @@ namespace LightVisionSettings
             this.bt_picture.TabIndex = 27;
             this.bt_picture.Text = "Bild";
             this.bt_picture.UseVisualStyleBackColor = true;
+            this.bt_picture.Click += new System.EventHandler(this.bt_picture_Click);
             // 
             // Animator
             // 
@@ -296,7 +285,6 @@ namespace LightVisionSettings
             this.Controls.Add(this.bt_color4);
             this.Controls.Add(this.bt_color3);
             this.Controls.Add(this.bt_color2);
-            this.Controls.Add(this.bt_Tamplate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.number);
             this.Controls.Add(this.tb_showtime);
@@ -327,7 +315,6 @@ namespace LightVisionSettings
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.NumericUpDown number;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button bt_Tamplate;
         private System.Windows.Forms.Button bt_color8;
         private System.Windows.Forms.Button bt_color7;
         private System.Windows.Forms.Button bt_color6;
