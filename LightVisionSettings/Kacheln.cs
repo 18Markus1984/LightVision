@@ -310,7 +310,6 @@ namespace LightVisionSettings
             mw.savedPanels.Add(p);
             mw.uploadPanels();
             reloadComboBox();
-            cb_SelectedPanal.Text = "example";
         }
 
         private void p_Color_Select(object sender, EventArgs e)

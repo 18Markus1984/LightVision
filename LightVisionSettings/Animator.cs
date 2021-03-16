@@ -338,7 +338,11 @@ namespace LightVisionSettings
 
         private void bt_picture_Click(object sender, EventArgs e)
         {
-            if (cb_SelectedPanal.Text != "")
+            if (tb_showtime.Text == "" || tb_showtime.Text == "5")
+            {
+                MessageBox.Show("Du kannst die Länge der einzelnen Gif-Bilder in der oberen rechten Ecke anpassen, bevor du das Bild auswählst");
+            }
+            else
             {
                 Panel p;
                 List<int> puffer = new List<int>();
@@ -354,17 +358,33 @@ namespace LightVisionSettings
                         List<Panel> panels = new List<Panel>();
                         foreach (Image image in GetFramesFromAnimatedGIF(b))
                         {
+                            puffer = new List<int>();
                             Bitmap bitmap = (Bitmap)image;
+                            if (bitmap.Width != 24 || bitmap.Height != 8)
+                            {
+                                bitmap = new Bitmap(bitmap, new Size(24, 8));
+                            }
                             for (int i = 0; i < height; i++)
                             {
                                 for (int m = 0; m < length; m++)
                                 {
-                                    puffer.Add((image.GetPixel(m, i).ToArgb()));
+                                    puffer.Add((bitmap.GetPixel(m, i).ToArgb()));
                                 }
                             }
+                            panels.Add(new Panel("", puffer, Convert.ToDouble(tb_showtime.Text)));
                         }
+                        if (panels.Count <= 40)
+                        {
+                            Name n = new Name(mw, panels);
+                            n.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Dein Gif hat zu viele Bilder");
+                        }
+
                     }
-                    else
+                    else if (cb_SelectedPanal.Text != "")
                     {
                         if (b.Width != 24 || b.Height != 8)
                         {
@@ -380,8 +400,16 @@ namespace LightVisionSettings
                         loadPanel(new Panel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].name + selectedPanel, puffer, 5));
                         savePanel();
                     }
+
                 }
             }
+        }
+
+        public void ImportAnimation(Animation a)
+        {
+            mw.savedAnimations.Add(a);
+            mw.uploadPanels();
+            reloadComboBox();
         }
         public Image[] GetFramesFromAnimatedGIF(Image IMG)
         {
