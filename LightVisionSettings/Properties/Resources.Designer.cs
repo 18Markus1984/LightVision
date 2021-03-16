@@ -263,6 +263,26 @@ namespace LightVisionSettings.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap picture_24px {
+            get {
+                object obj = ResourceManager.GetObject("picture_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap picture_30px {
+            get {
+                object obj = ResourceManager.GetObject("picture_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap play_24px {
             get {
                 object obj = ResourceManager.GetObject("play_24px", resourceCulture);

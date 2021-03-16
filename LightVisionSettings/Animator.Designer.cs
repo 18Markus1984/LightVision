@@ -38,8 +38,6 @@ namespace LightVisionSettings
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.number = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.bt_fill = new System.Windows.Forms.Button();
-            this.bt_clear = new System.Windows.Forms.Button();
             this.bt_color8 = new System.Windows.Forms.Button();
             this.bt_color7 = new System.Windows.Forms.Button();
             this.bt_color6 = new System.Windows.Forms.Button();
@@ -49,6 +47,8 @@ namespace LightVisionSettings
             this.bt_color2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.bt_picture = new System.Windows.Forms.Button();
+            this.bt_fill = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.number)).BeginInit();
             this.SuspendLayout();
             // 
@@ -144,32 +144,6 @@ namespace LightVisionSettings
             this.label1.TabIndex = 17;
             this.label1.Text = "label1";
             // 
-            // bt_fill
-            // 
-            this.bt_fill.BackgroundImage = global::LightVisionSettings.Properties.Resources.fill_color_24px;
-            this.bt_fill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bt_fill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_fill.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_fill.Location = new System.Drawing.Point(358, 302);
-            this.bt_fill.Name = "bt_fill";
-            this.bt_fill.Size = new System.Drawing.Size(41, 41);
-            this.bt_fill.TabIndex = 11;
-            this.bt_fill.UseVisualStyleBackColor = true;
-            this.bt_fill.Click += new System.EventHandler(this.Fill_Click);
-            // 
-            // bt_clear
-            // 
-            this.bt_clear.BackgroundImage = global::LightVisionSettings.Properties.Resources.erase_24px;
-            this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_clear.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_clear.Location = new System.Drawing.Point(311, 302);
-            this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(41, 41);
-            this.bt_clear.TabIndex = 10;
-            this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
-            // 
             // bt_color8
             // 
             this.bt_color8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -261,15 +235,42 @@ namespace LightVisionSettings
             // 
             // bt_picture
             // 
+            this.bt_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.bt_picture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bt_picture.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_picture.Image = global::LightVisionSettings.Properties.Resources.picture_30px;
             this.bt_picture.Location = new System.Drawing.Point(405, 349);
             this.bt_picture.Name = "bt_picture";
             this.bt_picture.Size = new System.Drawing.Size(61, 41);
             this.bt_picture.TabIndex = 27;
-            this.bt_picture.Text = "Bild";
             this.bt_picture.UseVisualStyleBackColor = true;
             this.bt_picture.Click += new System.EventHandler(this.bt_picture_Click);
+            // 
+            // bt_fill
+            // 
+            this.bt_fill.BackgroundImage = global::LightVisionSettings.Properties.Resources.fill_color_24px;
+            this.bt_fill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_fill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_fill.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_fill.Location = new System.Drawing.Point(358, 302);
+            this.bt_fill.Name = "bt_fill";
+            this.bt_fill.Size = new System.Drawing.Size(41, 41);
+            this.bt_fill.TabIndex = 11;
+            this.bt_fill.UseVisualStyleBackColor = true;
+            this.bt_fill.Click += new System.EventHandler(this.Fill_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.BackgroundImage = global::LightVisionSettings.Properties.Resources.erase_24px;
+            this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_clear.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_clear.Location = new System.Drawing.Point(311, 302);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(41, 41);
+            this.bt_clear.TabIndex = 10;
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // Animator
             // 

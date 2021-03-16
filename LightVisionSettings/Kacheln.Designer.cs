@@ -39,9 +39,6 @@
             this.tb_showtime = new System.Windows.Forms.TextBox();
             this.bt_Löschen = new System.Windows.Forms.Button();
             this.bt_picture = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.bt_fill = new System.Windows.Forms.Button();
-            this.bt_clear = new System.Windows.Forms.Button();
             this.bt_color2 = new System.Windows.Forms.Button();
             this.bt_color3 = new System.Windows.Forms.Button();
             this.bt_color4 = new System.Windows.Forms.Button();
@@ -57,6 +54,9 @@
             this.p_Color7 = new System.Windows.Forms.Panel();
             this.p_Color6 = new System.Windows.Forms.Panel();
             this.p_Color5 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.bt_fill = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_Speichern
@@ -142,51 +142,13 @@
             // 
             this.bt_picture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bt_picture.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_picture.Image = global::LightVisionSettings.Properties.Resources.picture_30px;
             this.bt_picture.Location = new System.Drawing.Point(405, 318);
             this.bt_picture.Name = "bt_picture";
             this.bt_picture.Size = new System.Drawing.Size(61, 41);
             this.bt_picture.TabIndex = 9;
-            this.bt_picture.Text = "Bild";
             this.bt_picture.UseVisualStyleBackColor = true;
             this.bt_picture.Click += new System.EventHandler(this.bt_picture_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = global::LightVisionSettings.Properties.Resources.color_dropper_30px;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(358, 318);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 41);
-            this.button1.TabIndex = 10;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // bt_fill
-            // 
-            this.bt_fill.BackgroundImage = global::LightVisionSettings.Properties.Resources.fill_color_24px;
-            this.bt_fill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bt_fill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_fill.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_fill.Location = new System.Drawing.Point(358, 271);
-            this.bt_fill.Name = "bt_fill";
-            this.bt_fill.Size = new System.Drawing.Size(41, 41);
-            this.bt_fill.TabIndex = 3;
-            this.bt_fill.UseVisualStyleBackColor = true;
-            this.bt_fill.Click += new System.EventHandler(this.Fill_Click);
-            // 
-            // bt_clear
-            // 
-            this.bt_clear.BackgroundImage = global::LightVisionSettings.Properties.Resources.erase_24px;
-            this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_clear.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_clear.Location = new System.Drawing.Point(311, 271);
-            this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(41, 41);
-            this.bt_clear.TabIndex = 2;
-            this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // bt_color2
             // 
@@ -287,8 +249,8 @@
             this.p_Color1.Size = new System.Drawing.Size(41, 41);
             this.p_Color1.TabIndex = 18;
             this.p_Color1.Click += new System.EventHandler(this.paletteChangeColor);
-            this.p_Color1.Enter += new System.EventHandler(this.p_Color_Select);
             this.p_Color1.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            this.p_Color1.Enter += new System.EventHandler(this.p_Color_Select);
             // 
             // p_Color2
             // 
@@ -298,8 +260,8 @@
             this.p_Color2.Size = new System.Drawing.Size(41, 41);
             this.p_Color2.TabIndex = 19;
             this.p_Color2.Click += new System.EventHandler(this.paletteChangeColor);
-            this.p_Color2.Enter += new System.EventHandler(this.p_Color_Select);
             this.p_Color2.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            this.p_Color2.Enter += new System.EventHandler(this.p_Color_Select);
             // 
             // p_Color4
             // 
@@ -309,8 +271,8 @@
             this.p_Color4.Size = new System.Drawing.Size(41, 41);
             this.p_Color4.TabIndex = 21;
             this.p_Color4.Click += new System.EventHandler(this.paletteChangeColor);
-            this.p_Color4.Enter += new System.EventHandler(this.p_Color_Select);
             this.p_Color4.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            this.p_Color4.Enter += new System.EventHandler(this.p_Color_Select);
             // 
             // p_Color3
             // 
@@ -320,8 +282,8 @@
             this.p_Color3.Size = new System.Drawing.Size(41, 41);
             this.p_Color3.TabIndex = 20;
             this.p_Color3.Click += new System.EventHandler(this.paletteChangeColor);
-            this.p_Color3.Enter += new System.EventHandler(this.p_Color_Select);
             this.p_Color3.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            this.p_Color3.Enter += new System.EventHandler(this.p_Color_Select);
             // 
             // p_Color8
             // 
@@ -331,8 +293,8 @@
             this.p_Color8.Size = new System.Drawing.Size(41, 41);
             this.p_Color8.TabIndex = 25;
             this.p_Color8.Click += new System.EventHandler(this.paletteChangeColor);
-            this.p_Color8.Enter += new System.EventHandler(this.p_Color_Select);
             this.p_Color8.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            this.p_Color8.Enter += new System.EventHandler(this.p_Color_Select);
             // 
             // p_Color7
             // 
@@ -342,8 +304,8 @@
             this.p_Color7.Size = new System.Drawing.Size(41, 41);
             this.p_Color7.TabIndex = 24;
             this.p_Color7.Click += new System.EventHandler(this.paletteChangeColor);
-            this.p_Color7.Enter += new System.EventHandler(this.p_Color_Select);
             this.p_Color7.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            this.p_Color7.Enter += new System.EventHandler(this.p_Color_Select);
             // 
             // p_Color6
             // 
@@ -353,8 +315,8 @@
             this.p_Color6.Size = new System.Drawing.Size(41, 41);
             this.p_Color6.TabIndex = 23;
             this.p_Color6.Click += new System.EventHandler(this.paletteChangeColor);
-            this.p_Color6.Enter += new System.EventHandler(this.p_Color_Select);
             this.p_Color6.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            this.p_Color6.Enter += new System.EventHandler(this.p_Color_Select);
             // 
             // p_Color5
             // 
@@ -364,8 +326,46 @@
             this.p_Color5.Size = new System.Drawing.Size(41, 41);
             this.p_Color5.TabIndex = 22;
             this.p_Color5.Click += new System.EventHandler(this.paletteChangeColor);
-            this.p_Color5.Enter += new System.EventHandler(this.p_Color_Select);
             this.p_Color5.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            this.p_Color5.Enter += new System.EventHandler(this.p_Color_Select);
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::LightVisionSettings.Properties.Resources.color_dropper_30px;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(358, 318);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 41);
+            this.button1.TabIndex = 10;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // bt_fill
+            // 
+            this.bt_fill.BackgroundImage = global::LightVisionSettings.Properties.Resources.fill_color_24px;
+            this.bt_fill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_fill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_fill.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_fill.Location = new System.Drawing.Point(358, 271);
+            this.bt_fill.Name = "bt_fill";
+            this.bt_fill.Size = new System.Drawing.Size(41, 41);
+            this.bt_fill.TabIndex = 3;
+            this.bt_fill.UseVisualStyleBackColor = true;
+            this.bt_fill.Click += new System.EventHandler(this.Fill_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.BackgroundImage = global::LightVisionSettings.Properties.Resources.erase_24px;
+            this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_clear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_clear.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_clear.Location = new System.Drawing.Point(311, 271);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(41, 41);
+            this.bt_clear.TabIndex = 2;
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
             // 
             // Kacheln
             // 

@@ -197,9 +197,6 @@
     <None Include="Resources\broom_32px.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\erase_24px.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\natural_user_interface_2_50px.png" />
   </ItemGroup>
   <ItemGroup>
@@ -210,9 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fill_color_32px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\fill_color_24px.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -282,6 +276,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\color_dropper_30px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\erase_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fill_color_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picture_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picture_30px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
