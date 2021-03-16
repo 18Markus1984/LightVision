@@ -101,32 +101,25 @@ namespace LightVisionSettings
             List<Panel> puffer = new List<Panel>();     //Liste für die Panels einer Animation
             List<Animation> animations = new List<Animation>();     //Liste für die erstellten Animationen
 
-            for (int j = 0; j < copySavedPanels.Count; j++)     
+            for (int i = 0; i < copySavedPanels.Count; i++)     //Es wird nach Animationen gesucht und nach dem Ende einer Animation wird die Schleife verlassen
             {
-                for (int i = 0; i < copySavedPanels.Count; i++)     //Es wird nach Animationen gesucht und nach dem Ende einer Animation wird die Schleife verlassen
+                if (copySavedPanels[i].name.Any(char.IsDigit))      //Falls der Name eines Panels eine Zahl enthält
                 {
-                    if (savedPanels[i].name.Any(char.IsDigit))      //Falls der Name eines Panels eine Zahl enthält
+                    puffer.Add(copySavedPanels[i]);     //Das Panel wird zum Puffer hinzugefügt
+                    string nameWODigits = ExtensionMethods.RemoveDigits(puffer[0].name);        //Die RemoveDigits Methode in der Extension Klasse entfernt die Zahl
+                    if (i == copySavedPanels.Count || (!copySavedPanels[i + 1].name.StartsWith(nameWODigits)))     //Es wird geschaut, dass die zuerst in keine OutOfIndex Exception gelaufen wird und dann geschaut, ob das nächste Panel zu der Animation dazu gehört
                     {
-                        puffer.Add(savedPanels[i]);     //Das Panel wird zum Puffer hinzugefügt
-                        string nameWODigits = ExtensionMethods.RemoveDigits(puffer[0].name);        //Die RemoveDigits Methode in der Extension Klasse entfernt die Zahl
-                        if (i == copySavedPanels.Count && savedPanels[i + 1].name.StartsWith(nameWODigits))     //Es wird geschaut, dass die zuerst in keine OutOfIndex Exception gelaufen wird und dann geschaut, ob das nächste Panel zu der Animation dazu gehört
+                        Animation a = new Animation(ExtensionMethods.RemoveDigits(puffer[0].name), puffer.Count, puffer[0].showtime, puffer);       //Eine neue Animation wird erstellt
+                        savedAnimations.Add(a);     //Die Animation wird zur Liste hinzugefügt
+                        foreach (Panel p in puffer)     //Alle Panels die jetzt in der Animation sind werden aus der Copy entfernt
                         {
-                            puffer.Clear();     //Der Puffer wird geleert
-                            break;              //Die Schleife wird verlassen
+                            copySavedPanels.Remove(p);
                         }
+                        puffer.Clear();     //Der Puffer wird geleert
                     }
-                }
-                if (puffer.Count >= 2)      //Falls die Schleife länger als 2 ist
-                {
-                    Animation a = new Animation(ExtensionMethods.RemoveDigits(puffer[0].name), puffer.Count, puffer[0].showtime, puffer);       //Eine neue Animation wird erstellt
-                    savedAnimations.Add(a);     //Die Animation wird zur Liste hinzugefügt
-                    foreach (Panel p in puffer)     //Alle Panels die jetzt in der Animation sind werden aus der Copy entfernt
-                    {
-                        copySavedPanels.Remove(p);
-                    }
-                    puffer.Clear();     //Der Puffe wird geleert
                 }
             }
+
             savedPanels = copySavedPanels;      //Die übrigen Panels werden dann in der savedPanls Liste gespeichert
         }
 
