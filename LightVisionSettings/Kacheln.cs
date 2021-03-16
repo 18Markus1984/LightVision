@@ -20,6 +20,7 @@ namespace LightVisionSettings
         private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
+        private System.Windows.Forms.Panel selectedColorPanel;  //Der ausgewählte Button der Color-Palette
 
         protected int length = 24;          //Pixel-Breite des Displays
         protected int height = 8;           //Pixel-Höhe des displays
@@ -126,7 +127,8 @@ namespace LightVisionSettings
                 {
                     if (e.X - 10 > p.X && e.X - 10 < p.X + p.Size && e.Y - 10 > p.Y && e.Y - 10 < p.Y + p.Size)
                     {
-                        p.Color = colorDialog1.Color;       //Farbe wird für den Pixel gesetzt
+                        p.Color = selectedColorPanel.BackColor;
+                        //p.Color = colorDialog1.Color;       //Farbe wird für den Pixel gesetzt
                         this.Refresh();     //alle Rechtecke werden neu gezeichnet
                     }
                 }
@@ -139,14 +141,16 @@ namespace LightVisionSettings
             onClick = false;        //der druckstatus der Maus wird geändert
         }
 
-        private void bt_Color_Click_1(object sender, EventArgs e)       //Farbe zum Malen ausgewählt
+        private void paletteChangeColor(object sender, EventArgs e)       //Farbe zum Malen ausgewählt
         {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
-            {
-                bt_Color1.BackColor = colorDialog1.Color;
-                //bt_color2.BackColor = colorDialog1.
-                backColorButtons = colorDialog1.Color;
-            }
+            System.Windows.Forms.Panel pnlPressed = (System.Windows.Forms.Panel)sender;
+            selectedColorPanel = pnlPressed;
+            //if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
+            //{
+            //    selectedColorPanel.BackColor = colorDialog1.Color;
+            //    //bt_color2.BackColor = colorDialog1.
+            //    backColorButtons = colorDialog1.Color;
+            //}
         }
 
         private void Clear_Click(object sender, EventArgs e)        //Das Panel wird zurück gesetzt und alle Pixel werden Weiß 
@@ -313,6 +317,32 @@ namespace LightVisionSettings
             mw.uploadPanels();
             reloadComboBox();
             cb_SelectedPanal.Text = "example";
+        }
+
+        private void p_Color_Select(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Panel pnlPressed = (System.Windows.Forms.Panel)sender;
+            selectedColorPanel = pnlPressed;
+        }
+
+        private void p_Color1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void p_Color1_DoubleClick(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
+            {
+                selectedColorPanel.BackColor = colorDialog1.Color;
+                //bt_color2.BackColor = colorDialog1.
+                backColorButtons = colorDialog1.Color;
+            }
+        }
+
+        private void p_Color1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
