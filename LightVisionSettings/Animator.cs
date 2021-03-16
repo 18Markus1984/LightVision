@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Drawing.Imaging;
 
 namespace LightVisionSettings
 {
@@ -348,27 +349,52 @@ namespace LightVisionSettings
                 if (open.ShowDialog() == DialogResult.OK)
                 {
                     b = new Bitmap(open.FileName);
-                    //if (b.)
-                    //{
-
-                    //}
-                    
-                    if (b.Width != 24 || b.Height != 8)
+                    if (open.FileName.EndsWith(".gif"))
                     {
-                        b = new Bitmap(b,new Size(24,8));
-                    }
-                    for (int i = 0; i < height; i++)
-                    {
-                        for (int m = 0; m < length; m++)
+                        List<Panel> panels = new List<Panel>();
+                        foreach (Image image in GetFramesFromAnimatedGIF(b))
                         {
-                            puffer.Add(b.GetPixel(m, i).ToArgb());
+                            Bitmap bitmap = (Bitmap)image;
+                            for (int i = 0; i < height; i++)
+                            {
+                                for (int m = 0; m < length; m++)
+                                {
+                                    puffer.Add((image.GetPixel(m, i).ToArgb()));
+                                }
+                            }
                         }
                     }
-                    loadPanel(new Panel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].name + selectedPanel, puffer, 5));
-                    savePanel();
-
+                    else
+                    {
+                        if (b.Width != 24 || b.Height != 8)
+                        {
+                            b = new Bitmap(b, new Size(24, 8));
+                        }
+                        for (int i = 0; i < height; i++)
+                        {
+                            for (int m = 0; m < length; m++)
+                            {
+                                puffer.Add(b.GetPixel(m, i).ToArgb());
+                            }
+                        }
+                        loadPanel(new Panel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].name + selectedPanel, puffer, 5));
+                        savePanel();
+                    }
                 }
-            }    
+            }
+        }
+        public Image[] GetFramesFromAnimatedGIF(Image IMG)
+        {
+            List<Image> IMGs = new List<Image>();
+            int Length = IMG.GetFrameCount(FrameDimension.Time);
+
+            for (int i = 0; i < Length; i++)
+            {
+                IMG.SelectActiveFrame(FrameDimension.Time, i);
+                IMGs.Add(new Bitmap(IMG));
+            }
+
+            return IMGs.ToArray();
         }
     }
 }
