@@ -32,7 +32,7 @@ namespace LightVisionSettings
             {
                 nameOfPanels.Add(a.name);
             }
-            if (!nameOfPanels.Contains(textBox1.Text) && textBox1.Text.Trim() != "")
+            if (!nameOfPanels.Contains(textBox1.Text) && textBox1.Text.Trim() != "" && textBox1.Text.Any(char.IsDigit) == false)
             {
                 Panel p = new Panel(textBox1.Text, puffer, 5);
                 mw.kacheln.ImportPanel(p);

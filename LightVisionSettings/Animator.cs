@@ -334,5 +334,41 @@ namespace LightVisionSettings
         {
             savePanel();
         }
+
+        private void bt_picture_Click(object sender, EventArgs e)
+        {
+            if (cb_SelectedPanal.Text != "")
+            {
+                Panel p;
+                List<int> puffer = new List<int>();
+
+                Bitmap b;
+                OpenFileDialog open = new OpenFileDialog();
+                open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    b = new Bitmap(open.FileName);
+                    //if (b.)
+                    //{
+
+                    //}
+                    
+                    if (b.Width != 24 || b.Height != 8)
+                    {
+                        b = new Bitmap(b,new Size(24,8));
+                    }
+                    for (int i = 0; i < height; i++)
+                    {
+                        for (int m = 0; m < length; m++)
+                        {
+                            puffer.Add(b.GetPixel(m, i).ToArgb());
+                        }
+                    }
+                    loadPanel(new Panel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].name + selectedPanel, puffer, 5));
+                    savePanel();
+
+                }
+            }    
+        }
     }
 }

@@ -280,31 +280,25 @@ namespace LightVisionSettings
             
             Bitmap b;
             OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.bmp)|*.jpg; *.jpeg; *.bmp";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 b = new Bitmap(open.FileName);
                 if (b.Width != 24 || b.Height != 8)
                 {
-                    MessageBox.Show("Bitte füge ein Bild hinzu das eine maximale Breite von 24 und Höhe 8 Pixeln hat.");
+                    b = new Bitmap(b, new Size(24, 8));
                 }
-                else
-                {
-                    for (int i = 0; i < height; i++)
-                    {
-                        for (int m = 0; m < length; m++)
-                        {
-                            puffer.Add(b.GetPixel(m,i).ToArgb());
-                        }
-                    }
-                    Name n = new Name(mw,puffer);
-                    n.Show();
 
-                   
-                    
+                for (int i = 0; i < height; i++)
+                {
+                    for (int m = 0; m < length; m++)
+                    {
+                        puffer.Add(b.GetPixel(m, i).ToArgb());
+                    }
                 }
+                Name n = new Name(mw, puffer);
+                n.Show();
             }
-            name = "";
         }
 
         public void ImportPanel(Panel p)
