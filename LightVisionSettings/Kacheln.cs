@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
-
+using System.Threading;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace LightVisionSettings
 {
@@ -27,6 +29,26 @@ namespace LightVisionSettings
         private LightVision_Base mw;        //Main Form mit allen anderen User Controll Panels
         public ComboBox cbText;             //ComboBox für bei dem augewählt wird welches Panel angezeigt wird(beinhaltet die Namen aller Panels)
         public string name = "";
+        public bool colorPicker = false;
+
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetDesktopWindow();
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetWindowDC(IntPtr window);
+        [DllImport("gdi32.dll", SetLastError = true)]
+        public static extern uint GetPixel(IntPtr dc, int x, int y);
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int ReleaseDC(IntPtr window, IntPtr dc);
+
+        public static Color GetColorAt(int x, int y)
+        {
+            IntPtr desk = GetDesktopWindow();
+            IntPtr dc = GetWindowDC(desk);
+            int a = (int)GetPixel(dc, x, y);
+            ReleaseDC(desk, dc);
+            return Color.FromArgb(255, (a >> 0) & 0xff, (a >> 8) & 0xff, (a >> 16) & 0xff);
+        }
 
 
         public Kacheln(LightVision_Base mw)     //
@@ -37,6 +59,7 @@ namespace LightVisionSettings
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
             backColorButtons = colorDialog1.Color;
             p_Color1.BackColor = colorDialog1.Color;
+            selectedColorPanel = p_Color1;
             this.mw = mw;
             cbText = cb_SelectedPanal;      //Die ComboBox wird auf cbText gesetzt, damit man von überall auf den cb_SelectedPanel.Text zugreifen kann
             reloadComboBox();               //Die Items der ComboBox werden geladen
@@ -133,6 +156,24 @@ namespace LightVisionSettings
                     }
                 }
             }
+            if (colorPicker)
+            {
+                Point pointToWindow = MousePosition;
+                Point pointToScreen = PointToScreen(pointToWindow);
+
+                Bitmap bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                Graphics gfxScreenshot = Graphics.FromImage(bmpScreenshot);
+                gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                bmpScreenshot.Save("Screenshot.png", ImageFormat.Png);
+
+                
+                Color c = bmpScreenshot.GetPixel(pointToScreen.X, pointToScreen.Y);
+                selectedColorPanel.BackColor = c;
+                backColorButtons = c;
+                colorDialog1.Color = c;
+                //selectedColorPanel.BackColor = GetColorAt(pointToScreen.X, pointToScreen.Y);
+            }
+
         }
 
         protected override void OnMouseUp(MouseEventArgs e)     //Wird aktiviert, wenn die Linke Maus Taste aufgehört wird zu drücken
@@ -172,15 +213,18 @@ namespace LightVisionSettings
 
         private void Fill_Click(object sender, EventArgs e)     //Methode für den Fill-Modus
         {
-            if (fill)       //ändert die Farbe das der Benutzer sieht, dass er den Fill-Modus aktiviert hat
+            if (!colorPicker)
             {
-                bt_fill.BackColor = mw.menuColor;
+                if (fill)       //ändert die Farbe das der Benutzer sieht, dass er den Fill-Modus aktiviert hat
+                {
+                    bt_fill.BackColor = mw.menuColor;
+                }
+                else
+                {
+                    bt_fill.BackColor = mw.contentColor;
+                }
+                fill = !fill;       //beim drücken auf den Knopf wird die aktivität des Modus geändert
             }
-            else
-            {
-                bt_fill.BackColor = mw.contentColor;
-            }
-            fill = !fill;       //beim drücken auf den Knopf wird die aktivität des Modus geändert
         }
 
         public void fillButtons(Color original, int x, int y)       //Die rekursive Funktion für die Ausfüllung der Fläche verwendet
@@ -316,5 +360,26 @@ namespace LightVisionSettings
                 backColorButtons = colorDialog1.Color;
             }
         }
+
+        private void bt_ColorPicker_Click(object sender, EventArgs e)
+        {
+            if (!fill)
+            {
+                if (colorPicker)
+                {
+                    bt_ColorPicker.BackColor = mw.menuColor;
+                }
+                else
+                {
+                    bt_ColorPicker.BackColor = mw.contentColor;
+                    //screenCaperting = new Thread();
+                    
+                }
+                colorPicker = !colorPicker;
+            }
+        }
+
+        
+
     }
 }
