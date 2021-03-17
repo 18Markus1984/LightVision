@@ -25,6 +25,7 @@ namespace LightVisionSettings
 
         private bool onClick;               //speichert, ob die Linke-Maus gedrückt ist oder nicht
         private Color backColorButtons;     //die Farbe, die beim ColorDialog ausgewählt ist
+        private System.Windows.Forms.Panel selectedColorPanel;  //Der ausgewählte Button der Color-Palette
         private bool fill;                  //ob der Fill-Tool Modus aktiviert ist
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
         public int selectedPanel = 0;
@@ -47,7 +48,7 @@ namespace LightVisionSettings
 
             Random r = new Random();
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
-            bt_Color.BackColor = colorDialog1.Color;
+            p_Color1.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
 
         }
@@ -217,15 +218,6 @@ namespace LightVisionSettings
         {
             base.OnMouseUp(e);
             onClick = false;                                        //der druckstatus der Maus wird geändert
-        }
-
-        private void bt_Color_Click_1(object sender, EventArgs e)       //Hier wird die Farbe zum Malen ausgewählt
-        {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                bt_Color.BackColor = colorDialog1.Color;
-                backColorButtons = colorDialog1.Color;
-            }
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -423,6 +415,23 @@ namespace LightVisionSettings
             }
 
             return IMGs.ToArray();
+        }
+
+        private void paletteChangeColor(object sender, EventArgs e)       //Farbe zum Malen ausgewählt
+        {
+            System.Windows.Forms.Panel pnlPressed = (System.Windows.Forms.Panel)sender;
+            selectedColorPanel = pnlPressed;
+            backColorButtons = pnlPressed.BackColor;
+            colorDialog1.Color = pnlPressed.BackColor;
+        }
+
+        private void p_Color1_DoubleClick(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
+            {
+                selectedColorPanel.BackColor = colorDialog1.Color;
+                backColorButtons = colorDialog1.Color;
+            }
         }
     }
 }

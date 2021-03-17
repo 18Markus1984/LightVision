@@ -33,22 +33,22 @@ namespace LightVisionSettings
             this.tb_NamePanel = new System.Windows.Forms.TextBox();
             this.bt_NewPanel = new System.Windows.Forms.Button();
             this.cb_SelectedPanal = new System.Windows.Forms.ComboBox();
-            this.bt_Color = new System.Windows.Forms.Button();
             this.bt_Löschen = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.number = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.bt_color8 = new System.Windows.Forms.Button();
-            this.bt_color7 = new System.Windows.Forms.Button();
-            this.bt_color6 = new System.Windows.Forms.Button();
-            this.bt_color5 = new System.Windows.Forms.Button();
-            this.bt_color4 = new System.Windows.Forms.Button();
-            this.bt_color3 = new System.Windows.Forms.Button();
-            this.bt_color2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.bt_picture = new System.Windows.Forms.Button();
             this.bt_fill = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.p_Color8 = new System.Windows.Forms.Panel();
+            this.p_Color7 = new System.Windows.Forms.Panel();
+            this.p_Color6 = new System.Windows.Forms.Panel();
+            this.p_Color5 = new System.Windows.Forms.Panel();
+            this.p_Color4 = new System.Windows.Forms.Panel();
+            this.p_Color3 = new System.Windows.Forms.Panel();
+            this.p_Color2 = new System.Windows.Forms.Panel();
+            this.p_Color1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.number)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,18 +88,6 @@ namespace LightVisionSettings
             this.cb_SelectedPanal.Size = new System.Drawing.Size(155, 21);
             this.cb_SelectedPanal.TabIndex = 12;
             this.cb_SelectedPanal.SelectedIndexChanged += new System.EventHandler(this.cb_SelectedPanal_SelectedIndexChanged);
-            // 
-            // bt_Color
-            // 
-            this.bt_Color.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_Color.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Color.Location = new System.Drawing.Point(123, 302);
-            this.bt_Color.Name = "bt_Color";
-            this.bt_Color.Size = new System.Drawing.Size(41, 41);
-            this.bt_Color.TabIndex = 9;
-            this.bt_Color.Text = "Farbe";
-            this.bt_Color.UseVisualStyleBackColor = true;
-            this.bt_Color.Click += new System.EventHandler(this.bt_Color_Click_1);
             // 
             // bt_Löschen
             // 
@@ -143,83 +131,6 @@ namespace LightVisionSettings
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "label1";
-            // 
-            // bt_color8
-            // 
-            this.bt_color8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_color8.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_color8.Location = new System.Drawing.Point(264, 349);
-            this.bt_color8.Name = "bt_color8";
-            this.bt_color8.Size = new System.Drawing.Size(41, 41);
-            this.bt_color8.TabIndex = 26;
-            this.bt_color8.Text = "F1";
-            this.bt_color8.UseVisualStyleBackColor = true;
-            // 
-            // bt_color7
-            // 
-            this.bt_color7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_color7.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_color7.Location = new System.Drawing.Point(217, 349);
-            this.bt_color7.Name = "bt_color7";
-            this.bt_color7.Size = new System.Drawing.Size(41, 41);
-            this.bt_color7.TabIndex = 25;
-            this.bt_color7.Text = "F1";
-            this.bt_color7.UseVisualStyleBackColor = true;
-            // 
-            // bt_color6
-            // 
-            this.bt_color6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_color6.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_color6.Location = new System.Drawing.Point(170, 349);
-            this.bt_color6.Name = "bt_color6";
-            this.bt_color6.Size = new System.Drawing.Size(41, 41);
-            this.bt_color6.TabIndex = 24;
-            this.bt_color6.Text = "F1";
-            this.bt_color6.UseVisualStyleBackColor = true;
-            // 
-            // bt_color5
-            // 
-            this.bt_color5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_color5.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_color5.Location = new System.Drawing.Point(123, 349);
-            this.bt_color5.Name = "bt_color5";
-            this.bt_color5.Size = new System.Drawing.Size(41, 41);
-            this.bt_color5.TabIndex = 23;
-            this.bt_color5.Text = "F1";
-            this.bt_color5.UseVisualStyleBackColor = true;
-            // 
-            // bt_color4
-            // 
-            this.bt_color4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_color4.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_color4.Location = new System.Drawing.Point(264, 302);
-            this.bt_color4.Name = "bt_color4";
-            this.bt_color4.Size = new System.Drawing.Size(41, 41);
-            this.bt_color4.TabIndex = 22;
-            this.bt_color4.Text = "F1";
-            this.bt_color4.UseVisualStyleBackColor = true;
-            // 
-            // bt_color3
-            // 
-            this.bt_color3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_color3.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_color3.Location = new System.Drawing.Point(217, 302);
-            this.bt_color3.Name = "bt_color3";
-            this.bt_color3.Size = new System.Drawing.Size(41, 41);
-            this.bt_color3.TabIndex = 21;
-            this.bt_color3.Text = "F1";
-            this.bt_color3.UseVisualStyleBackColor = true;
-            // 
-            // bt_color2
-            // 
-            this.bt_color2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_color2.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_color2.Location = new System.Drawing.Point(170, 302);
-            this.bt_color2.Name = "bt_color2";
-            this.bt_color2.Size = new System.Drawing.Size(41, 41);
-            this.bt_color2.TabIndex = 20;
-            this.bt_color2.Text = "F1";
-            this.bt_color2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -272,20 +183,101 @@ namespace LightVisionSettings
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.Clear_Click);
             // 
+            // p_Color8
+            // 
+            this.p_Color8.BackColor = System.Drawing.Color.White;
+            this.p_Color8.Location = new System.Drawing.Point(264, 349);
+            this.p_Color8.Name = "p_Color8";
+            this.p_Color8.Size = new System.Drawing.Size(41, 41);
+            this.p_Color8.TabIndex = 36;
+            this.p_Color8.Click += new System.EventHandler(this.paletteChangeColor);
+            this.p_Color8.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            // 
+            // p_Color7
+            // 
+            this.p_Color7.BackColor = System.Drawing.Color.White;
+            this.p_Color7.Location = new System.Drawing.Point(217, 349);
+            this.p_Color7.Name = "p_Color7";
+            this.p_Color7.Size = new System.Drawing.Size(41, 41);
+            this.p_Color7.TabIndex = 35;
+            this.p_Color7.Click += new System.EventHandler(this.paletteChangeColor);
+            this.p_Color7.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            // 
+            // p_Color6
+            // 
+            this.p_Color6.BackColor = System.Drawing.Color.White;
+            this.p_Color6.Location = new System.Drawing.Point(170, 349);
+            this.p_Color6.Name = "p_Color6";
+            this.p_Color6.Size = new System.Drawing.Size(41, 41);
+            this.p_Color6.TabIndex = 34;
+            this.p_Color6.Click += new System.EventHandler(this.paletteChangeColor);
+            this.p_Color6.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            // 
+            // p_Color5
+            // 
+            this.p_Color5.BackColor = System.Drawing.Color.White;
+            this.p_Color5.Location = new System.Drawing.Point(123, 349);
+            this.p_Color5.Name = "p_Color5";
+            this.p_Color5.Size = new System.Drawing.Size(41, 41);
+            this.p_Color5.TabIndex = 33;
+            this.p_Color5.Click += new System.EventHandler(this.paletteChangeColor);
+            this.p_Color5.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            // 
+            // p_Color4
+            // 
+            this.p_Color4.BackColor = System.Drawing.Color.White;
+            this.p_Color4.Location = new System.Drawing.Point(264, 302);
+            this.p_Color4.Name = "p_Color4";
+            this.p_Color4.Size = new System.Drawing.Size(41, 41);
+            this.p_Color4.TabIndex = 32;
+            this.p_Color4.Click += new System.EventHandler(this.paletteChangeColor);
+            this.p_Color4.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            // 
+            // p_Color3
+            // 
+            this.p_Color3.BackColor = System.Drawing.Color.White;
+            this.p_Color3.Location = new System.Drawing.Point(217, 302);
+            this.p_Color3.Name = "p_Color3";
+            this.p_Color3.Size = new System.Drawing.Size(41, 41);
+            this.p_Color3.TabIndex = 31;
+            this.p_Color3.Click += new System.EventHandler(this.paletteChangeColor);
+            this.p_Color3.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            // 
+            // p_Color2
+            // 
+            this.p_Color2.BackColor = System.Drawing.Color.White;
+            this.p_Color2.Location = new System.Drawing.Point(170, 302);
+            this.p_Color2.Name = "p_Color2";
+            this.p_Color2.Size = new System.Drawing.Size(41, 41);
+            this.p_Color2.TabIndex = 30;
+            this.p_Color2.Click += new System.EventHandler(this.paletteChangeColor);
+            this.p_Color2.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            // 
+            // p_Color1
+            // 
+            this.p_Color1.BackColor = System.Drawing.Color.White;
+            this.p_Color1.Location = new System.Drawing.Point(123, 302);
+            this.p_Color1.Name = "p_Color1";
+            this.p_Color1.Size = new System.Drawing.Size(41, 41);
+            this.p_Color1.TabIndex = 29;
+            this.p_Color1.Click += new System.EventHandler(this.paletteChangeColor);
+            this.p_Color1.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
+            // 
             // Animator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
+            this.Controls.Add(this.p_Color8);
+            this.Controls.Add(this.p_Color7);
+            this.Controls.Add(this.p_Color6);
+            this.Controls.Add(this.p_Color5);
+            this.Controls.Add(this.p_Color4);
+            this.Controls.Add(this.p_Color3);
+            this.Controls.Add(this.p_Color2);
+            this.Controls.Add(this.p_Color1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_picture);
-            this.Controls.Add(this.bt_color8);
-            this.Controls.Add(this.bt_color7);
-            this.Controls.Add(this.bt_color6);
-            this.Controls.Add(this.bt_color5);
-            this.Controls.Add(this.bt_color4);
-            this.Controls.Add(this.bt_color3);
-            this.Controls.Add(this.bt_color2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.number);
             this.Controls.Add(this.tb_showtime);
@@ -294,7 +286,6 @@ namespace LightVisionSettings
             this.Controls.Add(this.cb_SelectedPanal);
             this.Controls.Add(this.bt_fill);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.bt_Color);
             this.Controls.Add(this.bt_Löschen);
             this.Name = "Animator";
             this.Size = new System.Drawing.Size(820, 517);
@@ -311,19 +302,19 @@ namespace LightVisionSettings
         private System.Windows.Forms.ComboBox cb_SelectedPanal;
         private System.Windows.Forms.Button bt_fill;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Button bt_Color;
         private System.Windows.Forms.Button bt_Löschen;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.NumericUpDown number;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button bt_color8;
-        private System.Windows.Forms.Button bt_color7;
-        private System.Windows.Forms.Button bt_color6;
-        private System.Windows.Forms.Button bt_color5;
-        private System.Windows.Forms.Button bt_color4;
-        private System.Windows.Forms.Button bt_color3;
-        private System.Windows.Forms.Button bt_color2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bt_picture;
+        private System.Windows.Forms.Panel p_Color8;
+        private System.Windows.Forms.Panel p_Color7;
+        private System.Windows.Forms.Panel p_Color6;
+        private System.Windows.Forms.Panel p_Color5;
+        private System.Windows.Forms.Panel p_Color4;
+        private System.Windows.Forms.Panel p_Color3;
+        private System.Windows.Forms.Panel p_Color2;
+        private System.Windows.Forms.Panel p_Color1;
     }
 }

@@ -35,8 +35,8 @@ namespace LightVisionSettings
             AddButtons();       //Die Pixels werden erstellt
             Random r = new Random();
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
-            bt_Color1.BackColor = colorDialog1.Color;
             backColorButtons = colorDialog1.Color;
+            p_Color1.BackColor = colorDialog1.Color;
             this.mw = mw;
             cbText = cb_SelectedPanal;      //Die ComboBox wird auf cbText gesetzt, damit man von überall auf den cb_SelectedPanel.Text zugreifen kann
             reloadComboBox();               //Die Items der ComboBox werden geladen
@@ -141,18 +141,6 @@ namespace LightVisionSettings
             onClick = false;        //der druckstatus der Maus wird geändert
         }
 
-        private void paletteChangeColor(object sender, EventArgs e)       //Farbe zum Malen ausgewählt
-        {
-            System.Windows.Forms.Panel pnlPressed = (System.Windows.Forms.Panel)sender;
-            selectedColorPanel = pnlPressed;
-            //if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
-            //{
-            //    selectedColorPanel.BackColor = colorDialog1.Color;
-            //    //bt_color2.BackColor = colorDialog1.
-            //    backColorButtons = colorDialog1.Color;
-            //}
-        }
-
         private void Clear_Click(object sender, EventArgs e)        //Das Panel wird zurück gesetzt und alle Pixel werden Weiß 
         {
             foreach (var item in pixel)
@@ -186,11 +174,11 @@ namespace LightVisionSettings
         {
             if (fill)       //ändert die Farbe das der Benutzer sieht, dass er den Fill-Modus aktiviert hat
             {
-                bt_fill.BackColor = SystemColors.Control;
+                bt_fill.BackColor = mw.menuColor;
             }
             else
             {
-                bt_fill.BackColor = Color.LightGray;
+                bt_fill.BackColor = mw.contentColor;
             }
             fill = !fill;       //beim drücken auf den Knopf wird die aktivität des Modus geändert
         }
@@ -312,15 +300,12 @@ namespace LightVisionSettings
             reloadComboBox();
         }
 
-        private void p_Color_Select(object sender, EventArgs e)
+        private void paletteChangeColor(object sender, EventArgs e)       //Farbe zum Malen ausgewählt
         {
             System.Windows.Forms.Panel pnlPressed = (System.Windows.Forms.Panel)sender;
             selectedColorPanel = pnlPressed;
-        }
-
-        private void p_Color1_Click(object sender, EventArgs e)
-        {
-
+            backColorButtons = pnlPressed.BackColor;
+            colorDialog1.Color = pnlPressed.BackColor;
         }
 
         private void p_Color1_DoubleClick(object sender, EventArgs e)
@@ -328,14 +313,8 @@ namespace LightVisionSettings
             if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
             {
                 selectedColorPanel.BackColor = colorDialog1.Color;
-                //bt_color2.BackColor = colorDialog1.
                 backColorButtons = colorDialog1.Color;
             }
-        }
-
-        private void p_Color1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }
