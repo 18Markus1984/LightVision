@@ -52,14 +52,15 @@ namespace LightVisionSettings
                 s.MouseUp += MouseUp;
                 s.DoubleClick += DoubleClick;
                 kacheln.Add(s);
-                Controls.Add(s);
-                s.BringToFront();
                 s.Width = 240;
                 s.Height = 80;
                 s.Location = panels[i].Location;
                 s.Cursor = Cursors.Hand;
                 s.LocationChanged += PostionChanged;
                 s.matchingPanel = i;
+                Controls.Add(s);
+                //pa_dashboard.Controls.Add(s);
+                s.BringToFront();
             }
 
             for (int i = mw.savedPanels.Count; i < mw.savedPanels.Count + mw.savedAnimations.Count; i++)
@@ -70,14 +71,15 @@ namespace LightVisionSettings
                 s.MouseUp += MouseUp;
                 s.DoubleClick += DoubleClick;
                 kacheln.Add(s);
-                Controls.Add(s);
-                s.BringToFront();
                 s.Width = 240;
                 s.Height = 80;
                 s.Location = panels[i].Location;
                 s.Cursor = Cursors.Hand;
                 s.LocationChanged += PostionChanged;
                 s.matchingPanel = i- mw.savedPanels.Count;
+                Controls.Add(s);
+                //pa_dashboard.Controls.Add(s);
+                s.BringToFront();
             }
 
         }
@@ -103,6 +105,7 @@ namespace LightVisionSettings
                     panel.BorderStyle = BorderStyle.FixedSingle;
                     panels.Add(panel);
                     Controls.Add(panel);
+                    //pa_dashboard.Controls.Add(panel);
                 }
             }
             if (spalten != 0)
@@ -121,6 +124,7 @@ namespace LightVisionSettings
                     panel.BorderStyle = BorderStyle.FixedSingle;
                     panels.Add(panel);
                     Controls.Add(panel);
+                    //pa_dashboard.Controls.Add(panel);
                 }
             }
         }
@@ -217,6 +221,7 @@ namespace LightVisionSettings
 
         private void bt_Speichern_Click(object sender, EventArgs e)
         {
+            List<Panel> puffer = mw.savedPanels;
             List<Panel> p = createList();
             int number = 0;
             foreach (SmallKachel item in kacheln)
@@ -231,6 +236,7 @@ namespace LightVisionSettings
                 mw.savedPanels = p;
                 mw.uploadPanels();
                 MessageBox.Show("Speichern erfolgreich!");
+                mw.savedPanels = puffer;
                 mw.kacheln.reloadComboBox();
                 return;
             }
