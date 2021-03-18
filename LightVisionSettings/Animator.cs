@@ -30,8 +30,29 @@ namespace LightVisionSettings
         private Color clickedButton;        //die Farbe die in dem Bereich ist, um den Bereich zu füllen
         public int selectedPanel = 0;
         public ComboBox comboBoxText;
+        public bool colorPicker = false;
 
         public int numberOfPanels = 5;
+
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetDesktopWindow();
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr GetWindowDC(IntPtr window);
+        [DllImport("gdi32.dll", SetLastError = true)]
+        public static extern uint GetPixel(IntPtr dc, int x, int y);
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern int ReleaseDC(IntPtr window, IntPtr dc);
+
+        public static Color GetColorAt(int x, int y)
+        {
+            IntPtr desk = GetDesktopWindow();
+            IntPtr dc = GetWindowDC(desk);
+            int a = (int)GetPixel(dc, x, y);
+            ReleaseDC(desk, dc);
+            return Color.FromArgb(255, (a >> 0) & 0xff, (a >> 8) & 0xff, (a >> 16) & 0xff);
+        }
+
 
         public Animator(LightVision_Base mw, int size, int height, int length)
         {
@@ -45,6 +66,7 @@ namespace LightVisionSettings
 
             comboBoxText = cb_SelectedPanal;
             tb_showtime.Text = ""+5;
+            selectedColorPanel = p_Color1;
 
             Random r = new Random();
             colorDialog1.Color = Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256));     //Eine zufällige Farbe am Anfang für einen spaßigen Start ;)
@@ -59,6 +81,35 @@ namespace LightVisionSettings
             foreach (Animation a in mw.savedAnimations)
             {
                 cb_SelectedPanal.Items.Add(a.name);
+            }
+        }
+
+        public void OnDeactivate(object sender, EventArgs e)
+        {
+            if (colorPicker)
+            {
+                Point pointWindow = MousePosition;
+                selectedColorPanel.BackColor = GetColorAt(pointWindow.X, pointWindow.Y);
+                backColorButtons = GetColorAt(pointWindow.X, pointWindow.Y);
+                colorDialog1.Color = GetColorAt(pointWindow.X, pointWindow.Y);
+            }
+        }
+
+        private void bt_ColorPicker_Click(object sender, EventArgs e)
+        {
+            if (!fill)
+            {
+                if (colorPicker)
+                {
+                    bt_ColorPicker.BackColor = mw.menuColor;
+                }
+                else
+                {
+                    bt_ColorPicker.BackColor = mw.contentColor;
+                    //screenCaperting = new Thread();
+
+                }
+                colorPicker = !colorPicker;
             }
         }
 
@@ -174,9 +225,23 @@ namespace LightVisionSettings
                         this.Refresh();                                 //alle Rechtecke werden neu gezeichnet
                     }
                 }
-
                 savePanel();
 
+            }
+            if (colorPicker)
+            {
+                Point pointToWindow = MousePosition;
+
+                Bitmap bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                Graphics gfxScreenshot = Graphics.FromImage(bmpScreenshot);
+                gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
+                bmpScreenshot.Save("Screenshot.png", ImageFormat.Png);
+
+
+                Color c = bmpScreenshot.GetPixel(pointToWindow.X, pointToWindow.Y);
+                selectedColorPanel.BackColor = c;
+                backColorButtons = c;
+                colorDialog1.Color = c;
             }
         }
 

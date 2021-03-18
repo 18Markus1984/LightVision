@@ -74,6 +74,17 @@ namespace LightVisionSettings
             }
         }
 
+        public void OnDeactivate(object sender, EventArgs e)
+        {
+            if (colorPicker)
+            {
+                Point pointWindow = MousePosition;
+                selectedColorPanel.BackColor = GetColorAt(pointWindow.X, pointWindow.Y);
+                backColorButtons = GetColorAt(pointWindow.X, pointWindow.Y);
+                colorDialog1.Color = GetColorAt(pointWindow.X, pointWindow.Y);
+            }
+        }
+
         private void AddButtons()       //Fügt 192 Pixel hinzu
         {
             pixel = new Pixel[length, height]; //zweidimensionales Array mit der Höhe und Breite des Dispalays wird erstellt
@@ -159,21 +170,18 @@ namespace LightVisionSettings
             if (colorPicker)
             {
                 Point pointToWindow = MousePosition;
-                Point pointToScreen = PointToScreen(pointToWindow);
 
                 Bitmap bmpScreenshot = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
                 Graphics gfxScreenshot = Graphics.FromImage(bmpScreenshot);
                 gfxScreenshot.CopyFromScreen(Screen.PrimaryScreen.Bounds.X, Screen.PrimaryScreen.Bounds.Y, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
                 bmpScreenshot.Save("Screenshot.png", ImageFormat.Png);
 
-                
-                Color c = bmpScreenshot.GetPixel(pointToScreen.X, pointToScreen.Y);
+
+                Color c = bmpScreenshot.GetPixel(pointToWindow.X, pointToWindow.Y);
                 selectedColorPanel.BackColor = c;
                 backColorButtons = c;
                 colorDialog1.Color = c;
-                //selectedColorPanel.BackColor = GetColorAt(pointToScreen.X, pointToScreen.Y);
             }
-
         }
 
         protected override void OnMouseUp(MouseEventArgs e)     //Wird aktiviert, wenn die Linke Maus Taste aufgehört wird zu drücken

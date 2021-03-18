@@ -91,6 +91,9 @@ namespace LightVisionSettings
             timer1.Start();     //Der Einstellungstimer wird gestartet
 
             design();       //Das Design wird bearbeitet
+
+            Deactivate += kacheln.OnDeactivate;
+            Deactivate += animator.OnDeactivate;
         }
 
         public void extractPanelsAnimations()       //Hier wird beim Herunterladen von Panel und Animation unterschieden

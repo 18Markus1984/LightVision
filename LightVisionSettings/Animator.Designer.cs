@@ -37,7 +37,7 @@ namespace LightVisionSettings
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.number = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bt_ColorPicker = new System.Windows.Forms.Button();
             this.bt_picture = new System.Windows.Forms.Button();
             this.bt_fill = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -132,17 +132,18 @@ namespace LightVisionSettings
             this.label1.TabIndex = 17;
             this.label1.Text = "label1";
             // 
-            // button1
+            // bt_ColorPicker
             // 
-            this.button1.BackgroundImage = global::LightVisionSettings.Properties.Resources.color_dropper_30px;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(358, 349);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(41, 41);
-            this.button1.TabIndex = 28;
-            this.button1.UseVisualStyleBackColor = true;
+            this.bt_ColorPicker.BackgroundImage = global::LightVisionSettings.Properties.Resources.color_dropper_30px;
+            this.bt_ColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_ColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bt_ColorPicker.Font = new System.Drawing.Font("Forte", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_ColorPicker.Location = new System.Drawing.Point(358, 349);
+            this.bt_ColorPicker.Name = "bt_ColorPicker";
+            this.bt_ColorPicker.Size = new System.Drawing.Size(41, 41);
+            this.bt_ColorPicker.TabIndex = 28;
+            this.bt_ColorPicker.UseVisualStyleBackColor = true;
+            this.bt_ColorPicker.Click += new System.EventHandler(this.bt_ColorPicker_Click);
             // 
             // bt_picture
             // 
@@ -276,7 +277,7 @@ namespace LightVisionSettings
             this.Controls.Add(this.p_Color3);
             this.Controls.Add(this.p_Color2);
             this.Controls.Add(this.p_Color1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bt_ColorPicker);
             this.Controls.Add(this.bt_picture);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.number);
@@ -306,7 +307,7 @@ namespace LightVisionSettings
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.NumericUpDown number;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bt_ColorPicker;
         private System.Windows.Forms.Button bt_picture;
         private System.Windows.Forms.Panel p_Color8;
         private System.Windows.Forms.Panel p_Color7;
