@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
-using System.Threading;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
