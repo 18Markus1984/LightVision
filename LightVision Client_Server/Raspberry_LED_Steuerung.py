@@ -75,6 +75,9 @@ def downloadPanels(strip):
                 rcv = s.recv(1024)
                 buffer += str(rcv, encoding="utf-8")
             buffer = json.loads(buffer)
+            recvPanels.clear()
+            recvTimes.clear()
+            print("Panels updated")
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
                 recvTimes.append(buffer[i]['showtime'])
@@ -83,9 +86,7 @@ def downloadPanels(strip):
             threadTime = 0
             for i in range(0,len(recvTimes)):
                 threadTime += recvTimes[i]
-            print(threadTime)
             time.sleep(threadTime)
-            threadtTime = 0
  
 # Main program logic follows:
 if __name__ == '__main__':
@@ -109,4 +110,3 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         if args.clear:
             colorWipe(strip, Color(0,0,0), 10)
-
