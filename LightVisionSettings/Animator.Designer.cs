@@ -49,7 +49,9 @@ namespace LightVisionSettings
             this.p_Color3 = new System.Windows.Forms.Panel();
             this.p_Color2 = new System.Windows.Forms.Panel();
             this.p_Color1 = new System.Windows.Forms.Panel();
+            this.nm_Wiederholungen = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.number)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_Wiederholungen)).BeginInit();
             this.SuspendLayout();
             // 
             // tb_showtime
@@ -264,11 +266,34 @@ namespace LightVisionSettings
             this.p_Color1.Click += new System.EventHandler(this.paletteChangeColor);
             this.p_Color1.DoubleClick += new System.EventHandler(this.p_Color1_DoubleClick);
             // 
+            // nm_Wiederholungen
+            // 
+            this.nm_Wiederholungen.Location = new System.Drawing.Point(633, 355);
+            this.nm_Wiederholungen.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nm_Wiederholungen.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nm_Wiederholungen.Name = "nm_Wiederholungen";
+            this.nm_Wiederholungen.Size = new System.Drawing.Size(100, 20);
+            this.nm_Wiederholungen.TabIndex = 37;
+            this.nm_Wiederholungen.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
             // Animator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(147)))), ((int)(((byte)(72)))));
+            this.Controls.Add(this.nm_Wiederholungen);
             this.Controls.Add(this.p_Color8);
             this.Controls.Add(this.p_Color7);
             this.Controls.Add(this.p_Color6);
@@ -291,6 +316,7 @@ namespace LightVisionSettings
             this.Name = "Animator";
             this.Size = new System.Drawing.Size(820, 517);
             ((System.ComponentModel.ISupportInitialize)(this.number)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nm_Wiederholungen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,5 +343,6 @@ namespace LightVisionSettings
         private System.Windows.Forms.Panel p_Color3;
         private System.Windows.Forms.Panel p_Color2;
         private System.Windows.Forms.Panel p_Color1;
+        private System.Windows.Forms.NumericUpDown nm_Wiederholungen;
     }
 }

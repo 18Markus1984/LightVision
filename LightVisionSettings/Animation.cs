@@ -12,6 +12,7 @@ namespace LightVisionSettings
         public double showtime;         //Anzeigezeit für die Panels
         public int numberOfPanels;      //Anzahl der Panels bzw. animation.Length
         public string name;             //Name der Animation
+        public int wiederholungen;      //Anzahl der Wiederholungen der Animation
 
         public Animation(string name,int numberOfPanels, double showtime)       //Konstruktor für das Erstellen eines Panels ohne eine Farbe zu wissen
         {

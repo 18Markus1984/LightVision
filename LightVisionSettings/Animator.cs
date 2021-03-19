@@ -259,6 +259,7 @@ namespace LightVisionSettings
             {
                 mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].colors = puffer;
                 mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].showtime = Convert.ToDouble(tb_showtime.Text);
+                mw.savedAnimations[cb_SelectedPanal.SelectedIndex].wiederholungen = (int)nm_Wiederholungen.Value;
             }
         }
 
