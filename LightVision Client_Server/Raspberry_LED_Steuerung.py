@@ -35,14 +35,14 @@ def setPixel(strip,color,i):
 
 def showPanel(strip, wait):
     #Methode liest ARGB Werte aus recvPanels aus und leitet diese jeweils einzeln an setPixel weiter
-    while True:
-        for i in range(0, len(recvPanels)):
-            count = 0
-            for k in range(0, len(recvPanels[i])):
-                colors = RGBAfromInt(recvPanels[i][k])
-                setPixel(strip, Color(colors[0], colors[2], colors[1]), count)
-                count += 1
-            time.sleep(recvTimes[i])
+    for i in range(0, len(recvPanels)):
+        count = 0
+        for k in range(0, len(recvPanels[i])):
+            colors = RGBAfromInt(recvPanels[i][k])
+            setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
+            count += 1
+        strip.show()                      
+        time.sleep(recvTimes[i])       
         
 def ArrayErzeugen():
     for x in range(24):
@@ -55,7 +55,7 @@ def ArrayErzeugen():
             else:
                 Array[pos] = getPositionOuterMatrix(x - 16, y) + 128
     
-    print(Array)
+#    print(Array)
 
 def getPositionOuterMatrix(x, y):
     return 7 - y + x * 8
@@ -75,12 +75,18 @@ def downloadPanels(strip):
                 rcv = s.recv(1024)
                 buffer += str(rcv, encoding="utf-8")
             buffer = json.loads(buffer)
+            recvPanels.clear()
+            recvTimes.clear()
+            print("Panels updated")
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
                 recvTimes.append(buffer[i]['showtime'])
             t = Thread(target=showPanel, args=(strip, 5), daemon=True)
             t.start()
-            time.sleep(30)
+            threadTime = 0
+            for i in range(0,len(recvTimes)):
+                threadTime += recvTimes[i]
+            time.sleep(threadTime)
  
 # Main program logic follows:
 if __name__ == '__main__':
