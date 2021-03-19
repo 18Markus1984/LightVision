@@ -33,7 +33,7 @@ def RGBAfromInt(argb_int):
 def setPixel(strip,color,i):
     strip.setPixelColor(Array[i], color)
 
-def showPanel(strip, wait):
+def showPanel(strip):
     #Methode liest ARGB Werte aus recvPanels aus und leitet diese jeweils einzeln an setPixel weiter
     while True:
         for i in range(0, len(recvPanels)):
@@ -78,7 +78,7 @@ def downloadPanels(strip):
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
                 recvTimes.append(buffer[i]['showtime'])
-            t = Thread(target=showPanel, args=(strip, 5), daemon=True)
+            t = Thread(target=showPanel, args=(strip), daemon=True)
             t.start()
             time.sleep(30)
  
