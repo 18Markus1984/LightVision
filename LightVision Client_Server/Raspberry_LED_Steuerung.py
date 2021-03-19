@@ -33,16 +33,16 @@ def RGBAfromInt(argb_int):
 def setPixel(strip,color,i):
     strip.setPixelColor(Array[i], color)
 
-def showPanel(strip):
+def showPanel(strip, wait):
     #Methode liest ARGB Werte aus recvPanels aus und leitet diese jeweils einzeln an setPixel weiter
-    while True:
-        for i in range(0, len(recvPanels)):
-            count = 0
-            for k in range(0, len(recvPanels[i])):
-                colors = RGBAfromInt(recvPanels[i][k])
-                setPixel(strip, Color(colors[0], colors[2], colors[1]), count)
-                count += 1
-            time.sleep(recvTimes[i])
+    for i in range(0, len(recvPanels)):
+        count = 0
+        for k in range(0, len(recvPanels[i])):
+            colors = RGBAfromInt(recvPanels[i][k])
+            setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
+            count += 1
+        strip.show()                      
+        time.sleep(recvTimes[i])       
         
 def ArrayErzeugen():
     for x in range(24):
@@ -55,7 +55,7 @@ def ArrayErzeugen():
             else:
                 Array[pos] = getPositionOuterMatrix(x - 16, y) + 128
     
-    print(Array)
+#    print(Array)
 
 def getPositionOuterMatrix(x, y):
     return 7 - y + x * 8
@@ -78,9 +78,14 @@ def downloadPanels(strip):
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
                 recvTimes.append(buffer[i]['showtime'])
-            t = Thread(target=showPanel, args=(strip), daemon=True)
+            t = Thread(target=showPanel, args=(strip, 5), daemon=True)
             t.start()
-            time.sleep(30)
+            threadTime = 0
+            for i in range(0,len(recvTimes)):
+                threadTime += recvTimes[i]
+            print(threadTime)
+            time.sleep(threadTime)
+            threadtTime = 0
  
 # Main program logic follows:
 if __name__ == '__main__':
@@ -104,3 +109,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         if args.clear:
             colorWipe(strip, Color(0,0,0), 10)
+
