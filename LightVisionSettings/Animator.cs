@@ -385,6 +385,7 @@ namespace LightVisionSettings
                 }
             }
             label1.Text = selectedPanel + "";
+            nm_Wiederholungen.Value = mw.savedAnimations[cb_SelectedPanal.SelectedIndex].wiederholungen;
             loadPanel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel]);
         }
 

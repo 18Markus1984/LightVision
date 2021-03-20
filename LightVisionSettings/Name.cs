@@ -52,7 +52,7 @@ namespace LightVisionSettings
                 }
                 else
                 {
-                    Animation a = new Animation(textBox1.Text, panels.Count, 5, panels);
+                    Animation a = new Animation(textBox1.Text, panels.Count, 5, panels, 1);
                     for (int i = 0; i < a.numberOfPanels; i++)
                     {
                         a.animation[i].name = textBox1.Text + i;

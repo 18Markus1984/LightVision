@@ -206,6 +206,7 @@ namespace LightVisionSettings
                         {
                             foreach (Panel panel in mw.savedAnimations[item.matchingPanel].animation)
                             {
+                                panel.wiederholungen = mw.savedAnimations[item.matchingPanel].wiederholungen;
                                 p.Add(panel);
                             }
                         }
