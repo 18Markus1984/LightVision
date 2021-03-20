@@ -5,12 +5,14 @@ import time
 import random
 from rpi_ws281x import *
 import argparse
+import datetime
 
 HOST = '135.181.35.212'  # The server's hostname or IP address
 PORT = 65432        # The port used by the server
 
 recvPanels = []
 recvTimes = []
+recvName = []
 
 numbers = [[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24],[1,24,25,49,73,97,121,145,168,169,170],[0,1,2,26,50,74,73,72,96,120,144,168,169,170],[0,1,2,26,50,74,98,122,146,170,169,168,73,72],[0,24,48,72,73,74,50,26,2,98,122,146,170],[2,1,0,24,48,72,73,74,98,122,146,170,169,168],[2,1,0,24,48,72,96,120,144,168,169,170,146,122,98,74,73],[0,1,2,26,50,74,98,122,146,170],[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24,73],[73,72,48,24,0,1,2,26,50,74,98,122,146,170,169,168]]
 
@@ -44,6 +46,19 @@ def showPanel(strip, wait):
             colors = RGBAfromInt(recvPanels[i][k])
             setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
             count += 1
+            
+        if recvName[i] == "clock":
+            print("clock")       
+            
+            
+            hour = [int(d) for d in str(datetime.datetime.now().hour)]
+            minute = [int(d) for d in str(datetime.datetime.now().minute)]
+            
+            showNumber(hour[0],7,strip)
+            showNumber(hour[1],11,strip)
+            showNumber(minute[0],17,strip)
+            showNumber(minute[1],21,strip)
+            
         strip.show()
         time.sleep(recvTimes[i])       
     
@@ -90,6 +105,7 @@ def downloadPanels(strip):
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
                 recvTimes.append(buffer[i]['showtime'])
+                recvName.append(buffer[i]['name'])
             t = Thread(target=showPanel, args=(strip, 5), daemon=True)
             t.start()
             threadTime = 0
