@@ -12,6 +12,9 @@ PORT = 65432        # The port used by the server
 recvPanels = []
 recvTimes = []
 
+numbers = [[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24],[1,24,25,49,73,97,121,145,168,169,170],[0,1,2,26,50,74,73,72,96,120,144,168,169,170],[0,1,2,26,50,74,98,122,146,170,169,168,73,72],[0,24,48,72,73,74,50,26,2,98,122,146,170],[2,1,0,24,48,72,73,74,98,122,146,170,169,168],[2,1,0,24,48,72,96,120,144,168,169,170,146,122,98,74,73],[0,1,2,26,50,74,98,122,146,170],[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24,73],[73,72,48,24,0,1,2,26,50,74,98,122,146,170,169,168]]
+
+
 # LED strip configuration:
 LED_COUNT      = 192      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
@@ -41,9 +44,15 @@ def showPanel(strip, wait):
             colors = RGBAfromInt(recvPanels[i][k])
             setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
             count += 1
-        strip.show()                      
+        strip.show()
         time.sleep(recvTimes[i])       
-        
+    
+def showNumber(zahl, position, strip):
+    for x in range(len(numbers[zahl])):
+        setPixel(strip, Color(255,255,255),numbers[zahl][x] + position)
+    strip.show()
+    
+
 def ArrayErzeugen():
     for x in range(24):
         for y in range(8):
@@ -55,7 +64,7 @@ def ArrayErzeugen():
             else:
                 Array[pos] = getPositionOuterMatrix(x - 16, y) + 128
     
-#    print(Array)
+    print(Array)
 
 def getPositionOuterMatrix(x, y):
     return 7 - y + x * 8
@@ -110,3 +119,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         if args.clear:
             colorWipe(strip, Color(0,0,0), 10)
+
