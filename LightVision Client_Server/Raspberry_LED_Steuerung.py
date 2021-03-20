@@ -13,6 +13,7 @@ PORT = 65432        # The port used by the server
 recvPanels = []
 recvTimes = []
 recvName = []
+recvRep = []
 
 numbers = [[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24],[1,24,25,49,73,97,121,145,168,169,170],[0,1,2,26,50,74,73,72,96,120,144,168,169,170],[0,1,2,26,50,74,98,122,146,170,169,168,73,72],[0,24,48,72,73,74,50,26,2,98,122,146,170],[2,1,0,24,48,72,73,74,98,122,146,170,169,168],[2,1,0,24,48,72,96,120,144,168,169,170,146,122,98,74,73],[0,1,2,26,50,74,98,122,146,170],[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24,73],[73,72,48,24,0,1,2,26,50,74,98,122,146,170,169,168]]
 
@@ -38,12 +39,30 @@ def RGBAfromInt(argb_int):
 def setPixel(strip,color,i):
     strip.setPixelColor(Array[i], color)
 
+def createOrder():
+    order = []
+    puffer = []
+    for i in range(0, len(recvPanels)):
+        if(any(char.isdigit() for char in recvPanels[i])):
+            puffer.add(recvPanels[i])
+            nameWODigits = ''.join([i for i in recvPanels if not i.isdigit()])
+            if(i == len(recvPanels) - 1 || (!recvName[i + 1].startswith(nameWODigits))):
+                for j in range(0,recvRep[i]):
+                    for k in range(0,len(puffer)):
+                        order.add(puffer[k])
+                puffer.clear()
+        else:
+            order.add(recvPanels[i])
+    return order
+
 def showPanel(strip, wait):
     #Methode liest ARGB Werte aus recvPanels aus und leitet diese jeweils einzeln an setPixel weiter
-    for i in range(0, len(recvPanels)):
+    
+    toShow = createOrder()
+    for i in range(0, len(toShow)):
         count = 0
-        for k in range(0, len(recvPanels[i])):
-            colors = RGBAfromInt(recvPanels[i][k])
+        for k in range(0, len(toShow[i])):
+            colors = RGBAfromInt(toShow[i][k])
             setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
             count += 1
             
@@ -101,11 +120,14 @@ def downloadPanels(strip):
             buffer = json.loads(buffer)
             recvPanels.clear()
             recvTimes.clear()
+            recvName.clear()
+            recvRep.clear()
             print("Panels updated")
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
                 recvTimes.append(buffer[i]['showtime'])
                 recvName.append(buffer[i]['name'])
+                recvRep.append(buffer[i]['wiederholungen'])
             t = Thread(target=showPanel, args=(strip, 5), daemon=True)
             t.start()
             threadTime = 0
@@ -135,4 +157,3 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         if args.clear:
             colorWipe(strip, Color(0,0,0), 10)
-
