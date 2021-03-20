@@ -85,13 +85,7 @@ namespace LightVisionSettings
 
         public void OnDeactivate(object sender, EventArgs e)
         {
-            if (colorPicker)
-            {
-                Point pointWindow = MousePosition;
-                selectedColorPanel.BackColor = GetColorAt(pointWindow.X, pointWindow.Y);
-                backColorButtons = GetColorAt(pointWindow.X, pointWindow.Y);
-                colorDialog1.Color = GetColorAt(pointWindow.X, pointWindow.Y);
-            }
+
         }
 
         private void bt_ColorPicker_Click(object sender, EventArgs e)
@@ -498,6 +492,11 @@ namespace LightVisionSettings
                 selectedColorPanel.BackColor = colorDialog1.Color;
                 backColorButtons = colorDialog1.Color;
             }
+        }
+
+        private void nm_Wiederholungen_Leave(object sender, EventArgs e)
+        {
+            savePanel();
         }
     }
 }

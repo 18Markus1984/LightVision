@@ -283,10 +283,11 @@ namespace LightVisionSettings
             this.nm_Wiederholungen.Size = new System.Drawing.Size(100, 20);
             this.nm_Wiederholungen.TabIndex = 37;
             this.nm_Wiederholungen.Value = new decimal(new int[] {
-            10,
+            2,
             0,
             0,
             0});
+            this.nm_Wiederholungen.Leave += new System.EventHandler(this.nm_Wiederholungen_Leave);
             // 
             // Animator
             // 
