@@ -292,5 +292,11 @@
   <ItemGroup>
     <None Include="Resources\light_32px.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hjbjkbjk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uhrV2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

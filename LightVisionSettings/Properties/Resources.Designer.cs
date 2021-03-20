@@ -173,6 +173,16 @@ namespace LightVisionSettings.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hjbjkbjk {
+            get {
+                object obj = ResourceManager.GetObject("hjbjkbjk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap home_24px {
             get {
                 object obj = ResourceManager.GetObject("home_24px", resourceCulture);
@@ -336,6 +346,16 @@ namespace LightVisionSettings.Properties {
         internal static System.Drawing.Bitmap settings_24px {
             get {
                 object obj = ResourceManager.GetObject("settings_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap uhrV2 {
+            get {
+                object obj = ResourceManager.GetObject("uhrV2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
