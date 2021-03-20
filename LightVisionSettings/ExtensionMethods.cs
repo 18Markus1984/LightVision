@@ -30,13 +30,19 @@ namespace LightVisionSettings
             string name;
             string colors;
             double showtime;
+            int wiederholung;
             name = source.Remove(0, 9);
             name = name.Substring(0, name.IndexOf('\"'));
             colors = getStringInBetween(source, '[', ']')[0];
             colors = colors.Remove(0,1);
+            wiederholung = int.Parse(source.Remove(0, source.LastIndexOf(':') + 1));
+            source = source.Remove(source.LastIndexOf(','), source.Length - source.LastIndexOf(','));
             showtime = double.Parse(source.Remove(0, source.LastIndexOf(':') + 1), CultureInfo.InvariantCulture);
+            //wiederholung = 
             //colors = colors.Remove(colors.Length - 1, 1);
-            return new Panel(name, colors.Split(',').Select(Int32.Parse).ToList(), showtime);
+            return new Panel(name, colors.Split(',').Select(Int32.Parse).ToList(), showtime, wiederholung);
+            //return new Panel(name, colors.Split(',').Select(Int32.Parse).ToList(), showtime, 2);
+
         }
         public static string RemoveDigits(string source)
         {

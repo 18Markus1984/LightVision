@@ -12,6 +12,7 @@ namespace LightVisionSettings
         public string name;     //Name des Panels
         public List<int> colors;        //Liste mit 192 Farbwerten
         public double showtime;     //Anzeigezeit eines Panel
+        public int wiederholungen;
 
         public Panel(string name)       //Konstruktor der ein leeres Panel nur mit Namen erstellt
         {
@@ -21,8 +22,9 @@ namespace LightVisionSettings
             {
                 defaultColors.Add(Color.White.ToArgb());
             }
-            colors = defaultColors;
-            showtime = 5;
+            this.colors = defaultColors;
+            this.showtime = 5;
+            this.wiederholungen = 1;
         }
 
         public Panel(string name, double showtime)      //Konstruktor der ein leeres Panel nur mit Namen und Anzeigezeit erstellt
@@ -33,8 +35,9 @@ namespace LightVisionSettings
             {
                 defaultColors.Add(Color.White.ToArgb());
             }
-            colors = defaultColors;
+            this.colors = defaultColors;
             this.showtime = showtime;
+            this.wiederholungen = 1;
         }
 
         public Panel(string name, List<int> colors, double showtime)        //Konstruktor der ein Panel mit Namen, Anzeigezeit und einer gegebenen Liste von Farben erstellt
@@ -42,6 +45,15 @@ namespace LightVisionSettings
             this.colors = colors;
             this.name = name;
             this.showtime = showtime;
+            this.wiederholungen = 1;
+        }
+
+        public Panel(string name, List<int> colors, double showtime, int wiederholungen)        //Konstruktor der ein Panel mit Namen, Anzeigezeit und einer gegebenen Liste von Farben erstellt
+        {
+            this.colors = colors;
+            this.name = name;
+            this.showtime = showtime;
+            this.wiederholungen = wiederholungen;
         }
     }
 }

@@ -110,7 +110,7 @@ namespace LightVisionSettings
                     string nameWODigits = ExtensionMethods.RemoveDigits(puffer[0].name);        //Die RemoveDigits Methode in der Extension Klasse entfernt die Zahl
                     if (i == copySavedPanels.Count - 1 || (!copySavedPanels[i + 1].name.StartsWith(nameWODigits)))     //Es wird geschaut, dass die zuerst in keine OutOfIndex Exception gelaufen wird und dann geschaut, ob das nächste Panel zu der Animation dazu gehört
                     {
-                        Animation a = new Animation(ExtensionMethods.RemoveDigits(puffer[0].name), puffer.Count, puffer[0].showtime, puffer);       //Eine neue Animation wird erstellt
+                        Animation a = new Animation(ExtensionMethods.RemoveDigits(puffer[0].name), puffer.Count, puffer[0].showtime, puffer, puffer[0].wiederholungen);       //Eine neue Animation wird erstellt
                         savedAnimations.Add(a);     //Die Animation wird zur Liste hinzugefügt
                         foreach (Panel p in puffer)     //Alle Panels die jetzt in der Animation sind werden aus der Copy entfernt
                         {

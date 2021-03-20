@@ -20,7 +20,7 @@ namespace LightVisionSettings
             this.name = name;
             animation = new Panel[numberOfPanels];
             this.showtime = showtime;
-
+            this.wiederholungen = 1;
             for (int i = 0; i < numberOfPanels; i++)
             {
                 animation[i] = new Panel(name + i, showtime);
@@ -32,6 +32,7 @@ namespace LightVisionSettings
             this.numberOfPanels = numberOfPanels;
             this.name = name;
             this.showtime = showtime;
+            this.wiederholungen = 1;
             if (panels.Length == numberOfPanels)        //Hier wird überprüft, ob die Anzahl der eingegebenen Liste mit dem Array übereinstimmt
             {
                 animation = panels;
@@ -46,11 +47,12 @@ namespace LightVisionSettings
             }
         }
 
-        public Animation(string name, int numberOfPanels, double showtime, List<Panel> panels)      //Konstruktor für das Erstellen eines Panels mit einer Liste von Panels
+        public Animation(string name, int numberOfPanels, double showtime, List<Panel> panels, int wiederholungen)      //Konstruktor für das Erstellen eines Panels mit einer Liste von Panels
         {
             this.numberOfPanels = numberOfPanels;
             this.name = name;
             this.showtime = showtime;
+            this.wiederholungen = wiederholungen;
             if (panels.Count == numberOfPanels)     //Hier wird überprüft, ob die Anzahl der eingegebenen Liste mit dem Array übereinstimmt
             {
                 animation = panels.ToArray();
