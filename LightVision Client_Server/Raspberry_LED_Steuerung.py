@@ -14,6 +14,7 @@ recvPanels = []
 recvTimes = []
 recvName = []
 recvRep = []
+threadTimes = []
 
 numbers = [[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24],[1,24,25,49,73,97,121,145,168,169,170],[0,1,2,26,50,74,73,72,96,120,144,168,169,170],[0,1,2,26,50,74,98,122,146,170,169,168,73,72],[0,24,48,72,73,74,50,26,2,98,122,146,170],[2,1,0,24,48,72,73,74,98,122,146,170,169,168],[2,1,0,24,48,72,96,120,144,168,169,170,146,122,98,74,73],[0,1,2,26,50,74,98,122,146,170],[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24,73],[73,72,48,24,0,1,2,26,50,74,98,122,146,170,169,168]]
 
@@ -42,6 +43,7 @@ def setPixel(strip,color,i):
 def createOrder():
     order = []
     puffer = []
+    global threadTimes
     for i in range(0, len(recvPanels)):
         if(any(char.isdigit() for char in recvName[i])):
             puffer.add(recvPanels[i])
@@ -50,6 +52,7 @@ def createOrder():
                 for j in range(0,recvRep[i]):
                     for k in range(0,len(puffer)):
                         order.add(puffer[k])
+                threadTimes.append(recvTimes[i])
                 puffer.clear()
         else:
             order.add(recvPanels[i])
@@ -79,7 +82,7 @@ def showPanel(strip, wait):
             showNumber(minute[1],21,strip)
             
         strip.show()
-        time.sleep(recvTimes[i])       
+        time.sleep(threadTimes)       
     
 def showNumber(zahl, position, strip):
     for x in range(len(numbers[zahl])):
