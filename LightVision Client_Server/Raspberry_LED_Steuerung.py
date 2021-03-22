@@ -43,9 +43,9 @@ def createOrder():
     order = []
     puffer = []
     for i in range(0, len(recvPanels)):
-        if(any(char.isdigit() for char in recvPanels[i])):
+        if(any(char.isdigit() for char in recvName[i])):
             puffer.add(recvPanels[i])
-            nameWODigits = ''.join([i for i in recvPanels if not i.isdigit()])
+            nameWODigits = ''.join([i for i in recvName[i] if not i.isdigit()])
             if(i == len(recvPanels) - 1 || (!recvName[i + 1].startswith(nameWODigits))):
                 for j in range(0,recvRep[i]):
                     for k in range(0,len(puffer)):
