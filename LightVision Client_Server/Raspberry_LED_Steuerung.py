@@ -46,7 +46,7 @@ def createOrder():
         if(any(char.isdigit() for char in recvName[i])):
             puffer.add(recvPanels[i])
             nameWODigits = ''.join([i for i in recvName[i] if not i.isdigit()])
-            if(i == len(recvPanels) - 1 || (!recvName[i + 1].startswith(nameWODigits))):
+            if(i == len(recvPanels) - 1 or not recvName[i + 1].startswith(nameWODigits)):
                 for j in range(0,recvRep[i]):
                     for k in range(0,len(puffer)):
                         order.add(puffer[k])
