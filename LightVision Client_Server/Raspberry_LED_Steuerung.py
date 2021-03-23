@@ -1,3 +1,10 @@
+try:
+    # For Python 3.0 and later
+    from urllib.request import urlopen
+except ImportError:
+    # Fall back to Python 2's urllib2
+    from urllib2 import urlopen
+
 import socket
 import json
 from threading import Thread
@@ -16,8 +23,8 @@ recvName = []
 recvRep = []
 threadTimes = []
 
-numbers = [[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24],[1,24,25,49,73,97,121,145,168,169,170],[0,1,2,26,50,74,73,72,96,120,144,168,169,170],[0,1,2,26,50,74,98,122,146,170,169,168,73,72],[0,24,48,72,73,74,50,26,2,98,122,146,170],[2,1,0,24,48,72,73,74,98,122,146,170,169,168],[2,1,0,24,48,72,96,120,144,168,169,170,146,122,98,74,73],[0,1,2,26,50,74,98,122,146,170],[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24,73],[73,72,48,24,0,1,2,26,50,74,98,122,146,170,169,168]]
-
+numbers = [[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24],[1,24,25,49,73,97,121,145,168,169,170],[0,1,2,26,50,74,73,72,96,120,144,168,169,170],[0,1,2,26,50,74,98,122,146,170,169,168,73,72],[0,24,48,72,73,74,50,26,2,98,122,146,170],[2,1,0,24,48,72,73,74,98,122,146,170,169,168],[2,1,0,24,48,72,96,120,144,168,169,170,146,122,98,74,73],[0,1,2,26,50,74,98,122,146,170],[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24,73],[73,72,48,24,0,1,2,26,50,74,98,122,146,170,169,168],[25,50,49,48,72,96,97,98,122,146,145,144,169]]
+#[1,26,25,24,48,72,73,74,98,122,121,120,145] Dollar oben
 
 # LED strip configuration:
 LED_COUNT      = 192      # Number of LED pixels.
@@ -40,49 +47,73 @@ def RGBAfromInt(argb_int):
 def setPixel(strip,color,i):
     strip.setPixelColor(Array[i], color)
 
+def get_jsonparsed_data(url):
+    response = urlopen(url)
+    data = response.read().decode("utf-8")
+    return json.loads(data)
+
 def createOrder():
     order = []
     puffer = []
+    timePuffer = []
     global threadTimes
+    #threadTimes.clear()
     for i in range(0, len(recvPanels)):
         if(any(char.isdigit() for char in recvName[i])):
-            puffer.add(recvPanels[i])
+            puffer.append(recvPanels[i])
             nameWODigits = ''.join([i for i in recvName[i] if not i.isdigit()])
             if(i == len(recvPanels) - 1 or not recvName[i + 1].startswith(nameWODigits)):
                 for j in range(0,recvRep[i]):
                     for k in range(0,len(puffer)):
-                        order.add(puffer[k])
-                threadTimes.append(recvTimes[i])
+                        order.append(puffer[k])
+                        timePuffer.append(recvTimes[i])
                 puffer.clear()
         else:
-            order.add(recvPanels[i])
+            order.append(recvPanels[i])
+            timePuffer.append(recvTimes[i])
+    threadTimes.clear()
+    threadTimes = timePuffer
     return order
 
-def showPanel(strip, wait):
+def showPanel(strip, wait, order):
     #Methode liest ARGB Werte aus recvPanels aus und leitet diese jeweils einzeln an setPixel weiter
-    
-    toShow = createOrder()
-    for i in range(0, len(toShow)):
+    for i in range(0, len(order)):
         count = 0
-        for k in range(0, len(toShow[i])):
-            colors = RGBAfromInt(toShow[i][k])
+        for k in range(0, len(order[i])):
+            colors = RGBAfromInt(order[i][k])
             setPixel(strip, Color(colors[0], colors[1], colors[2]), count)
             count += 1
             
-        if recvName[i] == "clock":
-            print("clock")       
-            
-            
+        if i < len(recvName) and recvName[i] == "clock":
             hour = [int(d) for d in str(datetime.datetime.now().hour)]
             minute = [int(d) for d in str(datetime.datetime.now().minute)]
             
+            if len(hour) == 1:
+                pufferHour = hour[0]
+                hour = [0,0]
+                hour[1] = pufferHour
+
+            if len(minute) == 1:
+                pufferMinute = minute[0]
+                minute = [0,0]
+                minute[1] = pufferMinute
+
             showNumber(hour[0],7,strip)
             showNumber(hour[1],11,strip)
             showNumber(minute[0],17,strip)
             showNumber(minute[1],21,strip)
             
+        if i < len(recvName) and recvName[i] == "stonks1":
+            url = ("https://financialmodelingprep.com/api/v3/quote/GME?apikey=e2b332f85953e46cffa4f8b5c8e00255")
+            data = get_jsonparsed_data(url)
+            price = [int(d) for d in str(round(data[0]['price']))]
+            showNumber(price[0],9,strip)
+            showNumber(price[1],13,strip)
+            showNumber(price[2],17,strip)
+            showNumber(10,21,strip)
+            
         strip.show()
-        time.sleep(threadTimes)       
+        time.sleep(threadTimes[i])       
     
 def showNumber(zahl, position, strip):
     for x in range(len(numbers[zahl])):
@@ -101,7 +132,7 @@ def ArrayErzeugen():
             else:
                 Array[pos] = getPositionOuterMatrix(x - 16, y) + 128
     
-    print(Array)
+    #print(Array)
 
 def getPositionOuterMatrix(x, y):
     return 7 - y + x * 8
@@ -125,18 +156,28 @@ def downloadPanels(strip):
             recvTimes.clear()
             recvName.clear()
             recvRep.clear()
-            print("Panels updated")
+            #print("Panels updated")
             for i in range(0,len(buffer)):
                 recvPanels.append(buffer[i]['colors'])
                 recvTimes.append(buffer[i]['showtime'])
                 recvName.append(buffer[i]['name'])
                 recvRep.append(buffer[i]['wiederholungen'])
-            t = Thread(target=showPanel, args=(strip, 5), daemon=True)
+            toShow = createOrder()            
+            t = Thread(target=showPanel, args=(strip, 5, toShow), daemon=True)
             t.start()
-            threadTime = 0
-            for i in range(0,len(recvTimes)):
-                threadTime += recvTimes[i]
-            time.sleep(threadTime)
+            toWait = 0
+            for i in range(0, len(threadTimes)):
+                toWait += threadTimes[i]
+            toWait = round(toWait)                
+            time.sleep(toWait + 0.3)
+            
+def colorWipe(strip, color, wait_ms=50):
+    """Wipe color across display a pixel at a time."""
+    for i in range(strip.numPixels()):
+        #strip.setPixelColor(i, color)
+        setPixel(strip, color, i)
+        strip.show()
+        time.sleep(wait_ms/1000.0)
  
 # Main program logic follows:
 if __name__ == '__main__':
@@ -158,5 +199,5 @@ if __name__ == '__main__':
     try:
         downloadPanels(strip)
     except KeyboardInterrupt:
-        if args.clear:
-            colorWipe(strip, Color(0,0,0), 10)
+        colorWipe(strip, Color(0,0,0), 10)
+
