@@ -133,6 +133,16 @@ namespace LightVisionSettings.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ezgif_7_424c1e747021 {
+            get {
+                object obj = ResourceManager.GetObject("ezgif_7_424c1e747021", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fill_color_24px {
             get {
                 object obj = ResourceManager.GetObject("fill_color_24px", resourceCulture);
@@ -166,6 +176,16 @@ namespace LightVisionSettings.Properties {
         internal static System.Drawing.Bitmap gears_50px {
             get {
                 object obj = ResourceManager.GetObject("gears_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GMEAktieV2 {
+            get {
+                object obj = ResourceManager.GetObject("GMEAktieV2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

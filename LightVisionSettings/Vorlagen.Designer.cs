@@ -30,8 +30,11 @@ namespace LightVisionSettings
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cB_clock = new System.Windows.Forms.CheckBox();
+            this.cB_GME = new System.Windows.Forms.CheckBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,17 +47,38 @@ namespace LightVisionSettings
             this.label2.TabIndex = 1;
             this.label2.Text = "Hier sollen Dinge rein wie Uhr und andere Animationen die wir gemacht haben";
             // 
-            // checkBox1
+            // cB_clock
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.checkBox1.ForeColor = System.Drawing.Color.White;
-            this.checkBox1.Location = new System.Drawing.Point(462, 102);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(95, 28);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Enable";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cB_clock.AutoSize = true;
+            this.cB_clock.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.cB_clock.ForeColor = System.Drawing.Color.White;
+            this.cB_clock.Location = new System.Drawing.Point(462, 102);
+            this.cB_clock.Name = "cB_clock";
+            this.cB_clock.Size = new System.Drawing.Size(95, 28);
+            this.cB_clock.TabIndex = 3;
+            this.cB_clock.Text = "Enable";
+            this.cB_clock.UseVisualStyleBackColor = true;
+            // 
+            // cB_GME
+            // 
+            this.cB_GME.AutoSize = true;
+            this.cB_GME.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.cB_GME.ForeColor = System.Drawing.Color.White;
+            this.cB_GME.Location = new System.Drawing.Point(462, 288);
+            this.cB_GME.Name = "cB_GME";
+            this.cB_GME.Size = new System.Drawing.Size(95, 28);
+            this.cB_GME.TabIndex = 5;
+            this.cB_GME.Text = "Enable";
+            this.cB_GME.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::LightVisionSettings.Properties.Resources.GMEAktieV2;
+            this.pictureBox2.Location = new System.Drawing.Point(35, 238);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(379, 125);
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -69,11 +93,14 @@ namespace LightVisionSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cB_GME);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.cB_clock);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Name = "Vorlagen";
             this.Size = new System.Drawing.Size(917, 552);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -84,6 +111,8 @@ namespace LightVisionSettings
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cB_clock;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.CheckBox cB_GME;
     }
 }

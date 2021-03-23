@@ -78,11 +78,11 @@ namespace LightVisionSettings
             settings = new Settings(this);
             p_Content.Controls.Add(settings);
 
-            vorlagen = new Vorlagen(this);
-            p_Content.Controls.Add(vorlagen);
-
             animator = new Animator(this,30,8,24);
             p_Content.Controls.Add(animator);
+
+            vorlagen = new Vorlagen(this);
+            p_Content.Controls.Add(vorlagen);
 
             buttons = new List<Button>() {bt_Editor, bt_Animator, bt_Templates, bt_Dashboard, bt_Settings };        //Eine Liste mit allen Nav-Buttons wird erstellt, um diese Leichter zu handhaben
 

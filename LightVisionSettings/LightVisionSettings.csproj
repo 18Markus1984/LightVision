@@ -298,5 +298,11 @@
   <ItemGroup>
     <None Include="Resources\uhrV2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GMEAktieV2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ezgif-7-424c1e747021.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
