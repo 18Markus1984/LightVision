@@ -143,8 +143,8 @@ namespace LightVisionSettings
             if (cb_SelectedPanal.Text != "")        //Falls ein Panel in der ComboBox ausgewählt ist
             {
                 base.OnMouseDown(e);
-                int x = e.X / 30;       //Die x und y Koordinaten werden durch 30 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
-                int y = e.Y / 30;
+                int x = (e.X-7) / 30;       //Die x und y Koordinaten werden durch 30 geteilt, damit wir die Pixel Koordianten in Array-Positionen umrechnen können
+                int y = (e.Y-7) / 30;
 
                 if (fill && x < length && x >= 0 && y < height && y >= 0)       //Die x und y Werte sollten nicht größer als 28/10 und kleiner als 0 sein, da e die Werte als 0 bis 10 ausgibt
                 {
