@@ -22,6 +22,7 @@ recvTimes = []
 recvName = []
 recvRep = []
 threadTimes = []
+extraWait = 0
 
 numbers = [[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24],[1,24,25,49,73,97,121,145,168,169,170],[0,1,2,26,50,74,73,72,96,120,144,168,169,170],[0,1,2,26,50,74,98,122,146,170,169,168,73,72],[0,24,48,72,73,74,50,26,2,98,122,146,170],[2,1,0,24,48,72,73,74,98,122,146,170,169,168],[2,1,0,24,48,72,96,120,144,168,169,170,146,122,98,74,73],[0,1,2,26,50,74,98,122,146,170],[0,1,2,26,50,74,98,122,146,170,169,168,144,120,96,72,48,24,73],[73,72,48,24,0,1,2,26,50,74,98,122,146,170,169,168],[25,50,49,48,72,96,97,98,122,146,145,144,169]]
 #[1,26,25,24,48,72,73,74,98,122,121,120,145] Dollar oben
@@ -58,6 +59,8 @@ def createOrder():
     timePuffer = []
     global threadTimes
     #threadTimes.clear()
+    global extraWait
+    extraWait = 0
     for i in range(0, len(recvPanels)):
         if(any(char.isdigit() for char in recvName[i])):
             puffer.append(recvPanels[i])
@@ -67,6 +70,7 @@ def createOrder():
                     for k in range(0,len(puffer)):
                         order.append(puffer[k])
                         timePuffer.append(recvTimes[i])
+                extraWait += 0.05
                 puffer.clear()
         else:
             order.append(recvPanels[i])
@@ -169,7 +173,7 @@ def downloadPanels(strip):
             for i in range(0, len(threadTimes)):
                 toWait += threadTimes[i]
             toWait = round(toWait)                
-            time.sleep(toWait + 0.3)
+            time.sleep(toWait + extraWait)
             
 def colorWipe(strip, color, wait_ms=50):
     """Wipe color across display a pixel at a time."""
@@ -200,4 +204,3 @@ if __name__ == '__main__':
         downloadPanels(strip)
     except KeyboardInterrupt:
         colorWipe(strip, Color(0,0,0), 10)
-
