@@ -22,7 +22,7 @@ namespace LightVisionSettings
             this.mw = mw;
             List<int> puffer = new List<int>();
 
-            Bitmap b = new Bitmap(Properties.Resources.uhrV2);
+            Bitmap b = new Bitmap(Properties.Resources.uhrV2);      //Wir erstllen am Anfang die Animation stonks und das Bild für die Zeit, damit wir es im späteren Verlauf einfach vergleichen können und nicht immer wieder neu erzeugen müssen
             for (int i = 0; i < 8; i++)
             {
                 for (int m = 0; m < 24; m++)
@@ -56,7 +56,7 @@ namespace LightVisionSettings
             }
             stonks = new Animation("stonks", 2, 5, panels, 1);
 
-            List<string> namen = new List<string>();
+            List<string> namen = new List<string>();        //Es wird am Anfang überprüft, ob die Uhr und die Aktien Seite schon exsistiert und dementsprechend die CheckBoxen aktiviert
             foreach (Panel item in mw.savedPanels)
             {
                 namen.Add(item.name);
@@ -74,7 +74,7 @@ namespace LightVisionSettings
                 cB_GME.Checked = true;
             }
 
-            cB_clock.CheckedChanged += clock_CheckedChanged;
+            cB_clock.CheckedChanged += clock_CheckedChanged;        //Für beide CheckBoxen wird die Methode hinzugefügt, das wenn sich deren Status ändert, diese dann ausgeführt wird
             cB_GME.CheckedChanged += GME_CheckedChanged;
         }
 
@@ -85,16 +85,16 @@ namespace LightVisionSettings
             foreach (Panel item in mw.savedPanels)
             {
                 namen.Add(item.name);
-                if (item.name == "clock")
+                if (item.name == "clock")       //Das Clock Panel wird herausgezogen, da es ja nie genau das gleiche sein muss, wenn ein User z.B. die Anzeigezeit verändert hat
                 {
                     panel = item;
                 }
             }
-            if (namen.Contains("clock"))
+            if (namen.Contains("clock"))        //Wenn es exsistiert, wird es entfernt
             {
                 mw.savedPanels.Remove(panel);
             }
-            else
+            else       //anderfalls hinzugefügt
             {
                 mw.savedPanels.Add(clock);
             }
@@ -107,16 +107,16 @@ namespace LightVisionSettings
             foreach (Animation item in mw.savedAnimations)
             {
                 namen.Add(item.name);
-                if (item.name == "stonks")
+                if (item.name == "stonks")      //Das Stonks Panel wird herausgezogen, da es ja nie genau das gleiche sein muss, wenn ein User z.B. die Anzeigezeit verändert hat
                 {
                     panel = item;
                 }
             }
-            if (namen.Contains("stonks"))
+            if (namen.Contains("stonks"))       //Wenn es exsistiert, wird es entfernt
             {
                 mw.savedAnimations.Remove(panel);
             }
-            else
+            else       //anderfalls hinzugefügt
             {
                 mw.savedAnimations.Add(stonks);
             }

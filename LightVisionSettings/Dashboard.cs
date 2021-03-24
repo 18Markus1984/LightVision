@@ -28,7 +28,7 @@ namespace LightVisionSettings
 
         public void DashboardPanels()
         {
-            if (kacheln != null)
+            if (kacheln != null)       
             {
                 foreach (var item in kacheln)
                 {
@@ -39,12 +39,11 @@ namespace LightVisionSettings
                     Controls.Remove(item);
                 }
             }
-            //mw.savedPanels = mw.downloadPanels();
             kacheln = new List<SmallKachel>();
             panels = new List<System.Windows.Forms.Panel>();
             CreatePanel();
 
-            for (int i = 0; i < mw.savedPanels.Count; i++)
+            for (int i = 0; i < mw.savedPanels.Count; i++)      //Für jedes Panel und Animation wird eine Kachel erstellt, die man bewegen kann
             {
                 SmallKachel s = new SmallKachel(10, mw.savedPanels[i].colors, 8, 24);
                 s.MouseDown += MouseDown;
@@ -59,7 +58,6 @@ namespace LightVisionSettings
                 s.LocationChanged += PostionChanged;
                 s.matchingPanel = i;
                 Controls.Add(s);
-                //pa_dashboard.Controls.Add(s);
                 s.BringToFront();
             }
 
@@ -78,7 +76,6 @@ namespace LightVisionSettings
                 s.LocationChanged += PostionChanged;
                 s.matchingPanel = i- mw.savedPanels.Count;
                 Controls.Add(s);
-                //pa_dashboard.Controls.Add(s);
                 s.BringToFront();
             }
 
@@ -105,7 +102,6 @@ namespace LightVisionSettings
                     panel.BorderStyle = BorderStyle.FixedSingle;
                     panels.Add(panel);
                     Controls.Add(panel);
-                    //pa_dashboard.Controls.Add(panel);
                 }
             }
             if (spalten != 0)
@@ -124,22 +120,21 @@ namespace LightVisionSettings
                     panel.BorderStyle = BorderStyle.FixedSingle;
                     panels.Add(panel);
                     Controls.Add(panel);
-                    //pa_dashboard.Controls.Add(panel);
                 }
             }
         }
 
-        private void MouseDown(object sender, MouseEventArgs e)
+        private void MouseDown(object sender, MouseEventArgs e)     //Wird bei den Kacheln benutzt, dass diese der Position der Maus gesetzt wird
         {
             SmallKachel kachel = (SmallKachel)sender;
             if (e.Button == MouseButtons.Left)
             {
                 onclick = true;
-                kachel.mouseDown= e.Location;
+                kachel.mouseDown = e.Location;
             }
         }
 
-        private void MouseMove(object sender, MouseEventArgs e)
+        private void MouseMove(object sender, MouseEventArgs e)     //Wird benutzt, das wenn die Mausgedrückt ist und sich bewegt die Position der Kachel auf die der Maus zu setzen
         {
             SmallKachel kachel = (SmallKachel)sender;
             if (onclick)
@@ -150,33 +145,32 @@ namespace LightVisionSettings
 
         }
 
-        private void PostionChanged(object sender, EventArgs e)
+        private void PostionChanged(object sender, EventArgs e)     //Wenn sich eine Kachel bewegt hat
         {
             SmallKachel s = (SmallKachel)sender;
             s.moved = true;
         }
 
-        private void MouseUp(object sender, MouseEventArgs e)
+        private void MouseUp(object sender, MouseEventArgs e)       //Wenn die Maus nicht mehr nach unten gedrückt wird
         {
             onclick = false;
             SmallKachel s = (SmallKachel)sender;
 
-            if (s.moved == true)
+            if (s.moved == true)        //Wenn sich die Kachel bewegt hat; Hier wird nach der nahsten boden Kachel gesucht 
             {
-
-                int nearestPanel = 0;
+                int nearestPanel = 0;       //Index im Array
                 double length = 10;
-                List<System.Windows.Forms.Panel> p = new List<System.Windows.Forms.Panel>();
 
                 for (int i = 0; i < panels.Count; i++)
                 {
                     for (int t = 0; t < panels.Count; t++)
                     {
-                        if (panels[i].Location != kacheln[t].Location)
+                        if (panels[i].Location != kacheln[t].Location)      
                         {
-                            p.Add(panels[i]);
+                            //Vektor zwischen den Koordinaten wird berechnet
                             int x = s.Location.X - panels[i].Location.X;
                             int y = s.Location.Y - panels[i].Location.Y;
+                            //Hier wird überprüft, ob der Vektor länger ist als der andere (Size Matter)
                             if (length > Math.Sqrt(x * x + y * y))
                             {
                                 length = Math.Sqrt(x * x + y * y);
@@ -185,7 +179,7 @@ namespace LightVisionSettings
                         }
                     }
                 }
-                if (length <= 9.0)
+                if (length <= 9.0)      //Wenn der Vektor kleiner gleich 9 ist snappt die Kachel in die Position des Bodenpanels herein
                 {
                     s.Location = panels[nearestPanel].Location;
                     s.moved = false;
@@ -193,7 +187,7 @@ namespace LightVisionSettings
             }
         }
 
-        private List<Panel> createList()
+        private List<Panel> createList()        //Alle Panel werden in einer Liste gespeichert und Panel werden von ihrer Animation getrennt
         {
             List<Panel> p = new List<Panel>();
             for (int i = 0; i < panels.Count; i++)
@@ -204,7 +198,7 @@ namespace LightVisionSettings
                     {
                         if (item.thisISAnAnimation)
                         {
-                            foreach (Panel panel in mw.savedAnimations[item.matchingPanel].animation)
+                            foreach (Panel panel in mw.savedAnimations[item.matchingPanel].animation)       //Alle Panel werden durchgegangen und die Panel in der Liste gespeichert
                             {
                                 panel.wiederholungen = mw.savedAnimations[item.matchingPanel].wiederholungen;
                                 p.Add(panel);
@@ -220,7 +214,7 @@ namespace LightVisionSettings
             return p;
         }
 
-        private void bt_Speichern_Click(object sender, EventArgs e)
+        private void bt_Speichern_Click(object sender, EventArgs e)     //Die aktuelle Reihenfolge der Elemente auf dem Dashboard wird gespeichert
         {
             List<Panel> puffer = mw.savedPanels;
             List<Panel> p = createList();
@@ -232,7 +226,7 @@ namespace LightVisionSettings
                     number += item.panels.Length;
                 }
             }
-            if (p.Count == mw.savedPanels.Count+number)
+            if (p.Count == mw.savedPanels.Count+number)     //Es wird geprüft, dass auch die Werte übereinstimmten
             {
                 mw.savedPanels = p;
                 mw.uploadPanels();
@@ -244,7 +238,7 @@ namespace LightVisionSettings
             MessageBox.Show("Speichern fehlgeschlagen!");
         }
 
-        private new void DoubleClick(object sender, EventArgs e)
+        private new void DoubleClick(object sender, EventArgs e)        //Wenn die Kachel gedoppelklickt wird, wird Animator/Editor geöffnet, dementsprechend, was es für ein Element ist
         {
             SmallKachel kachel = (SmallKachel)sender;
             if (kachel.thisISAnAnimation)

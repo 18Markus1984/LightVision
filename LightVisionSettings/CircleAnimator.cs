@@ -26,7 +26,7 @@ namespace LightVisionSettings
         public int X { get => x; set => x = value; }
         public int Y { get => y; set => y = value; }
 
-        public void Render(Graphics g)
+        public void Render(Graphics g)      //Die Methode um den Kreis zu malen
         {
             g.FillEllipse(new SolidBrush(color), x - radius, y - radius, radius + radius, radius + radius); //Radius wird gemalt
         }

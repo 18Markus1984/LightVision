@@ -39,7 +39,7 @@ namespace LightVisionSettings
         [DllImport("user32.dll", SetLastError = true)]
         public static extern int ReleaseDC(IntPtr window, IntPtr dc);
 
-        public static Color GetColorAt(int x, int y)
+        public static Color GetColorAt(int x, int y)        //Methode, die mit einem DLL zuverlässlich die Farbe jedes Pixels auf dem Display abrufen kann
         {
             IntPtr desk = GetDesktopWindow();
             IntPtr dc = GetWindowDC(desk);
@@ -72,7 +72,7 @@ namespace LightVisionSettings
             }
         }
 
-        public void OnDeactivate(object sender, EventArgs e)
+        public void OnDeactivate(object sender, EventArgs e)        //Falls neben die Form geklickt wird, wird diese Methode aufgrufen, die alle Werte auf die ausgewählte Farbe setzt
         {
             if (colorPicker)
             {
@@ -165,7 +165,7 @@ namespace LightVisionSettings
                     }
                 }
             }
-            if (colorPicker)
+            if (colorPicker)        //Wenn der Colorpicker ausgewählt ist
             {
                 Point pointToWindow = MousePosition;
 
@@ -175,7 +175,7 @@ namespace LightVisionSettings
                 bmpScreenshot.Save("Screenshot.png", ImageFormat.Png);
 
 
-                Color c = bmpScreenshot.GetPixel(pointToWindow.X, pointToWindow.Y);
+                Color c = bmpScreenshot.GetPixel(pointToWindow.X, pointToWindow.Y);     //Die Frabe wird vom Screenshot abgerufen, an der entsprechenden Position, wo die Maus gedrückt wurde
                 selectedColorPanel.BackColor = c;
                 backColorButtons = c;
                 colorDialog1.Color = c;
@@ -315,7 +315,7 @@ namespace LightVisionSettings
             reloadComboBox();       //Der Inahlt der ComboBox wird auf die neue savedPanel Liste angepast
         }
 
-        private void bt_picture_Click(object sender, EventArgs e)
+        private void bt_picture_Click(object sender, EventArgs e)       //Es wird ein neues Panel mit dem ensprechenden Bild erstellt
         {
             Panel p;
             List<int> puffer = new List<int>();
@@ -326,7 +326,7 @@ namespace LightVisionSettings
             if (open.ShowDialog() == DialogResult.OK)
             {
                 b = new Bitmap(open.FileName);
-                if (b.Width != 24 || b.Height != 8)
+                if (b.Width != 24 || b.Height != 8)     //größe wird angepasst
                 {
                     b = new Bitmap(b, new Size(24, 8));
                 }
@@ -338,12 +338,12 @@ namespace LightVisionSettings
                         puffer.Add(b.GetPixel(m, i).ToArgb());
                     }
                 }
-                Name n = new Name(mw, puffer);
+                Name n = new Name(mw, puffer);      //Die Form für die Namensauswahl wird geöffent
                 n.Show();
             }
         }
 
-        public void ImportPanel(Panel p)
+        public void ImportPanel(Panel p)            //Methode, die von der Form Name aufgerufen wird, falls ein Bild importiert wird
         {
             mw.savedPanels.Add(p);
             mw.uploadPanels();
@@ -367,7 +367,7 @@ namespace LightVisionSettings
             }
         }
 
-        private void bt_ColorPicker_Click(object sender, EventArgs e)
+        private void bt_ColorPicker_Click(object sender, EventArgs e)        //Die Farbe des ColorPickerButtons wird immer geändert und die aktivität auch
         {
             if (!fill)
             {
@@ -378,8 +378,6 @@ namespace LightVisionSettings
                 else
                 {
                     bt_ColorPicker.BackColor = mw.contentColor;
-                    //screenCaperting = new Thread();
-                    
                 }
                 colorPicker = !colorPicker;
             }

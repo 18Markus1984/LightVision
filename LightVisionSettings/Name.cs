@@ -43,9 +43,11 @@ namespace LightVisionSettings
             {
                 nameOfPanels.Add(a.name);
             }
+            nameOfPanels.Add("clock");
+            nameOfPanels.Add("stonks");
             if (!nameOfPanels.Contains(textBox1.Text) && textBox1.Text.Trim() != "" && textBox1.Text.Any(char.IsDigit) == false)
             {
-                if (puffer != null)
+                if (puffer != null)     //Es wird unterschieden, ob es sich um eine Gif oder ein Bild handelt
                 {
                     Panel p = new Panel(textBox1.Text, puffer, 5);
                     mw.kacheln.ImportPanel(p);
@@ -59,7 +61,6 @@ namespace LightVisionSettings
                     }
                     mw.animator.ImportAnimation(a);
                 }
-               
                 this.Close();
             }
         }

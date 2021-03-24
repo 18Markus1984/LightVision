@@ -25,7 +25,7 @@ namespace LightVisionSettings
             sr = new StreamReader(ns);
         }
 
-        public List<Panel> GetPanel()
+        public List<Panel> GetPanel()       //Die DAten werden vom Server abgerufen
         {
             string data = "";
             using (sr = new StreamReader(ns))
@@ -45,7 +45,7 @@ namespace LightVisionSettings
             return panels;
         }
 
-        public void SendPanel(List<Panel> listOfPanel)
+        public void SendPanel(List<Panel> listOfPanel)      //Eine Liste von Panels wird Serialisiert und an den Server geschickt
          {
             using (StreamWriter sw = new StreamWriter(ns))
             {

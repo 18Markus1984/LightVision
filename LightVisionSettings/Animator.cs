@@ -43,7 +43,7 @@ namespace LightVisionSettings
         [DllImport("user32.dll", SetLastError = true)]
         public static extern int ReleaseDC(IntPtr window, IntPtr dc);
 
-        public static Color GetColorAt(int x, int y)
+        public static Color GetColorAt(int x, int y)        //Methode, die mit einem DLL zuverlässlich die Farbe jedes Pixels auf dem Display abrufen kann
         {
             IntPtr desk = GetDesktopWindow();
             IntPtr dc = GetWindowDC(desk);
@@ -53,7 +53,7 @@ namespace LightVisionSettings
         }
 
 
-        public Animator(LightVision_Base mw, int size, int height, int length)
+        public Animator(LightVision_Base mw, int size, int height, int length)  //Konstruktor mit Pixelgröße und Anzahl in x und y Richtung
         {
             InitializeComponent();
             
@@ -74,7 +74,7 @@ namespace LightVisionSettings
 
         }
 
-        public void reloadComboBox()
+        public void reloadComboBox()        //Die comboBox für die ausgewählten Animation wird neu geladen
         {
             cb_SelectedPanal.Items.Clear();
             foreach (Animation a in mw.savedAnimations)
@@ -83,12 +83,18 @@ namespace LightVisionSettings
             }
         }
 
-        public void OnDeactivate(object sender, EventArgs e)
+        public void OnDeactivate(object sender, EventArgs e)        //Falls neben die Form geklickt wird, wird diese Methode aufgrufen, die alle Werte auf die ausgewählte Farbe setzt
         {
-
+            if (colorPicker)
+            {
+                Point pointWindow = MousePosition;
+                selectedColorPanel.BackColor = GetColorAt(pointWindow.X, pointWindow.Y);
+                backColorButtons = GetColorAt(pointWindow.X, pointWindow.Y);
+                colorDialog1.Color = GetColorAt(pointWindow.X, pointWindow.Y);
+            }
         }
 
-        private void bt_ColorPicker_Click(object sender, EventArgs e)
+        private void bt_ColorPicker_Click(object sender, EventArgs e)       //Die Farbe des ColorPickerButtons wird immer geändert und die aktivität auch
         {
             if (!fill)
             {
@@ -99,14 +105,12 @@ namespace LightVisionSettings
                 else
                 {
                     bt_ColorPicker.BackColor = mw.contentColor;
-                    //screenCaperting = new Thread();
-
                 }
                 colorPicker = !colorPicker;
             }
         }
 
-        public void AddButton()
+        public void AddButton()     //Das Panel auf dem die User malen können wird erzeugt
         {
             pixel = new Pixel[length, height];
             int d = 0;
@@ -125,7 +129,7 @@ namespace LightVisionSettings
             this.Refresh();
         }
 
-        public void AddCircles()
+        public void AddCircles()        //Die Kreise werden neu gemalt
         {
             circles = new CircleAnimator[numberOfPanels];
             for (int i = 0; i < numberOfPanels; i++)
@@ -135,7 +139,7 @@ namespace LightVisionSettings
             }
         }
 
-        private void loadPanel(Panel selectedPanel)
+        private void loadPanel(Panel selectedPanel)     //Anzeigen eines Panels von einer Animation
         {
             int k = 0;
             for (int j = 0; j < height; j++)
@@ -166,12 +170,12 @@ namespace LightVisionSettings
             } 
         }
 
-        protected override void OnMouseDown(MouseEventArgs e)
+        protected override void OnMouseDown(MouseEventArgs e)       //Wird aufgerufen, wenn die Linke Maus gedrückt wird
         {
             if (cb_SelectedPanal.Text != "")
             {
                 int counter = 0;
-                foreach (CircleAnimator c in circles)
+                foreach (CircleAnimator c in circles)       //es werden alle Kreise der UI durchgegangen, ob einer gedrückt wurde
                 {
                     if (e.X + 10 >= c.X && e.X < c.X + c.Radius && e.Y + 10 >= c.Y && e.Y < c.Y + c.Radius)
                     {
@@ -221,7 +225,7 @@ namespace LightVisionSettings
                 savePanel();
 
             }
-            if (colorPicker)
+            if (colorPicker)        //Wenn der Colorpicker ausgewählt ist
             {
                 Point pointToWindow = MousePosition;
 
@@ -231,14 +235,14 @@ namespace LightVisionSettings
                 bmpScreenshot.Save("Screenshot.png", ImageFormat.Png);
 
 
-                Color c = bmpScreenshot.GetPixel(pointToWindow.X, pointToWindow.Y);
+                Color c = bmpScreenshot.GetPixel(pointToWindow.X, pointToWindow.Y);     //Die Frabe wird vom Screenshot abgerufen, an der entsprechenden Position, wo die Maus gedrückt wurde
                 selectedColorPanel.BackColor = c;
                 backColorButtons = c;
                 colorDialog1.Color = c;
             }
         }
 
-        private void savePanel()
+        private void savePanel()        //Das aktuelle Panel wird gespeichert also nur ein Panel der Animation
         {
             List<int> puffer = new List<int>();
             for (int i = 0; i < 8; i++)
@@ -249,7 +253,7 @@ namespace LightVisionSettings
                 }
             }
 
-            if (cb_SelectedPanal.Text != "")
+            if (cb_SelectedPanal.Text != "")        //Nur wenn auch eine Animation ausgewählt ist
             {
                 mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].colors = puffer;
                 mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel].showtime = Convert.ToDouble(tb_showtime.Text);
@@ -279,7 +283,7 @@ namespace LightVisionSettings
             onClick = false;                                        //der druckstatus der Maus wird geändert
         }
 
-        private void Clear_Click(object sender, EventArgs e)
+        private void Clear_Click(object sender, EventArgs e)        //Die Pixel werde alle auf Weiß gesetzt
         {
             foreach (var item in pixel)
             {
@@ -315,13 +319,19 @@ namespace LightVisionSettings
             }
         }
 
-        private void bt_NewPanel_Click(object sender, EventArgs e)
+        private void bt_NewPanel_Click(object sender, EventArgs e)      //Ein neues Panel wird erstellt
         {
-            List<string> nameOfPanels = new List<string>();
+            List<string> nameOfPanels = new List<string>();     //Alle bisherigen Panelnamen werden rausgesucht, da diese verboten sind
             foreach (Panel p in mw.savedPanels)
             {
                 nameOfPanels.Add(p.name);
             }
+            foreach (Animation p in mw.savedAnimations)
+            {
+                nameOfPanels.Add(p.name);
+            }
+            nameOfPanels.Add("clock");
+            nameOfPanels.Add("stonks");
             if (tb_NamePanel.Text.Trim() != "" && tb_NamePanel.Text.Any(char.IsDigit) == false && nameOfPanels.Contains(tb_NamePanel.Text) == false)
             {
                 string name = tb_NamePanel.Text;
@@ -349,12 +359,12 @@ namespace LightVisionSettings
             }
         }
 
-        private void cb_SelectedPanal_SelectedIndexChanged(object sender, EventArgs e)
+        private void cb_SelectedPanal_SelectedIndexChanged(object sender, EventArgs e)      //Wenn ein neues Panel ausgewählt wird, wird der Animator in seinen Urstand zurückversetzt
         {
             RealoadAnimator();
         }
 
-        private void bt_Löschen_Click(object sender, EventArgs e)
+        private void bt_Löschen_Click(object sender, EventArgs e)       //Die ausgewählte Animation wird gelöscht
         {
             selectedPanel = 0;
             AddButton();
@@ -365,7 +375,7 @@ namespace LightVisionSettings
             reloadComboBox();
         }
 
-        public void RealoadAnimator()
+        public void RealoadAnimator()       //Wird benutzt, um den Animator beim Neuauswählen oder neu öffnen wieder in seinen Urzustand zu versetzen
         {
             selectedPanel = 0;
             numberOfPanels = mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation.Length;
@@ -383,14 +393,14 @@ namespace LightVisionSettings
             loadPanel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].animation[selectedPanel]);
         }
 
-        private void tb_showtime_MouseLeave(object sender, EventArgs e)
+        private void tb_showtime_MouseLeave(object sender, EventArgs e)     //Wenn die Showtime verändert wird wird gespeichert
         {
             savePanel();
         }
 
-        private void bt_picture_Click(object sender, EventArgs e)
+        private void bt_picture_Click(object sender, EventArgs e)       //Zum eigfügen von einzelnen Bildern oder Gifs(erkennt Bilder und Gifs automatich)
         {
-            if (tb_showtime.Text == "" || tb_showtime.Text == "5")
+            if (tb_showtime.Text == "" || tb_showtime.Text == "5")      
             {
                 MessageBox.Show("Du kannst die Länge der einzelnen Gif-Bilder in der oberen rechten Ecke anpassen, bevor du das Bild auswählst");
             }
@@ -402,17 +412,17 @@ namespace LightVisionSettings
                 Bitmap b;
                 OpenFileDialog open = new OpenFileDialog();
                 open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
-                if (open.ShowDialog() == DialogResult.OK)
+                if (open.ShowDialog() == DialogResult.OK)       
                 {
                     b = new Bitmap(open.FileName);
-                    if (open.FileName.EndsWith(".gif"))
+                    if (open.FileName.EndsWith(".gif"))     //falls es sich um ein Gif handelt
                     {
                         List<Panel> panels = new List<Panel>();
                         foreach (Image image in GetFramesFromAnimatedGIF(b))
                         {
                             puffer = new List<int>();
                             Bitmap bitmap = (Bitmap)image;
-                            if (bitmap.Width != 24 || bitmap.Height != 8)
+                            if (bitmap.Width != 24 || bitmap.Height != 8)       //Größe wird angepasst
                             {
                                 bitmap = new Bitmap(bitmap, new Size(24, 8));
                             }
@@ -423,9 +433,9 @@ namespace LightVisionSettings
                                     puffer.Add((bitmap.GetPixel(m, i).ToArgb()));
                                 }
                             }
-                            panels.Add(new Panel("", puffer, Convert.ToDouble(tb_showtime.Text)));
+                            panels.Add(new Panel("", puffer, Convert.ToDouble(tb_showtime.Text)));      //Von jeder Gif dimenension wird eine Panel erzeugt und zu einer Litehinzugefügt
                         }
-                        if (panels.Count <= 40)
+                        if (panels.Count <= 40)     //Maximal Gif mit 40 Dimensionen
                         {
                             Name n = new Name(mw, panels);
                             n.Show();
@@ -436,20 +446,20 @@ namespace LightVisionSettings
                         }
 
                     }
-                    else if (cb_SelectedPanal.Text != "")
+                    else if (cb_SelectedPanal.Text != "")   
                     {
-                        if (b.Width != 24 || b.Height != 8)
+                        if (b.Width != 24 || b.Height != 8)     //Die Größe wird auf unser Verhältnis geändert
                         {
                             b = new Bitmap(b, new Size(24, 8));
                         }
-                        for (int i = 0; i < height; i++)
+                        for (int i = 0; i < height; i++)        //Alle Pixel werden neu gemalt
                         {
                             for (int m = 0; m < length; m++)
                             {
                                 puffer.Add(b.GetPixel(m, i).ToArgb());
                             }
                         }
-                        loadPanel(new Panel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].name + selectedPanel, puffer, 5));
+                        loadPanel(new Panel(mw.savedAnimations[cb_SelectedPanal.SelectedIndex].name + selectedPanel, puffer, 5));       //Das Bild wird auf auf das augewählte Panel übertragen 
                         savePanel();
                     }
 
@@ -457,16 +467,17 @@ namespace LightVisionSettings
             }
         }
 
-        public void ImportAnimation(Animation a)
+        public void ImportAnimation(Animation a)        //Methode, die von der Form Name aufgerufen wird, falls ein Gif importiert wird
         {
             mw.savedAnimations.Add(a);
             mw.uploadPanels();
             reloadComboBox();
         }
-        public Image[] GetFramesFromAnimatedGIF(Image IMG)
+
+        public Image[] GetFramesFromAnimatedGIF(Image IMG)      //Methode zum extrahieren von einezelnen Bildern des Gifs
         {
             List<Image> IMGs = new List<Image>();
-            int Length = IMG.GetFrameCount(FrameDimension.Time);
+            int Length = IMG.GetFrameCount(FrameDimension.Time);        //Es wird gezählt, wie viele Dimensionen das Gif hat
 
             for (int i = 0; i < Length; i++)
             {
@@ -485,7 +496,7 @@ namespace LightVisionSettings
             colorDialog1.Color = pnlPressed.BackColor;
         }
 
-        private void p_Color1_DoubleClick(object sender, EventArgs e)
+        private void p_Color1_DoubleClick(object sender, EventArgs e)       //Damit man beim Color Panel die Farbe im Color Dialog auswählen kann
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)       //Im Color-Dialog wir die Farbe ausgewählt
             {
@@ -494,7 +505,7 @@ namespace LightVisionSettings
             }
         }
 
-        private void nm_Wiederholungen_Leave(object sender, EventArgs e)
+        private void nm_Wiederholungen_Leave(object sender, EventArgs e)        //Wenn die Wiederholungzeit geändert wird, wird die Animation gespeichert
         {
             savePanel();
         }
