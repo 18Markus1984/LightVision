@@ -27,3 +27,7 @@ A small raspberry Pi WS2812 RGB LED Matrix project
 ## Display
 <img src="https://github.com/18Markus1984/LightVision/blob/master/images/PXL_20210310_202212894.jpg" width="800">
 
+<video controls="controls">
+  <source type="video/mp4" src="https://github.com/18Markus1984/LightVision/blob/master/images/PXL_20210214_203206494.mp4"></source>
+  <p>Your browser does not support the video element.</p>
+</video>
