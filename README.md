@@ -1,6 +1,7 @@
 # LightVision
 
 A small raspberry Pi WS2812 RGB LED Matrix project
+<img src="https://github.com/18Markus1984/LightVision/blob/master/images/LightVision(2).gif" width="800">
 
 ## Editor
 You can import, create or edit a Panel. You have a fill Tool, Color-Picker and an eraser, that reset the complete panel. You have a color pallet you dopple click on the white box and get a color Picker. If you only click ones, you select the color. You can also move and press down the mouse, so you don't need to click for each pixel.
